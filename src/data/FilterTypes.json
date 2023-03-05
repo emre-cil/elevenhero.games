@@ -1,0 +1,17 @@
+[
+  {
+    "id": 0,
+    "title": "Card Type",
+    "items": ["Gold", "Silver", "Bronze"]
+  },
+  {
+    "id": 1,
+    "title": "Position",
+    "items": ["Goalkeeper", "Defender", "Midfielder", "Forward"]
+  },
+  {
+    "id": 2,
+    "title": "Price",
+    "items": null
+  }
+]

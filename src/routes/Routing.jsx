@@ -13,6 +13,7 @@ import Market from '../pages/Market/Market';
 import Leaderboard from '../pages/Leaderboard/Leaderboard';
 import Lineup from '../pages/Lineup/Lineup';
 import Team from '../pages/Team/Team';
+import VerifyEmail from '../pages/Auth/VerifyEmail';
 
 function Routing({ isLoading, accessToken, hasRefresh }) {
   function ProtectedRoute() {
@@ -49,6 +50,7 @@ function Routing({ isLoading, accessToken, hasRefresh }) {
           <Route path="/register" element={<Register />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
         </>
       )}
     </Routes>

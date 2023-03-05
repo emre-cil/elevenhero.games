@@ -33,7 +33,15 @@ export const userApiSlice = apiSlice.injectEndpoints({
         credentials: 'include',
       }),
     }),
+    verifyMail: builder.query({
+      query: (body) => ({
+        url: '/auth/verify-mail',
+        method: 'PUT',
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useRegisterMutation, useAuthMutation, useRefreshQuery, useLazyLogoutQuery } = userApiSlice;
+export const { useRegisterMutation, useAuthMutation, useRefreshQuery, useLazyLogoutQuery, useVerifyMailQuery } =
+  userApiSlice;

@@ -19,7 +19,7 @@ specifiers:
   eslint-plugin-jsx-a11y: ^6.7.1
   eslint-plugin-react: ^7.32.2
   eslint-plugin-react-hooks: ^4.6.0
-  framer-motion: ^10.0.1
+  framer-motion: ^10.0.2
   prettier: ^2.8.4
   react: ^18.2.0
   react-dom: ^18.2.0
@@ -38,7 +38,7 @@ dependencies:
   '@mui/material': 5.11.11_xqeqsl5kvjjtyxwyi3jhw3yuli
   '@reduxjs/toolkit': 1.9.3_k4ae6lp43ej6mezo3ztvx6pykq
   axios: 1.3.4
-  framer-motion: 10.0.1_biqbaboplfbrettd7655fr4n2y
+  framer-motion: 10.0.2_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-redux: 8.0.5_3xleytyzprlgycb2ded54tx72i
@@ -2065,8 +2065,8 @@ packages:
       mime-types: 2.1.35
     dev: false
 
-  /framer-motion/10.0.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-/N7gBA9gH8PkStyNQ67P/lx8UhL/7Y8z9Ku7FfgOF77sSG8wu8781kX7I5ZUgflRRtQXo8qH4Rev23004G1zcQ==}
+  /framer-motion/10.0.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-1k8y1e6DMRQ/r6or4TBxRhE1cXlDE5bm+SFeWLeh7ng0sfSbpROC2Qd1OEHq6lLXNARar/KKoj/EQ6eIvn60Uw==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0

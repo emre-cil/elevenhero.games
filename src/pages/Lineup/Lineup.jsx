@@ -11,10 +11,10 @@ function Lineup() {
   // 11 players 4-4-2 img 500x500 cards 50x75
   const [isDropped, setIsDropped] = useState([
     { id: 0, name: 'GK', x: 1.75, y: 3.25, playerId: null },
-    { id: 1, name: 'LB', x: 0.45, y: 2, playerId: null },
-    { id: 2, name: 'CB', x: 1.35, y: 2.1, playerId: null },
-    { id: 3, name: 'CB', x: 2.15, y: 2.1, playerId: null },
-    { id: 4, name: 'RB', x: 3.05, y: 2, playerId: null },
+    { id: 1, name: 'LB', x: 0.45, y: 2.1, playerId: null },
+    { id: 2, name: 'CB', x: 1.35, y: 2.3, playerId: null },
+    { id: 3, name: 'CB', x: 2.15, y: 2.3, playerId: null },
+    { id: 4, name: 'RB', x: 3.05, y: 2.1, playerId: null },
     { id: 5, name: 'LM', x: 0.25, y: 1, playerId: null },
     { id: 6, name: 'CM', x: 1.25, y: 1, playerId: null },
     { id: 7, name: 'CM', x: 2.25, y: 1, playerId: null },

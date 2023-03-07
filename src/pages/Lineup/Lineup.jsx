@@ -25,34 +25,33 @@ function Lineup() {
 
   const players = [
     {
-      id: 123,
+      id: 2,
       name: 'GK',
       img: TestImg,
     },
     {
-      id: 2123,
+      id: 212,
       name: 'LB',
       img: TestImg,
     },
     {
-      id: 323,
-
+      id: 32,
       name: 'CB',
       img: TestImg,
     },
     {
-      id: 442,
+      id: 44,
       name: 'CB',
       img: TestImg,
     },
     {
-      id: 115,
+      id: 11,
       name: 'RB',
 
       img: TestImg,
     },
     {
-      id: 62323,
+      id: 623,
       name: 'LM',
       img: TestImg,
     },
@@ -62,7 +61,7 @@ function Lineup() {
       img: TestImg,
     },
     {
-      id: 82424,
+      id: 844,
       name: 'CM',
       img: TestImg,
     },
@@ -72,12 +71,12 @@ function Lineup() {
       img: TestImg,
     },
     {
-      id: 10232,
+      id: 102,
       name: 'ST',
       img: TestImg,
     },
     {
-      id: 112312,
+      id: 112,
       name: 'ST',
       img: TestImg,
     },
@@ -112,7 +111,6 @@ function Lineup() {
   };
 
   const handleDragEnd = (event) => {
-    console.log(event);
     if (event.over) {
       setUnSelectedPlayers((prev) => {
         let NewUnselecteds = prev;
@@ -195,13 +193,11 @@ function Lineup() {
           >
             <img id="grass" src={lineupImg} alt="" />
             {isDropped.map((position, idx) => (
-              <LineUpEmpty key={position.id} x={position.x} y={position.y} id={position.id}>
+              <LineUpEmpty key={position.id} x={position.x} y={position.y} id={position.id} name={position.name}>
                 {position.player ? (
                   <TestLineUpCard
                     located
-                    id={position.player.id}
-                    img={position.player.img}
-                    name={position.player.name}
+                    player={position.player}
                     onDoubleClick={() => setAsUnselected(position.player.id)}
                   />
                 ) : (
@@ -238,7 +234,7 @@ function Lineup() {
           }}
         >
           {unSelectedPlayers.map((player, idx) => (
-            <TestLineUpCard key={player.id} id={player.id} img={player.img} name={player.name} />
+            <TestLineUpCard key={player.id} player={player} />
           ))}
         </Stack>
       </DndContext>

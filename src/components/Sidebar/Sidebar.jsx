@@ -71,7 +71,7 @@ function Sidebar({ accessToken, isOpen, setIsOpen }) {
             >
               {links.map((link) => (
                 <React.Fragment key={link.id}>
-                  {accessToken || !link.requiredToken ? (
+                  {!accessToken || !link.requiredToken ? (
                     <Stack
                       sx={{
                         span: {

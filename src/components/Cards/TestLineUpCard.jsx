@@ -3,9 +3,9 @@ import React from 'react';
 import { useDraggable } from '@dnd-kit/core';
 import { Box } from '@mui/material';
 
-function TestLineUpCard({ located, img, id, onDoubleClick }) {
+function TestLineUpCard({ located, player, onDoubleClick }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id,
+    id: player.id,
   });
 
   return (
@@ -22,11 +22,27 @@ function TestLineUpCard({ located, img, id, onDoubleClick }) {
         img: {
           width: '100%',
         },
+        position: 'relative',
         touchAction: 'none',
+        zIndex: transform ? 1 : 0,
+        span: {
+          position: 'absolute',
+          bottom: '30%',
+          left: 0,
+          right: 0,
+          width: '100%',
+          color: 'black',
+          textAlign: 'center',
+          fontSize: { xs: '10px', sm: '12px' },
+        },
+        '#p-name': {
+          bottom: '15%',
+        },
       }}
     >
-      <img src={img} alt="player" />
-      {id}
+      <img src={player.img} alt="player" />
+      <span>{player.id}</span>
+      <span id="p-name">{player.name}</span>
     </Box>
   );
 }

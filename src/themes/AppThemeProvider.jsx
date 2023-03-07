@@ -4,6 +4,7 @@ export function AppThemeProvider({ children }) {
   const theme = responsiveFontSizes(
     createTheme({
       palette: {
+        mode: 'dark',
         primary: {
           main: '#0F8B0F',
         },
@@ -258,7 +259,6 @@ export function AppThemeProvider({ children }) {
           styleOverrides: {
             body: {
               backgroundColor: '#000',
-              color: '#fff',
               height: '100%',
             },
           },

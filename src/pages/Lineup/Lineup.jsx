@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
-import { Box, Container, Stack } from '@mui/material';
-import React, { useState } from 'react';
+import { Box, Container, MenuItem, Stack, TextField } from '@mui/material';
+import React, { useState, useMemo, useCallback } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import lineupImg from '../../assets/Images/lineup.webp';
 import TestImg from '../../assets/Images/testImg.webp';
@@ -9,6 +9,7 @@ import TestLineUpCard from '../../components/Cards/TestLineUpCard';
 
 function Lineup() {
   // 11 players 4-4-2 img 500x500 cards 50x75
+  const [selectedFormation, setSelectedFormation] = useState('4-4-2');
   const [isDropped, setIsDropped] = useState([
     { id: 0, name: 'GK', x: 1.75, y: 3.25, playerId: null },
     { id: 1, name: 'LB', x: 0.45, y: 2.1, playerId: null },
@@ -22,6 +23,8 @@ function Lineup() {
     { id: 9, name: 'ST', x: 2.25, y: -0.1, playerId: null },
     { id: 10, name: 'ST', x: 1.25, y: -0.1, playerId: null },
   ]);
+  // top 5 most used formations
+  const formations = ['4-4-2', '4-3-3', '4-2-3-1', '4-1-2-1-2', '3-4-3', '3-5-2'];
 
   const players = [
     {
@@ -172,9 +175,23 @@ function Lineup() {
               flex: 3,
               borderRadius: '5px',
               border: '1px solid gray',
+              p: 2,
             }}
           >
-            LEFT ELEMENTS
+            <TextField
+              select
+              label="Formation"
+              defaultValue="4-4-2"
+              onChange={(e) => {
+                setSelectedFormation(e.target.value);
+              }}
+            >
+              {formations.map((option) => (
+                <MenuItem key={option} value={option}>
+                  {option}
+                </MenuItem>
+              ))}
+            </TextField>
           </Stack>
           <Box
             sx={{
@@ -207,15 +224,40 @@ function Lineup() {
             ))}
           </Box>
           <Stack
-            // right
+            alignItems="center"
             sx={{
               flex: 3,
+              p: 2,
               borderRadius: '5px',
               border: '1px solid gray',
               order: { xs: 2, sm: 3 },
             }}
           >
-            Right ELEMENTS
+            <Box
+              sx={{
+                p: 2,
+                backgroundColor: 'purple',
+                borderRadius: '50%',
+                width: '60px',
+                height: '60px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Box
+                sx={{
+                  border: '5px solid white',
+                  borderRadius: '50%',
+                  minWidth: '50px',
+                  minHeight: '50px',
+                  textAlign: 'center',
+                  pt: '8px',
+                }}
+              >
+                90
+              </Box>
+            </Box>
           </Stack>
         </Stack>
         <Stack

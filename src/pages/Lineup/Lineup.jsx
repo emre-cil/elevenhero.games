@@ -24,7 +24,7 @@ function Lineup() {
     { id: 10, name: 'ST', x: 1.25, y: -0.1, playerId: null },
   ]);
   // top 5 most used formations
-  const formations = ['4-4-2', '4-3-3', '4-2-3-1', '4-1-2-1-2', '3-4-3', '3-5-2'];
+  const formations = ['4-4-2', '4-3-3A', '4-3-3D', '4-2-3-1', '4-1-2-1-2', '3-4-3', '3-5-2'];
 
   const players = [
     {

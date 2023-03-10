@@ -23,12 +23,12 @@ const formations = [
       { id: 2, name: 'CB', x: 1.35, y: 2.3, playerId: null },
       { id: 3, name: 'CB', x: 2.15, y: 2.3, playerId: null },
       { id: 4, name: 'RB', x: 3.05, y: 2.1, playerId: null },
-      { id: 5, name: 'CM', x: 0.5, y: 1, playerId: null },
-      { id: 6, name: 'CAM', x: 1.75, y: 1.25, playerId: null },
-      { id: 7, name: 'CM', x: 3, y: 1, playerId: null },
-      { id: 8, name: 'LW', x: 2.25, y: -0.4, playerId: null },
-      { id: 9, name: 'ST', x: 1.25, y: -0.1, playerId: null },
-      { id: 10, name: 'RW', x: 3.25, y: -0.4, playerId: null },
+      { id: 5, name: 'CM', x: 0.85, y: 1.25, playerId: null },
+      { id: 6, name: 'CAM', x: 1.75, y: 0.85, playerId: null },
+      { id: 7, name: 'CM', x: 2.65, y: 1.25, playerId: null },
+      { id: 8, name: 'LW', x: 0.45, y: 0.25, playerId: null },
+      { id: 9, name: 'ST', x: 1.73, y: -0.1, playerId: null },
+      { id: 10, name: 'RW', x: 3.05, y: 0.25, playerId: null },
     ],
   },
   {
@@ -112,3 +112,5 @@ const formations = [
     ],
   },
 ];
+
+export default formations;

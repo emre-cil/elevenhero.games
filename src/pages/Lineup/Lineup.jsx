@@ -6,25 +6,12 @@ import lineupImg from '../../assets/Images/lineup.webp';
 import TestImg from '../../assets/Images/testImg.webp';
 import LineUpEmpty from '../../components/Cards/LineUpEmpty';
 import TestLineUpCard from '../../components/Cards/TestLineUpCard';
+import formations from '../../data/formations';
 
 function Lineup() {
   // 11 players 4-4-2 img 500x500 cards 50x75
-  const [selectedFormation, setSelectedFormation] = useState('4-4-2');
-  const [isDropped, setIsDropped] = useState([
-    { id: 0, name: 'GK', x: 1.75, y: 3.25, playerId: null },
-    { id: 1, name: 'LB', x: 0.45, y: 2.1, playerId: null },
-    { id: 2, name: 'CB', x: 1.35, y: 2.3, playerId: null },
-    { id: 3, name: 'CB', x: 2.15, y: 2.3, playerId: null },
-    { id: 4, name: 'RB', x: 3.05, y: 2.1, playerId: null },
-    { id: 5, name: 'LM', x: 0.25, y: 1, playerId: null },
-    { id: 6, name: 'CM', x: 1.25, y: 1, playerId: null },
-    { id: 7, name: 'CM', x: 2.25, y: 1, playerId: null },
-    { id: 8, name: 'RM', x: 3.25, y: 1, playerId: null },
-    { id: 9, name: 'ST', x: 2.25, y: -0.1, playerId: null },
-    { id: 10, name: 'ST', x: 1.25, y: -0.1, playerId: null },
-  ]);
+  const [selectedFormation, setSelectedFormation] = useState(formations[0]);
   // top 5 most used formations
-  const formations = ['4-4-2', '4-3-3A', '4-3-3D', '4-2-3-1', '4-1-2-1-2', '3-4-3', '3-5-2'];
 
   const players = [
     {
@@ -99,8 +86,8 @@ function Lineup() {
       return prev;
     });
     // remove the player from the dropped
-    setIsDropped((prev) => {
-      const NewDropped = prev.map((position) => {
+    setSelectedFormation((prev) => {
+      const NewDropped = prev.positions.map((position) => {
         if (position.player && position.player.id === id) {
           return {
             ...position,
@@ -118,9 +105,9 @@ function Lineup() {
       setUnSelectedPlayers((prev) => {
         let NewUnselecteds = prev;
         const isPlayerUnselected = prev.find((p) => p.id === event.active.id) !== undefined;
-        const destination = isDropped.find((p) => p.id === event.over.id);
-        setIsDropped((x) => {
-          const NewDropped = x.map((position) => {
+        const destination = selectedFormation.positions.find((p) => p.id === event.over.id);
+        setSelectedFormation((x) => {
+          const NewDropped = x.positions.map((position) => {
             if (position.player && position.player.id === event.active.id) {
               return {
                 ...position,
@@ -181,14 +168,16 @@ function Lineup() {
             <TextField
               select
               label="Formation"
-              defaultValue="4-4-2"
+              value={selectedFormation.name}
               onChange={(e) => {
-                setSelectedFormation(e.target.value);
+                setSelectedFormation(
+                  formations.find((formation) => formation.name === e.target.value) ?? formations[0],
+                );
               }}
             >
               {formations.map((option) => (
-                <MenuItem key={option} value={option}>
-                  {option}
+                <MenuItem key={option.name} value={option.name}>
+                  {option.name}
                 </MenuItem>
               ))}
             </TextField>
@@ -209,7 +198,7 @@ function Lineup() {
             }}
           >
             <img id="grass" src={lineupImg} alt="" />
-            {isDropped.map((position, idx) => (
+            {selectedFormation.positions?.map((position, idx) => (
               <LineUpEmpty key={position.id} x={position.x} y={position.y} id={position.id} name={position.name}>
                 {position.player ? (
                   <TestLineUpCard

@@ -12,10 +12,10 @@ function TestLineUpCard({ located, player, onDoubleClick }) {
     <Grid
       item
       xs={2}
-      sm={2}
-      md={6}
+      sm={4}
+      md={4}
       lg={4}
-      xl={6}
+      xl={4}
       onDoubleClick={onDoubleClick}
       ref={setNodeRef}
       {...attributes}
@@ -28,6 +28,7 @@ function TestLineUpCard({ located, player, onDoubleClick }) {
         },
         position: 'relative',
         touchAction: 'none',
+
         zIndex: transform ? 1 : 0,
       }}
     >
@@ -36,9 +37,11 @@ function TestLineUpCard({ located, player, onDoubleClick }) {
         sx={{
           position: 'absolute',
           top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
+          textAlign: 'center',
+          width: '100%',
           color: 'grey.200',
+          fontSize: '0.8rem',
+          lineHeight: '0.8rem',
         }}
       >
         <span>{player.id}</span>

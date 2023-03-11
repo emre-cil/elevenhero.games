@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import { Box, Container, Grid, MenuItem, Stack, TextField } from '@mui/material';
+import { Box, Container, Grid, MenuItem, Pagination, Stack, TextField } from '@mui/material';
 import React, { useState, useMemo, useCallback } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import lineupImg from '../../assets/Images/lineup.webp';
@@ -11,6 +11,8 @@ import formations from '../../data/formations';
 function Lineup() {
   // 11 players 4-4-2 img 500x500 cards 50x75
   const [selectedFormation, setSelectedFormation] = useState(formations[0]);
+  const [page, setPage] = useState(1);
+  const playerPositions = ['ALL', 'GK', 'LB', 'CB', 'RB', 'LM', 'CM', 'RM', 'ST', 'CAM', 'LW', 'RW', 'CDM'];
   // top 5 most used formations
 
   const players = [
@@ -96,7 +98,10 @@ function Lineup() {
         }
         return position;
       });
-      return NewDropped;
+      return {
+        ...prev,
+        positions: NewDropped,
+      };
     });
   };
 
@@ -136,7 +141,10 @@ function Lineup() {
             return position;
           });
 
-          return NewDropped;
+          return {
+            ...x,
+            positions: NewDropped,
+          };
         });
 
         return NewUnselecteds;
@@ -238,18 +246,37 @@ function Lineup() {
               </LineUpEmpty>
             ))}
           </Box>
-          <Grid
+          <Stack
             sx={{
               flex: 3,
               borderRadius: '5px',
               border: '1px solid gray',
+              p: 2,
             }}
-            container
+            alignItems="center"
+            justifyContent="space-between"
           >
-            {unSelectedPlayers.map((player, idx) => (
-              <TestLineUpCard key={player.id} player={player} />
-            ))}
-          </Grid>
+            <Stack
+              direction="row"
+              gap={1}
+              flexWrap="wrap"
+              sx={{
+                borderBottom: '1px solid gray',
+                pb: 1,
+                mb: 1,
+              }}
+            >
+              {playerPositions.map((position) => (
+                <Box>{position}</Box>
+              ))}
+            </Stack>
+            <Grid container>
+              {unSelectedPlayers.slice((page - 1) * 9, page * 9).map((player) => (
+                <TestLineUpCard key={player.id} player={player} />
+              ))}
+            </Grid>
+            <Pagination count={Math.ceil(players.length / 9)} page={page} onChange={(e, value) => setPage(value)} />
+          </Stack>
         </Stack>
       </DndContext>
     </Container>

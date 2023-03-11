@@ -628,10 +628,10 @@ function SectionWrapper({ title, sectionId, setSelected, handleOperation }) {
         p: 3,
         width: '100%',
         scrollMarginTop: '146px',
-        color: 'Ink.Darkest',
+        color: 'black',
       }}
     >
-      <Typography color="Ink.Darkest" variant="LargeNormalBold">
+      <Typography color="black" variant="LargeNormalBold">
         {title}
       </Typography>
       <Stack
@@ -698,7 +698,7 @@ function SectionWrapper({ title, sectionId, setSelected, handleOperation }) {
 
                 '& .MuiPaginationItem-page': {
                   backgroundColor: 'Sky.Base',
-                  color: 'Sky.White',
+                  color: 'grey.900',
                 },
 
                 '& .Mui-selected': {

@@ -33,7 +33,7 @@ function Home() {
           pt: 0,
         }}
       >
-        <Typography variant="subtitle1" color="Ink.Darkest" sx={{ mb: 3, fontSize: '13px', wordBreak: 'break-all' }}>
+        <Typography variant="subtitle1" color="black" sx={{ mb: 3, fontSize: '13px', wordBreak: 'break-all' }}>
           {token}
         </Typography>
         <Button onClick={logoutHandler}>logout</Button>

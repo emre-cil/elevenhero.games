@@ -53,7 +53,7 @@ function Sidebar({ accessToken, isOpen, setIsOpen }) {
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ duration: 0.3 }}
-            style={{ zIndex: 1000, position: 'fixed', top: 0, left: 0, height: '100vh', width: '200px' }}
+            style={{ zIndex: 9999, position: 'fixed', top: 0, left: 0, height: '100vh', width: '200px' }}
           >
             <Stack
               gap={1}
@@ -62,8 +62,7 @@ function Sidebar({ accessToken, isOpen, setIsOpen }) {
                 width: '100%',
                 pt: '95px',
                 px: 3.5,
-
-                backgroundColor: 'Ink.Darkest',
+                backgroundColor: 'black',
                 borderRight: '3px solid',
                 borderColor: 'Green.Base',
                 borderBottomRightRadius: '20px',
@@ -81,7 +80,7 @@ function Sidebar({ accessToken, isOpen, setIsOpen }) {
                         a: {
                           userSelect: 'none',
                           textDecoration: 'none',
-                          color: selected === link.id ? 'Sky.White' : 'Sky.Base',
+                          color: selected === link.id ? 'grey.900' : 'grey.700',
                         },
                       }}
                     >

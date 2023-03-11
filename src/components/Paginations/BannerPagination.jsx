@@ -23,7 +23,7 @@ function BannerPagination({ current, setCurrent, length }) {
             key={i}
             onClick={() => setCurrent(i)}
             sx={{
-              backgroundColor: current === i ? 'Red.Base' : 'Sky.White',
+              backgroundColor: current === i ? 'Red.Base' : 'grey.900',
               boxShadow: current !== i && 'Large',
               width: '8px',
               height: '8px',

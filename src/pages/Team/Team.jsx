@@ -55,11 +55,10 @@ function Team() {
               sx={{
                 width: '399px',
                 p: 3,
-                backgroundColor: 'Sky.White',
                 borderRadius: 2,
               }}
             >
-              <Typography variant="Title3" color="Ink.Darkest" sx={{ textAlign: 'center' }}>
+              <Typography variant="Title3" color="black" sx={{ textAlign: 'center' }}>
                 {prompt.title}
               </Typography>
               {prompt?.item?.price && (
@@ -122,7 +121,7 @@ function Team() {
             handleOperation={handleOperation}
           />
         </>
-      </Modal>{' '}
+      </Modal>
     </>
   );
 }

@@ -38,7 +38,7 @@ function BalanceCard({ accessToken }) {
           <Typography
             variant="h6"
             sx={{
-              color: 'Sky.White',
+              color: 'grey.900',
               textAlign: 'center',
               width: '100%',
             }}
@@ -50,7 +50,7 @@ function BalanceCard({ accessToken }) {
         <Typography
           variant="Title3"
           sx={{
-            color: 'Sky.White',
+            color: 'grey.900',
             textAlign: 'center',
             width: '100%',
           }}

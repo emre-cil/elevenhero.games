@@ -26,10 +26,10 @@ function CardDetailModal({ data, setSelected, selected, handleOperation }) {
         flex: 1,
       }}
     >
-      <Typography variant="LargeNormalRegular" component="h3" color="Ink.Darkest">
+      <Typography variant="LargeNormalRegular" component="h3" color="black">
         {head}
       </Typography>
-      <Typography variant="Title3" component="h3" color="Ink.Darkest">
+      <Typography variant="Title3" component="h3" color="black">
         {text}
       </Typography>
     </Stack>
@@ -82,7 +82,7 @@ function CardDetailModal({ data, setSelected, selected, handleOperation }) {
           p={3}
           gap={3}
           sx={{
-            backgroundColor: 'Sky.White',
+            backgroundColor: 'grey.900',
             height: '488px',
           }}
         >
@@ -91,7 +91,7 @@ function CardDetailModal({ data, setSelected, selected, handleOperation }) {
               <Typography variant="Title3" component="h3" color="Red.Base">
                 {data?.name}
               </Typography>
-              <Typography variant="LargeNormalRegular" component="p" color="Ink.Darkest">
+              <Typography variant="LargeNormalRegular" component="p" color="black">
                 {data?.position}
               </Typography>
             </Stack>
@@ -106,7 +106,7 @@ function CardDetailModal({ data, setSelected, selected, handleOperation }) {
                 backgroundColor: 'Sky.Lighter',
               }}
             >
-              <Typography variant="Title3" component="h3" color="Ink.Darkest">
+              <Typography variant="Title3" component="h3" color="black">
                 € {data?.price.toFixed(2)}
               </Typography>
               <Button
@@ -129,7 +129,7 @@ function CardDetailModal({ data, setSelected, selected, handleOperation }) {
               backgroundColor: 'Sky.Lighter',
             }}
           >
-            <Typography variant="LargeNormalBold" component="h3" color="Ink.Darkest">
+            <Typography variant="LargeNormalBold" component="h3" color="black">
               ATTRIBUTES
             </Typography>
             <Stack gap="22px" direction="row" mt={2}>
@@ -138,21 +138,16 @@ function CardDetailModal({ data, setSelected, selected, handleOperation }) {
                   <Stack
                     key={key}
                     sx={{
-                      backgroundColor: 'Sky.White',
+                      backgroundColor: 'grey.900',
                       borderRadius: 2,
                       p: 3,
                       width: '118px',
                     }}
                   >
-                    <Typography
-                      variant="LargeNormalRegular"
-                      component="h3"
-                      color="Ink.Darkest"
-                      textTransform="capitalize"
-                    >
+                    <Typography variant="LargeNormalRegular" component="h3" color="black" textTransform="capitalize">
                       {key}
                     </Typography>
-                    <Typography variant="Title3" component="p" color="Ink.Darkest">
+                    <Typography variant="Title3" component="p" color="black">
                       {data?.attributes[key]}
                       <Typography variant="LargeNormalRegular" display="inline" color="Sky.Dark">
                         /100

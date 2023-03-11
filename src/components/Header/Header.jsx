@@ -18,7 +18,7 @@ function Header({ accessToken, setIsOpen }) {
         position: 'fixed',
         top: 0,
         left: 0,
-        zIndex: 1000221,
+        zIndex: 10000,
         p: {
           xs: 2,
           md: '0 20px',
@@ -26,7 +26,7 @@ function Header({ accessToken, setIsOpen }) {
         width: '100%',
         height: '75px',
         alignItems: 'center',
-        backgroundColor: 'Ink.Darkest',
+        backgroundColor: 'black',
         justifyContent: 'space-between',
         '.header-img': {
           height: '60px',

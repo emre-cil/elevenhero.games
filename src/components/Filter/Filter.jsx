@@ -35,7 +35,7 @@ function Filter({ range, cardType, position, setRange, setCardType, setPosition,
   return (
     <Box
       sx={{
-        backgroundColor: 'Sky.White',
+        backgroundColor: 'grey.900',
         borderRadius: 2,
         p: 3,
         minWidth: '199px',
@@ -120,7 +120,7 @@ function Filter({ range, cardType, position, setRange, setCardType, setPosition,
                             border: 0,
                           },
                           '& .MuiSlider-thumb': {
-                            backgroundColor: 'Sky.White',
+                            backgroundColor: 'grey.900',
                             width: 12,
                             height: 12,
                             border: '2px solid currentColor',

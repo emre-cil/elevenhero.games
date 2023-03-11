@@ -4,7 +4,7 @@ function PlayerCard({ item, section, onClick, handleOperation }) {
   return (
     <Stack
       sx={{
-        backgroundColor: 'Sky.White',
+        backgroundColor: 'grey.900',
         borderRadius: 2,
         userSelect: 'none',
         zIndex: 1,

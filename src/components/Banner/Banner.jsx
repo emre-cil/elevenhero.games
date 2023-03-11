@@ -73,7 +73,7 @@ function Banner() {
         >
           <motion.div initial={{ opacity: 0, x: -100 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }}>
             <Typography
-              color="Sky.White"
+              color="grey.900"
               component="h1"
               sx={{
                 lineHeight: { xs: '30px', md: '91px' },
@@ -84,7 +84,7 @@ function Banner() {
               NEW
             </Typography>
             <Typography
-              color="Sky.White"
+              color="grey.900"
               component="h1"
               textTransform="uppercase"
               sx={{

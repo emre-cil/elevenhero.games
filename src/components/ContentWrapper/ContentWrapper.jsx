@@ -14,7 +14,7 @@ function ContentWrapper({ accessToken }) {
         <Sidebar accessToken={accessToken} isOpen={isOpen} setIsOpen={setIsOpen} />
         <Box
           sx={{
-            mt: '100px',
+            mt: '75px',
             ml: { xs: 0, md: '200px' },
             width: '100%',
           }}

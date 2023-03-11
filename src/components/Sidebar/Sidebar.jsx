@@ -60,7 +60,7 @@ function Sidebar({ accessToken, isOpen, setIsOpen }) {
               sx={{
                 height: '100%',
                 width: '100%',
-                pt: '120px',
+                pt: '95px',
                 px: 3.5,
 
                 backgroundColor: 'Ink.Darkest',

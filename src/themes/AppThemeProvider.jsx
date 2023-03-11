@@ -1,10 +1,11 @@
 import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 export function AppThemeProvider({ children }) {
+  const mode = 'dark';
   const theme = responsiveFontSizes(
     createTheme({
       palette: {
-        mode: 'dark',
+        mode,
         primary: {
           main: '#0F8B0F',
         },
@@ -46,211 +47,28 @@ export function AppThemeProvider({ children }) {
           Silver: 'linear-gradient(180deg, #808080 0%, #DFDFDF 100%)',
           Gold: 'linear-gradient(180deg, #A3873C 0%, #E3D294 100%)',
         },
+        grey: {
+          50: mode === 'dark' ? 'hsl(0, 0%, 10%)' : 'hsl(0, 5%, 95%)',
+          100: mode === 'dark' ? 'hsl(0, 0%, 20%)' : 'hsl(0, 0%, 90%)',
+          200: mode === 'dark' ? 'hsl(0, 0%, 30%)' : 'hsl(0, 0%, 80%)',
+          300: mode === 'dark' ? 'hsl(0, 0%, 40%)' : 'hsl(0, 0%, 70%)',
+          400: mode === 'dark' ? 'hsl(0, 0%, 50%)' : 'hsl(0, 0%, 60%)',
+          500: mode === 'dark' ? 'hsl(0, 0%, 60%)' : 'hsl(0, 0%, 50%)',
+          600: mode === 'dark' ? 'hsl(0, 0%, 70%)' : 'hsl(0, 0%, 40%)',
+          700: mode === 'dark' ? 'hsl(0, 0%, 80%)' : 'hsl(0, 0%, 30%)',
+          800: mode === 'dark' ? 'hsl(0, 0%, 90%)' : 'hsl(0, 0%, 20%)',
+          900: mode === 'dark' ? 'hsl(0, 5%, 95%)' : 'hsl(0, 0%, 10%)',
+        },
       },
 
       typography: {
         fontFamily: 'Source Sans Pro',
         fontstyle: 'normal',
-        fontColor: 'white',
-
-        Title1: {
-          fontSize: '48px',
-          lineHeight: '56px',
-          fontWeight: 700,
+        body1: {
+          lineHeight: '20px',
         },
-        Title2: {
-          fontSize: '32px',
-          lineHeight: '36px',
-          fontWeight: 700,
-        },
-        Title3: {
-          fontSize: '24px',
-          lineHeight: '32px',
-          fontWeight: 700,
-        },
-        // ==== Large ====
-        LargeNoneBold: {
-          fontSize: '18px',
+        body2: {
           lineHeight: '18px',
-          fontWeight: 700,
-        },
-        LargeNoneMedium: {
-          fontSize: '18px',
-          lineHeight: '18px',
-          fontWeight: 600,
-        },
-        LargeNoneRegular: {
-          fontSize: '18px',
-          lineHeight: '18px',
-          fontWeight: 400,
-        },
-        LargeTightBold: {
-          fontSize: '18px',
-          lineHeight: '20px',
-          fontWeight: 700,
-        },
-        LargeTightMedium: {
-          fontSize: '18px',
-          lineHeight: '20px',
-          fontWeight: 600,
-        },
-        LargeTightRegular: {
-          fontSize: '18px',
-          lineHeight: '20px',
-          fontWeight: 400,
-        },
-        LargeNormalBold: {
-          fontSize: '18px',
-          lineHeight: '24px',
-          fontWeight: 700,
-        },
-        LargeNormalMedium: {
-          fontSize: '18px',
-          lineHeight: '24px',
-          fontWeight: 600,
-        },
-        LargeNormalRegular: {
-          fontSize: '18px',
-          lineHeight: '24px',
-          fontWeight: 400,
-        },
-        // ==== REGULAR ====
-        RegularNoneBold: {
-          fontSize: '16px',
-          lineHeight: '16px',
-          fontWeight: 700,
-        },
-        RegularNoneMedium: {
-          fontSize: '16px',
-          lineHeight: '16px',
-          fontWeight: 600,
-        },
-        RegularNoneRegular: {
-          fontSize: '16px',
-          lineHeight: '16px',
-          fontWeight: 400,
-        },
-        RegularTightBold: {
-          fontSize: '16px',
-          lineHeight: '20px',
-          fontWeight: 700,
-        },
-        RegularTightMedium: {
-          fontSize: '16px',
-          lineHeight: '20px',
-          fontWeight: 600,
-        },
-        RegularTightRegular: {
-          fontSize: '16px',
-          lineHeight: '20px',
-          fontWeight: 400,
-        },
-        RegularNormalBold: {
-          fontSize: '16px',
-          lineHeight: '24px',
-          fontWeight: 700,
-        },
-        RegularNormalMedium: {
-          fontSize: '16px',
-          lineHeight: '24px',
-          fontWeight: 600,
-        },
-        RegularNormalRegular: {
-          fontSize: '16px',
-          lineHeight: '24px',
-          fontWeight: 400,
-        },
-        // ==== SMALL ====
-        SmallNoneBold: {
-          fontSize: '14px',
-          lineHeight: '14px',
-          fontWeight: 700,
-        },
-        SmallNoneMedium: {
-          fontSize: '14px',
-          lineHeight: '14px',
-          fontWeight: 600,
-        },
-        SmallNoneRegular: {
-          fontSize: '14px',
-          lineHeight: '14px',
-          fontWeight: 400,
-        },
-        SmallTightBold: {
-          fontSize: '14px',
-          lineHeight: '16px',
-          fontWeight: 700,
-        },
-        SmallTightMedium: {
-          fontSize: '14px',
-          lineHeight: '16px',
-          fontWeight: 600,
-        },
-        SmallTightRegular: {
-          fontSize: '14px',
-          lineHeight: '16px',
-          fontWeight: 400,
-        },
-        SmallNormalBold: {
-          fontSize: '14px',
-          lineHeight: '20px',
-          fontWeight: 700,
-        },
-        SmallNormalMedium: {
-          fontSize: '14px',
-          lineHeight: '20px',
-          fontWeight: 600,
-        },
-        SmallNormalRegular: {
-          fontSize: '14px',
-          lineHeight: '20px',
-          fontWeight: 400,
-        },
-        // ==== TINY ====
-        TinyNoneBold: {
-          fontSize: '12px',
-          lineHeight: '12px',
-          fontWeight: 700,
-        },
-        TinyNoneMedium: {
-          fontSize: '12px',
-          lineHeight: '12px',
-          fontWeight: 600,
-        },
-        TinyNoneRegular: {
-          fontSize: '12px',
-          lineHeight: '12px',
-          fontWeight: 400,
-        },
-        TinyTightBold: {
-          fontSize: '12px',
-          lineHeight: '14px',
-          fontWeight: 700,
-        },
-        TinyTightMedium: {
-          fontSize: '12px',
-          lineHeight: '14px',
-          fontWeight: 600,
-        },
-        TinyTightRegular: {
-          fontSize: '12px',
-          lineHeight: '14px',
-          fontWeight: 400,
-        },
-        TinyNormalBold: {
-          fontSize: '12px',
-          lineHeight: '16px',
-          fontWeight: 700,
-        },
-        TinyNormalMedium: {
-          fontSize: '12px',
-          lineHeight: '16px',
-          fontWeight: 600,
-        },
-        TinyNormalRegular: {
-          fontSize: '12px',
-          lineHeight: '16px',
-          fontWeight: 400,
         },
       },
 

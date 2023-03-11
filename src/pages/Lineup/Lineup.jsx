@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import { Box, Container, MenuItem, Stack, TextField } from '@mui/material';
+import { Box, Container, Grid, MenuItem, Stack, TextField } from '@mui/material';
 import React, { useState, useMemo, useCallback } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import lineupImg from '../../assets/Images/lineup.webp';
@@ -164,63 +164,8 @@ function Lineup() {
               border: '1px solid gray',
               p: 2,
             }}
-          >
-            <TextField
-              select
-              label="Formation"
-              value={selectedFormation.name}
-              onChange={(e) => {
-                setSelectedFormation(
-                  formations.find((formation) => formation.name === e.target.value) ?? formations[0],
-                );
-              }}
-            >
-              {formations.map((option) => (
-                <MenuItem key={option.name} value={option.name}>
-                  {option.name}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Stack>
-          <Box
-            sx={{
-              mx: 'auto',
-              width: 'fit-content',
-              height: 'fit-content',
-              position: 'relative',
-              order: { xs: 3, sm: 2 },
-
-              '#grass': {
-                width: { xs: '100%', sm: '300px', md: '400px', lg: '450px', xl: '500px' },
-                zIndex: -1,
-                userSelect: 'none',
-              },
-            }}
-          >
-            <img id="grass" src={lineupImg} alt="" />
-            {selectedFormation.positions?.map((position, idx) => (
-              <LineUpEmpty key={position.id} x={position.x} y={position.y} id={position.id} name={position.name}>
-                {position.player ? (
-                  <TestLineUpCard
-                    located
-                    player={position.player}
-                    onDoubleClick={() => setAsUnselected(position.player.id)}
-                  />
-                ) : (
-                  <span>{position.name}</span>
-                )}
-              </LineUpEmpty>
-            ))}
-          </Box>
-          <Stack
             alignItems="center"
-            sx={{
-              flex: 3,
-              p: 2,
-              borderRadius: '5px',
-              border: '1px solid gray',
-              order: { xs: 2, sm: 3 },
-            }}
+            gap={2}
           >
             <Box
               sx={{
@@ -247,26 +192,64 @@ function Lineup() {
                 90
               </Box>
             </Box>
+            <TextField
+              fullWidth
+              select
+              label="Formation"
+              value={selectedFormation.name}
+              onChange={(e) => {
+                setSelectedFormation(
+                  formations.find((formation) => formation.name === e.target.value) ?? formations[0],
+                );
+              }}
+            >
+              {formations.map((option) => (
+                <MenuItem key={option.name} value={option.name}>
+                  {option.name}
+                </MenuItem>
+              ))}
+            </TextField>
           </Stack>
-        </Stack>
-        <Stack
-          // this one is going to be also droppable
-          direction="row"
-          gap={2}
-          flexWrap="wrap"
-          sx={{
-            border: '1px solid black',
-            borderRadius: '5px',
-            padding: '5px',
-            maxHeight: '675px',
-            overflowY: 'auto',
-            overflow: 'visible',
-            zIndex: 1,
-          }}
-        >
-          {unSelectedPlayers.map((player, idx) => (
-            <TestLineUpCard key={player.id} player={player} />
-          ))}
+          <Box
+            sx={{
+              mx: 'auto',
+              width: 'fit-content',
+              height: 'fit-content',
+              position: 'relative',
+              '#grass': {
+                width: { xs: '100%', sm: '300px', md: '400px', lg: '450px', xl: '500px' },
+                zIndex: -1,
+                userSelect: 'none',
+              },
+            }}
+          >
+            <img id="grass" src={lineupImg} alt="" />
+            {selectedFormation.positions?.map((position, idx) => (
+              <LineUpEmpty key={position.id} x={position.x} y={position.y} id={position.id} name={position.name}>
+                {position.player ? (
+                  <TestLineUpCard
+                    located
+                    player={position.player}
+                    onDoubleClick={() => setAsUnselected(position.player.id)}
+                  />
+                ) : (
+                  <span>{position.name}</span>
+                )}
+              </LineUpEmpty>
+            ))}
+          </Box>
+          <Grid
+            sx={{
+              flex: 3,
+              borderRadius: '5px',
+              border: '1px solid gray',
+            }}
+            container
+          >
+            {unSelectedPlayers.map((player, idx) => (
+              <TestLineUpCard key={player.id} player={player} />
+            ))}
+          </Grid>
         </Stack>
       </DndContext>
     </Container>

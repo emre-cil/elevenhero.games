@@ -13,8 +13,8 @@ function BalanceCard({ accessToken }) {
       sx={{
         borderRadius: '8px',
         overflow: 'hidden',
-        width: '179px',
-        height: '48px',
+        width: '120px',
+        height: '30px',
         backgroundColor: 'Ink.Dark',
         cursor: 'pointer',
       }}
@@ -26,14 +26,17 @@ function BalanceCard({ accessToken }) {
             sx={{
               backgroundColor: 'Green.Base',
               height: '100%',
-              width: '48px',
-              p: '12px 10px',
+              width: '40px',
+              p: '6px',
+              img: {
+                width: 20,
+              },
             }}
           >
             <img src={walletIcon} alt="wallet icon" />
           </Box>
           <Typography
-            variant="Title3"
+            variant="h6"
             sx={{
               color: 'Sky.White',
               textAlign: 'center',

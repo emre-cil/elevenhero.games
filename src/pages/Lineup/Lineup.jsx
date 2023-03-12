@@ -1,5 +1,6 @@
+/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/no-array-index-key */
-import { Box, Container, Grid, MenuItem, Pagination, Stack, TextField } from '@mui/material';
+import { Box, Container, Grid, IconButton, MenuItem, Pagination, Stack, TextField, Typography } from '@mui/material';
 import React, { useState, useMemo, useCallback } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import lineupImg from '../../assets/Images/lineup.webp';
@@ -7,7 +8,9 @@ import TestImg from '../../assets/Images/testImg.webp';
 import LineUpEmpty from '../../components/Cards/LineUpEmpty';
 import TestLineUpCard from '../../components/Cards/TestLineUpCard';
 import formations from '../../data/formations';
-
+import CenterFocusStrongIcon from '@mui/icons-material/CenterFocusStrong';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 function Lineup() {
   // 11 players 4-4-2 img 500x500 cards 50x75
   const [selectedFormation, setSelectedFormation] = useState(formations[0]);
@@ -76,6 +79,24 @@ function Lineup() {
 
   const [unSelectedPlayers, setUnSelectedPlayers] = useState(players);
 
+  function LineTactics({ line }) {
+    return (
+      <Stack direction="row" alignItems="center">
+        <Typography variant="body2" sx={{ minWidth: '5rem' }}>
+          {line}
+        </Typography>
+        <IconButton sx={{ color: 'green' }}>
+          <ArrowUpwardIcon />
+        </IconButton>
+        <IconButton>
+          <CenterFocusStrongIcon />
+        </IconButton>
+        <IconButton>
+          <ArrowDownwardIcon />
+        </IconButton>
+      </Stack>
+    );
+  }
   const setAsUnselected = (id) => {
     // if unselected contains the player
     if (unSelectedPlayers.find((p) => p.id === id) !== undefined) return;
@@ -172,7 +193,6 @@ function Lineup() {
               border: '1px solid gray',
               p: 2,
             }}
-            alignItems="center"
             gap={2}
           >
             <Box
@@ -185,6 +205,7 @@ function Lineup() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                mx: 'auto',
               }}
             >
               <Box
@@ -200,6 +221,38 @@ function Lineup() {
                 90
               </Box>
             </Box>
+            <Box
+              sx={{
+                background: 'linear-gradient(90deg, #ff0000 0%, #ff8800 33%, #fbff00 66%, #00ff00 100%)',
+                width: '100%',
+                height: '10px',
+                borderRadius: '5px',
+                mb: 2,
+                position: 'relative',
+                '&:after': {
+                  content: '""',
+                  position: 'absolute',
+                  top: '-50%',
+                  width: '4px',
+                  height: '200%',
+                  backgroundColor: 'white',
+                  left: '83%',
+                  boxShadow: 10,
+                  borderRadius: '6px',
+                },
+
+                '&:before': {
+                  content: '"83"',
+                  position: 'absolute',
+                  top: '150%',
+                  width: '5px',
+                  height: '200%',
+                  left: '81%',
+                  boxShadow: 10,
+                  borderRadius: '6px',
+                },
+              }}
+            />
             <TextField
               fullWidth
               select
@@ -217,6 +270,14 @@ function Lineup() {
                 </MenuItem>
               ))}
             </TextField>
+            <Stack>
+              <Typography variant="h6" textAlign="center">
+                Line Tactics
+              </Typography>
+              <LineTactics line="Upper Line" />
+              <LineTactics line="Middle Line" />
+              <LineTactics line="Lower Line" />
+            </Stack>
           </Stack>
           <Box
             sx={{

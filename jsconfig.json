@@ -7,8 +7,8 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true
   },
-  "exclude": ["node_modules", "**/node_modules/*", "dist", "**/dist/*"],
+  "exclude": ["node_modules", "**/node_modules/*", "**/node_modules", "dist", "**/dist/*"],
   "include": ["src/**/*"]
 }

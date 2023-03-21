@@ -9,12 +9,14 @@ function Register() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const passwordConfRef = useRef<HTMLInputElement>(null);
+  const usernameRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const [register, { isLoading }] = useRegisterMutation();
 
   const registerHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const email = emailRef?.current?.value.replace(/\s+/g, '') || '';
+    const username = usernameRef?.current?.value.replace(/\s+/g, '') || '';
     const password = passwordRef?.current?.value.replace(/\s+/g, '') || '';
     const pwdConf = passwordConfRef?.current?.value.replace(/\s+/g, '') || '';
     if (email === '') {
@@ -23,6 +25,15 @@ function Register() {
     } else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{1,20}$/.test(email)) {
       toast.error('Please enter a valid e-mail address');
       emailRef?.current?.focus();
+    } else if (username === '') {
+      toast.error('Please enter your username');
+      usernameRef?.current?.focus();
+    } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+      toast.error('Username can only contain letters, numbers and underscores');
+      usernameRef?.current?.focus();
+    } else if (username.length < 3) {
+      toast.error('Username must be at least 3 characters long');
+      usernameRef?.current?.focus();
     } else if (password === '') {
       toast.error('Please enter your password');
       passwordRef?.current?.focus();
@@ -39,6 +50,7 @@ function Register() {
       register({
         email,
         password,
+        username,
       })
         .unwrap()
         .then(() => {
@@ -60,6 +72,7 @@ function Register() {
   return (
     <AuthOutlet>
       <TextField inputRef={emailRef} type="email" label="E-mail" variant="outlined" autoComplete="off" autoFocus />
+      <TextField inputRef={usernameRef} label="Username" variant="outlined" />
       <TextField
         inputRef={passwordRef}
         type="password"

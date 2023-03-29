@@ -1,7 +1,7 @@
 import { Button, Modal, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import CardDetailModal from '../../components/Modals/CardDetailModal';
-import SectionWrapper from '../../components/SectionWrapper/SectionWrapper';
+import SectionWrapper from '../../layout/SectionWrapper/SectionWrapper';
 
 function Team() {
   const [selected, setSelected] = useState(null);

@@ -5,7 +5,7 @@ import Home from '../pages/Home/Home';
 import Login from '../pages/Auth/Login';
 import Register from '../pages/Auth/Register';
 import Profile from '../pages/Profile/Profile';
-import ContentWrapper from '../components/ContentWrapper/ContentWrapper';
+import ContentWrapper from '../layout/ContentWrapper/ContentWrapper';
 import ResetPassword from '../pages/Auth/ResetPassword';
 import ForgotPassword from '../pages/Auth/ForgotPassword';
 import Tournament from '../pages/Tournament/Tournament';
@@ -38,12 +38,12 @@ function Routing({ isLoading, accessToken, hasRefresh }) {
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/tournament" element={<Tournament />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/team" element={<Team />} />
           <Route path="/lineup" element={<Lineup />} />
         </Route>
         <Route path="/market" element={<Market />} />
       </Route>
+          <Route path="/leaderboard" element={<Leaderboard />} />
       {(!hasRefresh || !accessToken) && !isLoading && (
         <>
           <Route path="/login" element={<Login />} />

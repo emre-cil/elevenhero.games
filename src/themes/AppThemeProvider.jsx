@@ -34,6 +34,12 @@ export function AppThemeProvider({ children }) {
           Lightest: '#FFE5E5',
         },
 
+        Card:{
+          Bronze: '#847545',
+          Silver: '#69797e',
+          Gold: '#ffb900',
+        }
+,
         Green: {
           Darkest: '#0A4C0A',
           Base: '#0F8B0F',

@@ -3,8 +3,8 @@ import { Stack, Typography, Grid, Pagination, Box } from '@mui/material';
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
-import Filter from '../Filter/Filter';
-import PlayerCard from '../Cards/PlayerCard';
+import Filter from '../../components/Filter/Filter';
+import PlayerCard from '../../components/Cards/PlayerCard';
 
 function SectionWrapper({ title, sectionId, setSelected, handleOperation }) {
   const multiData = [

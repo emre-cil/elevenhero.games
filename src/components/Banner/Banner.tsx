@@ -1,8 +1,9 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Box, Stack, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
-import BannerBackground from '../../assets/Images/banner-background.jpg';
-import Banners from '../../data/BannerData';
+import BannerBackground from '@/assets/Images/banner-background.jpg';
+import Banners from '@/data/BannerData';
 import BannerPagination from '../Paginations/BannerPagination';
 
 function Banner() {

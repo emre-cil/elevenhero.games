@@ -3,8 +3,14 @@ import { Stack, ClickAwayListener } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
-function Sidebar({ accessToken, isOpen, setIsOpen }) {
-  const [selected, setSelected] = useState(null);
+type SidebarProps = {
+  accessToken: string | null;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+};
+
+const Sidebar: React.FC<SidebarProps> = ({ accessToken, isOpen, setIsOpen }) => {
+  const [selected, setSelected] = useState<any>(null);
 
   const links = [
     {
@@ -109,6 +115,6 @@ function Sidebar({ accessToken, isOpen, setIsOpen }) {
       )}
     </AnimatePresence>
   );
-}
+};
 
 export default Sidebar;

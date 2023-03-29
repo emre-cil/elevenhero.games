@@ -1,41 +1,40 @@
 import { Box, Typography, TextField, Button, Link, CircularProgress } from '@mui/material';
-
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
-import { toast } from 'react-toastify';
+import React, { useRef } from 'react';
+import { toast } from 'react-hot-toast';
 import AuthOutlet from './AuthOutlet';
 import { useRegisterMutation } from '../../features/user/userApiSlice';
 
 function Register() {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
-  const passwordConfRef = useRef(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const passwordConfRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const [register, { isLoading }] = useRegisterMutation();
 
-  const registerHandler = async (e) => {
+  const registerHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    const email = emailRef.current.value.replace(/\s+/g, '');
-    const password = passwordRef.current.value.replace(/\s+/g, '');
-    const pwdConf = passwordConfRef.current.value.replace(/\s+/g, '');
+    const email = emailRef?.current?.value.replace(/\s+/g, '') || '';
+    const password = passwordRef?.current?.value.replace(/\s+/g, '') || '';
+    const pwdConf = passwordConfRef?.current?.value.replace(/\s+/g, '') || '';
     if (email === '') {
       toast.error('Please enter your e-mail address');
-      emailRef.current.focus();
+      emailRef?.current?.focus();
     } else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{1,20}$/.test(email)) {
       toast.error('Please enter a valid e-mail address');
-      emailRef.current.focus();
+      emailRef?.current?.focus();
     } else if (password === '') {
       toast.error('Please enter your password');
-      passwordRef.current.focus();
+      passwordRef?.current?.focus();
     } else if (pwdConf === '') {
       toast.error('Please confirm your password');
-      passwordConfRef.current.focus();
+      passwordConfRef?.current?.focus();
     } else if (password !== pwdConf) {
       toast.error('Passwords do not match');
-      passwordRef.current.focus();
+      passwordRef?.current?.focus();
     } else if (password.length < 6) {
       toast.error('Password must be at least 6 characters long');
-      passwordRef.current.focus();
+      passwordRef?.current?.focus();
     } else {
       register({
         email,
@@ -48,7 +47,7 @@ function Register() {
             navigate('/login');
           }, 4000);
         })
-        .catch((error) => {
+        .catch((error: any) => {
           if (error?.status === 'FETCH_ERROR') {
             toast.error('Server Error - Please try again later.');
           } else {
@@ -58,14 +57,9 @@ function Register() {
     }
   };
 
-  /** Focus name input when component mounted. */
-  useEffect(() => {
-    emailRef.current.focus();
-  }, []);
-
   return (
     <AuthOutlet>
-      <TextField inputRef={emailRef} type="email" label="E-mail" variant="outlined" autoComplete="off" />
+      <TextField inputRef={emailRef} type="email" label="E-mail" variant="outlined" autoComplete="off" autoFocus />
       <TextField
         inputRef={passwordRef}
         type="password"

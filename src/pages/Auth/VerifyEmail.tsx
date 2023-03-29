@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { CircularProgress, Stack, Typography, Button } from '@mui/material';
 import { useVerifyMailQuery } from '../../features/user/userApiSlice';
@@ -59,14 +59,6 @@ function VerifyEmail() {
           </Button>
         </>
       )}
-      <ToastContainer
-        draggable
-        closeOnClick
-        theme="colored"
-        autoClose={3500}
-        pauseOnHover={false}
-        position="bottom-left"
-      />
     </Stack>
   );
 }

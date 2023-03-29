@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from '../features/user/userSlice';
-import  apiSlice  from './api/apiSlice';
+import apiSlice from './api/apiSlice';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 
- const store = configureStore({
+const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     user: userReducer,

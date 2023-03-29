@@ -1,10 +1,18 @@
+import React from 'react';
 import { Button, Stack, Typography, useTheme } from '@mui/material';
 import { motion } from 'framer-motion';
 import CloseIcon from '../../assets/Icons/close.svg';
 
-function CardDetailModal({ data, setSelected, selected, handleOperation }) {
+type CardDetailModalProps = {
+  data: any;
+  setSelected: (selected: boolean | null) => void;
+  selected: any;
+  handleOperation: (operation: string) => void;
+};
+
+const CardDetailModal: React.FC<CardDetailModalProps> = ({ data, setSelected, selected, handleOperation }) => {
   const theme = useTheme();
-  const selectGradient = (type) => {
+  const selectGradient = (type: any) => {
     switch (type) {
       case 'Gold':
         return theme.palette.Gradient.Gold;
@@ -17,7 +25,7 @@ function CardDetailModal({ data, setSelected, selected, handleOperation }) {
     }
   };
 
-  const miniCard = (head, text) => (
+  const miniCard = (head: string, text: string) => (
     <Stack
       p={3}
       sx={{
@@ -165,6 +173,6 @@ function CardDetailModal({ data, setSelected, selected, handleOperation }) {
       </Stack>
     </motion.div>
   );
-}
+};
 
 export default CardDetailModal;

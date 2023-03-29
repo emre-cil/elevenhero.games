@@ -1,9 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { useDraggable } from '@dnd-kit/core';
-import { Box, Grid, Stack } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
 
-function TestLineUpCard({ located, player, onDoubleClick }) {
+type TestLineUpCardProps = {
+  located?: boolean;
+  player: any;
+  onDoubleClick?: () => void;
+};
+
+const TestLineUpCard: React.FC<TestLineUpCardProps> = ({ located, player, onDoubleClick }) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: player.id,
   });
@@ -49,6 +55,6 @@ function TestLineUpCard({ located, player, onDoubleClick }) {
       </Stack>
     </Grid>
   );
-}
+};
 
 export default TestLineUpCard;

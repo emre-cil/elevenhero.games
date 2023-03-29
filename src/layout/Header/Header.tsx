@@ -7,7 +7,12 @@ import BalanceCard from '../../components/Cards/BalanceCard';
 import LOGO_TEXT from '../../assets/Images/LOGO-TEXT.webp';
 import LOGO_11H from '../../assets/Images/LOGO-11H.webp';
 
-function Header({ accessToken, setIsOpen }) {
+type HeaderProps = {
+  accessToken: string | null;
+  setIsOpen: (p: any) => void;
+};
+
+const Header: React.FC<HeaderProps> = ({ accessToken, setIsOpen }) => {
   const navigate = useNavigate();
 
   return (
@@ -56,10 +61,10 @@ function Header({ accessToken, setIsOpen }) {
           fontSize: '45px',
           ml: 'auto',
         }}
-        onClick={() => setIsOpen((p) => !p)}
+        onClick={() => setIsOpen((p: boolean) => !p)}
       />
     </Stack>
   );
-}
+};
 
 export default Header;

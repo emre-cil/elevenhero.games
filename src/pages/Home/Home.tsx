@@ -1,5 +1,6 @@
 import { Button, Container, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import { selectAccessToken, logout } from '../../features/user/userSlice';
 import AppSlider from '../../components/Banner/Banner';
 import { useLazyLogoutQuery } from '../../features/user/userApiSlice';
@@ -15,10 +16,10 @@ function Home() {
     dispatch(logout());
     logoutF()
       .unwrap()
-      .then((res) => {
+      .then((res: any) => {
         console.log(res);
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.log(err);
       });
   };

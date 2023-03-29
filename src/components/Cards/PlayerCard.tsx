@@ -1,6 +1,14 @@
+import React from 'react';
 import { Button, Stack, Typography } from '@mui/material';
 
-function PlayerCard({ item, section, onClick, handleOperation }) {
+type PlayerCardProps = {
+  item: any;
+  section: string;
+  onClick: (data: any) => void;
+  handleOperation: (operation: string, item: any) => void;
+};
+
+const PlayerCard: React.FC<PlayerCardProps> = ({ item, section, onClick, handleOperation }) => {
   return (
     <Stack
       sx={{
@@ -38,6 +46,6 @@ function PlayerCard({ item, section, onClick, handleOperation }) {
       </Stack>
     </Stack>
   );
-}
+};
 
 export default PlayerCard;

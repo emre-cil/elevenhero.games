@@ -5,7 +5,10 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
-function ContentWrapper({ accessToken }) {
+type ContentWrapperProps = {
+  accessToken: string | null;
+};
+const ContentWrapper: React.FC<ContentWrapperProps> = ({ accessToken }) => {
   const [isOpen, setIsOpen] = useState(!(window.innerWidth < 900));
   return (
     <>
@@ -25,6 +28,6 @@ function ContentWrapper({ accessToken }) {
       <Footer />
     </>
   );
-}
+};
 
 export default ContentWrapper;

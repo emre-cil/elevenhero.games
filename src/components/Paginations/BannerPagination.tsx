@@ -1,8 +1,15 @@
+import React from 'react';
 import { Box, Stack } from '@mui/material';
 import ArrowLeft from '../../assets/Icons/arrow-left.svg';
 import ArrowRight from '../../assets/Icons/arrow-right.svg';
 
-function BannerPagination({ current, setCurrent, length }) {
+type BannerPaginationProps = {
+  current: number;
+  setCurrent: (current: number) => void;
+  length: number;
+};
+
+const BannerPagination: React.FC<BannerPaginationProps> = ({ current, setCurrent, length }) => {
   return (
     <Stack
       direction="row"
@@ -24,7 +31,7 @@ function BannerPagination({ current, setCurrent, length }) {
             onClick={() => setCurrent(i)}
             sx={{
               backgroundColor: current === i ? 'Red.Base' : 'grey.900',
-              boxShadow: current !== i && 'Large',
+              boxShadow: (current !== i && 'Large') || 'none',
               width: '8px',
               height: '8px',
               borderRadius: '50%',
@@ -35,6 +42,6 @@ function BannerPagination({ current, setCurrent, length }) {
       <img src={ArrowRight} alt="Arrow Right" onClick={() => setCurrent(current === length - 1 ? 0 : current + 1)} />
     </Stack>
   );
-}
+};
 
 export default BannerPagination;

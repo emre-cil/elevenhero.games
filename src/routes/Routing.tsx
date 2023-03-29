@@ -15,7 +15,7 @@ import Lineup from '@/pages/Lineup/Lineup';
 import Team from '@/pages/Team/Team';
 import VerifyEmail from '@/pages/Auth/VerifyEmail';
 
-function Routing({ isLoading, accessToken, hasRefresh }:any) {
+function Routing({ isLoading, accessToken, hasRefresh }: any) {
   function ProtectedRoute() {
     return isLoading ? (
       <CircularProgress

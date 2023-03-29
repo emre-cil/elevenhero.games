@@ -1,8 +1,16 @@
-import { Stack } from '@mui/material';
 import React from 'react';
+import { Stack } from '@mui/material';
 import { useDroppable } from '@dnd-kit/core';
 
-function LineUpEmpty({ x, y, children, id, name }) {
+type LineUpEmptyProps = {
+  x: number;
+  y: number;
+  children: any;
+  id: string;
+  name: string;
+};
+
+const LineUpEmpty: React.FC<LineUpEmptyProps> = ({ x, y, children, id, name }) => {
   const { isOver, setNodeRef } = useDroppable({
     id,
   });
@@ -10,9 +18,9 @@ function LineUpEmpty({ x, y, children, id, name }) {
     <Stack
       ref={setNodeRef}
       sx={{
-        border: !children.props?.player && '1px solid #000',
+        border: (!children.props?.player && '1px solid #000') || 'none',
         borderRadius: '6px',
-        backgroundColor: !children.props?.player && 'rgba(0,0,0,0.2)',
+        backgroundColor: (!children.props?.player && 'rgba(0,0,0,0.2)') || 'none',
         width: { xs: '13%', sm: '50px', md: '60px', lg: '70px', xl: '80px' },
         aspectRatio: '21/28',
         position: 'absolute',
@@ -61,6 +69,6 @@ function LineUpEmpty({ x, y, children, id, name }) {
       )}
     </Stack>
   );
-}
+};
 
 export default LineUpEmpty;

@@ -1,12 +1,17 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { Stack, Typography, Grid, Pagination, Box } from '@mui/material';
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { useSelector } from 'react-redux';
 import Filter from '../../components/Filter/Filter';
 import PlayerCard from '../../components/Cards/PlayerCard';
 
-function SectionWrapper({ title, sectionId, setSelected, handleOperation }) {
+type SectionWrapperProps = {
+  title: string;
+  sectionId: string;
+  setSelected: (id: string) => void;
+  handleOperation: (id: string) => void;
+};
+
+const SectionWrapper: React.FC<SectionWrapperProps> = ({ title, sectionId, setSelected, handleOperation }) => {
   const multiData = [
     {
       id: '0',
@@ -714,6 +719,6 @@ function SectionWrapper({ title, sectionId, setSelected, handleOperation }) {
       </Stack>
     </Stack>
   );
-}
+};
 
 export default SectionWrapper;

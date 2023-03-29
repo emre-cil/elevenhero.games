@@ -1,34 +1,34 @@
 import { TextField, Button, CircularProgress } from '@mui/material';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useRef, useEffect } from 'react';
-import { toast } from 'react-toastify';
+// import { useNavigate, useSearchParams } from 'react-router-dom';
+import React, { useRef, useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 import AuthOutlet from './AuthOutlet';
 
 function ResetPassword() {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const passwordRef = useRef();
-  const confirmPasswordRef = useRef();
+  // const navigate = useNavigate();
+  // const [searchParams] = useSearchParams();
+  const passwordRef = useRef<HTMLInputElement>();
+  const confirmPasswordRef = useRef<HTMLInputElement>();
   const isLoading = false;
   // const [newPassword, { isLoading }] = useNewPasswordMutation();
   const handleRequest = async () => {
-    const pwd = passwordRef.current.value.replace(/\s+/g, '');
-    const pwdConf = confirmPasswordRef.current.value.replace(/\s+/g, '');
+    const pwd = passwordRef?.current?.value.replace(/\s+/g, '') || '';
+    const pwdConf = confirmPasswordRef?.current?.value.replace(/\s+/g, '') || '';
     if (pwd === '') {
       toast.error('Please enter your password.');
-      passwordRef.current.focus();
+      passwordRef?.current?.focus();
     } else if (pwdConf === '') {
       toast.error('Please confirm your password.');
-      confirmPasswordRef.current.focus();
+      confirmPasswordRef?.current?.focus();
     } else if (pwd !== pwdConf) {
       toast.error('The passwords do not match.');
-      passwordRef.current.focus();
+      passwordRef?.current?.focus();
     } else if (pwd.length < 6) {
       toast.error('The password must be at least 6 characters long.');
-      passwordRef.current.focus();
+      passwordRef?.current?.focus();
     } else if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/.test(pwd)) {
       toast.error('The password must contain at least one uppercase letter, one lowercase letter, and one number.');
-      passwordRef.current.focus();
+      passwordRef?.current?.focus();
     } else {
       // newPassword({
       //   ForgotToken: searchParams.get('GUID'),
@@ -53,7 +53,7 @@ function ResetPassword() {
   };
 
   useEffect(() => {
-    passwordRef.current.focus();
+    passwordRef?.current?.focus();
   }, []);
 
   return (
@@ -65,6 +65,7 @@ function ResetPassword() {
         autoComplete="new-password"
         label="New Password"
         variant="outlined"
+        autoFocus
       />
       <TextField
         id="pwdAgain"

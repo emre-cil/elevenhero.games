@@ -1,7 +1,8 @@
+import React from 'react';
 import { Stack } from '@mui/material';
 
 function Profile() {
-  return <Stack sx={{}}>Profile</Stack>;
+  return <Stack>Profile</Stack>;
 }
 
 export default Profile;

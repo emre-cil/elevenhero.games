@@ -23,9 +23,9 @@ function Team() {
     },
   };
 
-  const [prompt, setPrompt] = useState(null);
+  const [prompt, setPrompt] = useState<any>(null);
   // const { data } = useGetCardWithIdQuery(selected?.id, { skip: selected === null });
-  const handleOperation = (operation, item) => {
+  const handleOperation = (operation: any, item: any) => {
     setPrompt({
       title: `Would you like to ${operation} the card for`,
       item,
@@ -59,7 +59,7 @@ function Team() {
               }}
             >
               <Typography variant="Title3" color="black" sx={{ textAlign: 'center' }}>
-                {prompt.title}
+                {prompt?.title}
               </Typography>
               {prompt?.item?.price && (
                 <Typography variant="Title3" color="Red.Base" sx={{ textAlign: 'center' }}>

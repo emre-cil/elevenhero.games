@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/no-array-index-key */
 import { Box, Container, Grid, IconButton, MenuItem, Pagination, Stack, TextField, Typography } from '@mui/material';
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import lineupImg from '../../assets/Images/lineup.webp';
 import TestImg from '../../assets/Images/testImg.webp';
@@ -79,7 +79,7 @@ function Lineup() {
 
   const [unSelectedPlayers, setUnSelectedPlayers] = useState(players);
 
-  function LineTactics({ line }) {
+  function LineTactics({ line }: any) {
     return (
       <Stack direction="row" alignItems="center">
         <Typography variant="body2" sx={{ minWidth: '5rem' }}>
@@ -97,7 +97,7 @@ function Lineup() {
       </Stack>
     );
   }
-  const setAsUnselected = (id) => {
+  const setAsUnselected = (id: any) => {
     // if unselected contains the player
     if (unSelectedPlayers.find((p) => p.id === id) !== undefined) return;
     // update the unselected players
@@ -110,8 +110,8 @@ function Lineup() {
     });
     // remove the player from the dropped
     setSelectedFormation((prev) => {
-      const NewDropped = prev.positions.map((position) => {
-        if (position.player && position.player.id === id) {
+      const NewDropped = prev.positions.map((position: any) => {
+        if (position?.player && position.player.id === id) {
           return {
             ...position,
             player: null,
@@ -126,18 +126,18 @@ function Lineup() {
     });
   };
 
-  const handleDragEnd = (event) => {
+  const handleDragEnd = (event: any) => {
     if (event.over) {
       setUnSelectedPlayers((prev) => {
         let NewUnselecteds = prev;
         const isPlayerUnselected = prev.find((p) => p.id === event.active.id) !== undefined;
         const destination = selectedFormation.positions.find((p) => p.id === event.over.id);
-        setSelectedFormation((x) => {
-          const NewDropped = x.positions.map((position) => {
+        setSelectedFormation((x: any) => {
+          const NewDropped = x.positions.map((position: any) => {
             if (position.player && position.player.id === event.active.id) {
               return {
                 ...position,
-                player: destination.player || null,
+                player: destination?.player || null,
               };
             }
             // if the position is the same as the one
@@ -293,7 +293,7 @@ function Lineup() {
             }}
           >
             <img id="grass" src={lineupImg} alt="" />
-            {selectedFormation.positions?.map((position, idx) => (
+            {selectedFormation.positions?.map((position: any) => (
               <LineUpEmpty key={position.id} x={position.x} y={position.y} id={position.id} name={position.name}>
                 {position.player ? (
                   <TestLineUpCard
@@ -328,7 +328,7 @@ function Lineup() {
               }}
             >
               {playerPositions.map((position) => (
-                <Box>{position}</Box>
+                <Box key={position}>{position}</Box>
               ))}
             </Stack>
             <Grid container>

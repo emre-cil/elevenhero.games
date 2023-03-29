@@ -3,7 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { Stack, Typography, Box } from '@mui/material';
 import walletIcon from '../../assets/Icons/walletIcon.svg';
 
-function BalanceCard({ accessToken }) {
+type BalanceCardProps = {
+  accessToken: string | null;
+};
+
+const BalanceCard: React.FC<BalanceCardProps> = ({ accessToken }) => {
   const navigate = useNavigate();
 
   return (
@@ -60,6 +64,6 @@ function BalanceCard({ accessToken }) {
       )}
     </Stack>
   );
-}
+};
 
 export default BalanceCard;

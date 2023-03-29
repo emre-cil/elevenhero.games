@@ -1,14 +1,31 @@
-/* eslint-disable react/jsx-curly-newline */
 import { Box, Slider, Stack, Typography } from '@mui/material';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ArrowDownIcon from '../../assets/Icons/arrow-down.svg';
 import FilterTypes from '../../data/FilterTypes.json';
 
-function Filter({ range, cardType, position, setRange, setCardType, setPosition, filterValues }) {
-  const [open, setOpen] = useState([]);
+type FilterProps = {
+  range: number[];
+  cardType: string;
+  position: string;
+  setRange: (range: any) => void;
+  setCardType: (cardType: any) => void;
+  setPosition: (position: any) => void;
+  filterValues: any;
+};
 
-  const filterHeader = (filter) => (
+const Filter: React.FC<FilterProps> = ({
+  range,
+  cardType,
+  position,
+  setRange,
+  setCardType,
+  setPosition,
+  filterValues,
+}) => {
+  const [open, setOpen] = useState<any>([]);
+
+  const filterHeader = (filter: any) => (
     <Stack
       direction="row"
       alignItems="center"
@@ -141,6 +158,6 @@ function Filter({ range, cardType, position, setRange, setCardType, setPosition,
       ))}
     </Box>
   );
-}
+};
 
 export default Filter;

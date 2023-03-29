@@ -9,19 +9,19 @@ import {
   IconButton,
   CircularProgress,
 } from '@mui/material';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { setCredentials } from '../../features/user/userSlice';
 import AuthOutlet from './AuthOutlet';
 import { useAuthMutation } from '../../features/user/userApiSlice';
 
 function Login() {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [login, { isLoading }] = useAuthMutation();
@@ -29,23 +29,23 @@ function Login() {
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
-  const loginHandler = async (e) => {
+  const loginHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    const email = emailRef.current.value.replace(/\s+/g, '');
-    const password = passwordRef.current.value.replace(/\s+/g, '');
+    const email = emailRef?.current?.value.replace(/\s+/g, '');
+    const password = passwordRef?.current?.value.replace(/\s+/g, '');
     if (email === '') {
       toast.error('Please enter your e-mail address');
-      emailRef.current.focus();
+      emailRef?.current?.focus();
     } else if (password === '') {
       toast.error('Please enter your password');
-      passwordRef.current.focus();
+      passwordRef?.current?.focus();
     } else {
       login({
         email,
         password,
       })
         .unwrap()
-        .then((response) => {
+        .then((response: any) => {
           dispatch(
             setCredentials({
               accessToken: response.accessToken,
@@ -54,7 +54,7 @@ function Login() {
           );
           navigate('/');
         })
-        .catch((error) => {
+        .catch((error: any) => {
           if (error?.status === 'FETCH_ERROR') {
             toast.error('Server Error - Please try again later.');
           } else {
@@ -63,11 +63,6 @@ function Login() {
         });
     }
   };
-
-  /** Focus email input when component mounted. */
-  useEffect(() => {
-    emailRef.current.focus();
-  }, []);
 
   return (
     <AuthOutlet>

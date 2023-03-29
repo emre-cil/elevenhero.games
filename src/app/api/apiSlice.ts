@@ -46,8 +46,6 @@ const baseQueryWithReauth = async (args: string | FetchArgs, api: any, extraOpti
   return result;
 };
 
-
-
 const apiSlice = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),

@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import { Container, Stack, Typography, styled } from '@mui/material';
 import LeaderBoardCard from '../../components/Cards/LeaderBoardCard';
 import { useGetAllTimeLeaderboardQuery, useGetMonthlyLeaderboardQuery } from '@/features/common/commonApiSlice';
+
+type score = {
+  username: string;
+  monthlyScore?: number;
+  totalScore?: number;
+};
 function Leaderboard() {
   // monthly 1, all time 2
   const [selectedBoard, setSelectedBoard] = useState(1);
@@ -9,6 +15,27 @@ function Leaderboard() {
   const { data: allTimeScores } = useGetAllTimeLeaderboardQuery(undefined, { skip: selectedBoard !== 2 });
   console.log(monthlyScores, allTimeScores);
 
+  const ScoreItem = (score: score, index: number) => (
+    <Stack
+      direction="row"
+      sx={{
+        justifyContent: 'space-between',
+        borderRadius: '14px',
+        backgroundColor: 'Ink.Base',
+        p: '1rem',
+      }}
+    >
+      <Typography variant="body2" component="h3" color="white">
+        {index + 1}
+      </Typography>
+      <Typography variant="body2" component="h3" color="white">
+        {score.username}
+      </Typography>
+      <Typography variant="body2" component="h3" color="white">
+        {selectedBoard === 1 ? score.monthlyScore : score.totalScore}
+      </Typography>
+    </Stack>
+  );
   return (
     <Container
       sx={{
@@ -61,36 +88,9 @@ function Leaderboard() {
         <LeaderBoardCard color="Card.Bronze" mt={2.25} />
       </Stack>
       <Stack gap={2}>
-        {monthlyScores?.map(
-          (
-            score: {
-              username: string;
-              score: number;
-            },
-            index: number,
-          ) => (
-            <Stack
-              direction="row"
-              sx={{
-                justifyContent: 'space-between',
-                borderRadius: '14px',
-                backgroundColor: 'Ink.Base',
-                p: '1rem',
-              }}
-              key={index}
-            >
-              <Typography variant="body2" component="h3" color="white">
-                {index + 1}
-              </Typography>
-              <Typography variant="body2" component="h3" color="white">
-                {score.username}
-              </Typography>
-              <Typography variant="body2" component="h3" color="white">
-                {score.score}
-              </Typography>
-            </Stack>
-          ),
-        )}
+        {selectedBoard === 1
+          ? monthlyScores?.map((score: score, index: number) => ScoreItem(score, index))
+          : allTimeScores?.map((score: score, index: number) => ScoreItem(score, index))}
       </Stack>
     </Container>
   );

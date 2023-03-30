@@ -6,8 +6,8 @@ import FilterTypes from '../../data/FilterTypes.json';
 
 type FilterProps = {
   range: number[];
-  cardType: string;
-  position: string;
+  cardType: string | null;
+  position: string | null;
   setRange: (range: any) => void;
   setCardType: (cardType: any) => void;
   setPosition: (position: any) => void;
@@ -30,7 +30,9 @@ const Filter: React.FC<FilterProps> = ({
       direction="row"
       alignItems="center"
       justifyContent="space-between"
-      onClick={() => setOpen(open.includes(filter.id) ? open.filter((id) => id !== filter.id) : [...open, filter.id])}
+      onClick={() =>
+        setOpen(open.includes(filter.id) ? open.filter((id: any) => id !== filter.id) : [...open, filter.id])
+      }
       sx={{
         cursor: 'pointer',
         userSelect: 'none',
@@ -43,7 +45,7 @@ const Filter: React.FC<FilterProps> = ({
         },
       }}
     >
-      <Typography variant="RegularNormalRegular" component="h6">
+      <Typography variant="body2" component="h6">
         {filter.title}
       </Typography>
       <img src={ArrowDownIcon} alt="arrow" />
@@ -95,7 +97,7 @@ const Filter: React.FC<FilterProps> = ({
                   {filter?.items?.map((item) => (
                     <Typography
                       key={item}
-                      variant={cardType === item || position === item ? 'RegularNormalBold' : 'RegularNormalRegular'}
+                      variant={cardType === item || position === item ? 'body2' : 'h3'}
                       component="p"
                       onClick={() => {
                         if (filter.id === 0) {
@@ -116,8 +118,8 @@ const Filter: React.FC<FilterProps> = ({
                   {filter?.title === 'Price' && (
                     <>
                       <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={2}>
-                        <Typography variant="TinyNormalBold">€ {range[0].toFixed(2)}</Typography>
-                        <Typography variant="TinyNormalBold">€ {range[1].toFixed(2)}</Typography>
+                        <Typography variant="body2">€ {range[0].toFixed(2)}</Typography>
+                        <Typography variant="body2">€ {range[1].toFixed(2)}</Typography>
                       </Stack>
 
                       <Slider

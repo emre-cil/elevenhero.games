@@ -16,7 +16,7 @@ export const userSlice = createSlice({
       state.accessToken = action.payload?.accessToken;
       state.user = action.payload?.UserInfo;
       state.refreshPending = false;
-      localStorage.setItem('hasRefresh', true);
+      localStorage.setItem('hasRefresh', 'true');
     },
     logout: (state) => {
       state.accessToken = null;
@@ -49,13 +49,5 @@ export const userSlice = createSlice({
 });
 
 export const { setCredentials, logout, setRefreshPending, changeMode } = userSlice.actions;
-
-export const selectAccessToken = (state) => state.user.accessToken;
-
-export const selectUser = (state) => state.user.user;
-
-export const selectMode = (state) => state.user.mode;
-
-export const selectRefreshPending = (state) => state.user.refreshPending;
 
 export default userSlice.reducer;

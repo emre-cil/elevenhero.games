@@ -5,25 +5,13 @@ import CloseIcon from '../../assets/Icons/close.svg';
 
 type CardDetailModalProps = {
   data: any;
-  setSelected: (selected: boolean | null) => void;
+  setSelected: any;
   selected: any;
-  handleOperation: (operation: string) => void;
+  handleOperation: any;
 };
 
 const CardDetailModal: React.FC<CardDetailModalProps> = ({ data, setSelected, selected, handleOperation }) => {
   const theme = useTheme();
-  const selectGradient = (type: any) => {
-    switch (type) {
-      case 'Gold':
-        return theme.palette.Gradient.Gold;
-      case 'Silver':
-        return theme.palette.Gradient.Silver;
-      case 'Bronze':
-        return theme.palette.Gradient.Bronze;
-      default:
-        return 'White';
-    }
-  };
 
   const miniCard = (head: string, text: string) => (
     <Stack
@@ -34,10 +22,10 @@ const CardDetailModal: React.FC<CardDetailModalProps> = ({ data, setSelected, se
         flex: 1,
       }}
     >
-      <Typography variant="LargeNormalRegular" component="h3" color="black">
+      <Typography variant="h3" component="h3" color="black">
         {head}
       </Typography>
-      <Typography variant="Title3" component="h3" color="black">
+      <Typography variant="body2" component="h3" color="black">
         {text}
       </Typography>
     </Stack>
@@ -77,7 +65,18 @@ const CardDetailModal: React.FC<CardDetailModalProps> = ({ data, setSelected, se
           justifyContent="center"
           sx={{
             height: '382px',
-            background: selectGradient(data?.cardType),
+            background: (theme: any) => {
+              switch (data?.cardType) {
+                case 'Gold':
+                  return theme.palette.Gradient.Gold;
+                case 'Silver':
+                  return theme.palette.Gradient.Silver;
+                case 'Bronze':
+                  return theme.palette.Gradient.Bronze;
+                default:
+                  return 'White';
+              }
+            },
             img: {
               height: '286px',
               objectFit: 'contain',
@@ -96,10 +95,10 @@ const CardDetailModal: React.FC<CardDetailModalProps> = ({ data, setSelected, se
         >
           <Stack direction="row" gap={3}>
             <Stack flex={1} justifyContent="center" pr={6}>
-              <Typography variant="Title3" component="h3" color="Red.Base">
+              <Typography variant="body2" component="h3" color="Red.Base">
                 {data?.name}
               </Typography>
-              <Typography variant="LargeNormalRegular" component="p" color="black">
+              <Typography variant="body2" component="p" color="black">
                 {data?.position}
               </Typography>
             </Stack>
@@ -114,7 +113,7 @@ const CardDetailModal: React.FC<CardDetailModalProps> = ({ data, setSelected, se
                 backgroundColor: 'Sky.Lighter',
               }}
             >
-              <Typography variant="Title3" component="h3" color="black">
+              <Typography variant="body2" component="h3" color="black">
                 € {data?.price.toFixed(2)}
               </Typography>
               <Button
@@ -137,7 +136,7 @@ const CardDetailModal: React.FC<CardDetailModalProps> = ({ data, setSelected, se
               backgroundColor: 'Sky.Lighter',
             }}
           >
-            <Typography variant="LargeNormalBold" component="h3" color="black">
+            <Typography variant="body2" component="h3" color="black">
               ATTRIBUTES
             </Typography>
             <Stack gap="22px" direction="row" mt={2}>
@@ -152,12 +151,12 @@ const CardDetailModal: React.FC<CardDetailModalProps> = ({ data, setSelected, se
                       width: '118px',
                     }}
                   >
-                    <Typography variant="LargeNormalRegular" component="h3" color="black" textTransform="capitalize">
+                    <Typography variant="body2" component="h3" color="black" textTransform="capitalize">
                       {key}
                     </Typography>
-                    <Typography variant="Title3" component="p" color="black">
+                    <Typography variant="body2" component="p" color="black">
                       {data?.attributes[key]}
-                      <Typography variant="LargeNormalRegular" display="inline" color="Sky.Dark">
+                      <Typography variant="body2" display="inline" color="Sky.Dark">
                         /100
                       </Typography>
                     </Typography>

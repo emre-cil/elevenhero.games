@@ -52,7 +52,7 @@ const BalanceCard: React.FC<BalanceCardProps> = ({ accessToken }) => {
         </>
       ) : (
         <Typography
-          variant="Title3"
+          variant="body2"
           sx={{
             color: 'grey.900',
             textAlign: 'center',

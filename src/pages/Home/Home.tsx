@@ -1,20 +1,20 @@
 import { Button, Container, Typography } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/app/store';
 import React from 'react';
-import { selectAccessToken, logout } from '../../features/user/userSlice';
+import { logout } from '../../features/user/userSlice';
 import AppSlider from '../../components/Banner/Banner';
 import { useLazyLogoutQuery } from '../../features/user/userApiSlice';
 // import { useGetCardWithIdQuery } from '../../features/user/userApiSlice';
 
 function Home() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [logoutF] = useLazyLogoutQuery();
 
-  const token = useSelector(selectAccessToken);
+  const token = useAppSelector((state) => state.user.accessToken);
 
   const logoutHandler = () => {
     dispatch(logout());
-    logoutF()
+    logoutF(undefined)
       .unwrap()
       .then((res: any) => {
         console.log(res);

@@ -7,8 +7,8 @@ import PlayerCard from '../../components/Cards/PlayerCard';
 type SectionWrapperProps = {
   title: string;
   sectionId: string;
-  setSelected: (id: string) => void;
-  handleOperation: (id: string) => void;
+  setSelected: any;
+  handleOperation: any;
 };
 
 const SectionWrapper: React.FC<SectionWrapperProps> = ({ title, sectionId, setSelected, handleOperation }) => {
@@ -636,7 +636,7 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({ title, sectionId, setSe
         color: 'black',
       }}
     >
-      <Typography color="black" variant="LargeNormalBold">
+      <Typography color="black" variant="body2">
         {title}
       </Typography>
       <Stack

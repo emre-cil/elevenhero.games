@@ -9,7 +9,9 @@ import { Toaster } from 'react-hot-toast';
 function App() {
   const { accessToken } = useAppSelector((state) => state.user);
   const hasRefresh = localStorage.getItem('hasRefresh');
-  const { isLoading } = useRefreshQuery(hasRefresh, { skip: !hasRefresh || accessToken });
+  const { isLoading } = useRefreshQuery(hasRefresh, {
+    skip: !hasRefresh || accessToken !== null,
+  });
   return (
     <BrowserRouter>
       <CssBaseline />

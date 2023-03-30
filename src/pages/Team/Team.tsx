@@ -58,11 +58,11 @@ function Team() {
                 borderRadius: 2,
               }}
             >
-              <Typography variant="Title3" color="black" sx={{ textAlign: 'center' }}>
+              <Typography variant="h6" color="black" sx={{ textAlign: 'center' }}>
                 {prompt?.title}
               </Typography>
               {prompt?.item?.price && (
-                <Typography variant="Title3" color="Red.Base" sx={{ textAlign: 'center' }}>
+                <Typography variant="h6" color="Red.Base" sx={{ textAlign: 'center' }}>
                   € {prompt.item.price.toFixed(2)}
                 </Typography>
               )}
@@ -86,7 +86,7 @@ function Team() {
                       setSelected(null);
                     }}
                   >
-                    <Typography variant="RegularNoneMedium"> {prompt.operation}</Typography>
+                    <Typography variant="body2"> {prompt.operation}</Typography>
                   </Button>
                 </>
               )}
@@ -98,7 +98,7 @@ function Team() {
                   setPrompt(null);
                 }}
               >
-                <Typography variant="RegularNoneMedium">{(prompt?.back && 'Back') || 'Cancel'}</Typography>
+                <Typography variant="body2">{(prompt?.back && 'Back') || 'Cancel'}</Typography>
               </Button>
             </Stack>
           )}

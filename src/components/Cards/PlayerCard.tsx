@@ -31,7 +31,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ item, section, onClick, handleO
     >
       <img src={item?.photoUrl} alt="" />
       <Stack direction="row" alignItems="center" p={2} pt={0}>
-        <Typography variant="RegularNormalBold">€ {item?.price.toFixed(2)}</Typography>
+        <Typography variant="body2">€ {item?.price.toFixed(2)}</Typography>
         <Button
           variant="outlined"
           color="primary"
@@ -41,7 +41,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ item, section, onClick, handleO
             handleOperation(section === 'market' ? 'buy' : 'sell', item);
           }}
         >
-          <Typography variant="RegularNoneMedium">{section === 'market' ? 'Buy' : 'Sell'}</Typography>
+          <Typography variant="body2">{section === 'market' ? 'Buy' : 'Sell'}</Typography>
         </Button>
       </Stack>
     </Stack>

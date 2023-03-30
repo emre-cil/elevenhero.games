@@ -4,14 +4,14 @@ export const ticketApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createTicket: builder.mutation({
       query: (body) => ({
-        url: '/api/tickets/createTicket',
+        url: '/tickets/createTicket',
         method: 'POST',
         body,
       }),
     }),
     sendMessage: builder.mutation({
       query: (body) => ({
-        url: '/api/tickets/sendMessage',
+        url: '/tickets/sendMessage',
         method: 'PUT',
         body,
       }),

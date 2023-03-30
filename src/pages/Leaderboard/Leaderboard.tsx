@@ -1,53 +1,13 @@
 import React, { useState } from 'react';
 import { Container, Stack, Typography, styled } from '@mui/material';
 import LeaderBoardCard from '../../components/Cards/LeaderBoardCard';
-
+import { useGetAllTimeLeaderboardQuery, useGetMonthlyLeaderboardQuery } from '@/features/common/commonApiSlice';
 function Leaderboard() {
   // monthly 1, all time 2
   const [selectedBoard, setSelectedBoard] = useState(1);
-
-  const scores = [
-    {
-      name: 'John Doe',
-      score: 100,
-    },
-    {
-      name: 'John Doe',
-      score: 100,
-    },
-    {
-      name: 'John Doe',
-      score: 100,
-    },
-    {
-      name: 'John Doe',
-      score: 100,
-    },
-    {
-      name: 'John Doe',
-      score: 100,
-    },
-    {
-      name: 'John Doe',
-      score: 100,
-    },
-    {
-      name: 'John Doe',
-      score: 100,
-    },
-    {
-      name: 'John Doe',
-      score: 100,
-    },
-    {
-      name: 'John Doe',
-      score: 100,
-    },
-    {
-      name: 'John Doe',
-      score: 100,
-    },
-  ];
+  const { data: monthlyScores } = useGetMonthlyLeaderboardQuery(undefined, { skip: selectedBoard !== 1 });
+  const { data: allTimeScores } = useGetAllTimeLeaderboardQuery(undefined, { skip: selectedBoard !== 2 });
+  console.log(monthlyScores, allTimeScores);
 
   return (
     <Container
@@ -101,28 +61,36 @@ function Leaderboard() {
         <LeaderBoardCard color="Card.Bronze" mt={2.25} />
       </Stack>
       <Stack gap={2}>
-        {scores.map((score, index) => (
-          <Stack
-            direction="row"
-            sx={{
-              justifyContent: 'space-between',
-              borderRadius: '14px',
-              backgroundColor: 'Ink.Base',
-              p: '1rem',
-            }}
-            key={index}
-          >
-            <Typography variant="body2" component="h3" color="white">
-              {index + 1}
-            </Typography>
-            <Typography variant="body2" component="h3" color="white">
-              {score.name}
-            </Typography>
-            <Typography variant="body2" component="h3" color="white">
-              {score.score}
-            </Typography>
-          </Stack>
-        ))}
+        {monthlyScores?.map(
+          (
+            score: {
+              username: string;
+              score: number;
+            },
+            index: number,
+          ) => (
+            <Stack
+              direction="row"
+              sx={{
+                justifyContent: 'space-between',
+                borderRadius: '14px',
+                backgroundColor: 'Ink.Base',
+                p: '1rem',
+              }}
+              key={index}
+            >
+              <Typography variant="body2" component="h3" color="white">
+                {index + 1}
+              </Typography>
+              <Typography variant="body2" component="h3" color="white">
+                {score.username}
+              </Typography>
+              <Typography variant="body2" component="h3" color="white">
+                {score.score}
+              </Typography>
+            </Stack>
+          ),
+        )}
       </Stack>
     </Container>
   );

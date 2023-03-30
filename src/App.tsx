@@ -21,9 +21,11 @@ function App() {
         toastOptions={{
           duration: 3000,
           style: {
-            background: 'linear-gradient(#003d3a, #006661)',
+            background: 'black',
             color: '#fff',
             fontSize: '1.2rem',
+            borderRadius: '5px',
+            border: '1px solid #0F8B0F',
           },
         }}
       />

@@ -63,7 +63,7 @@ function Register() {
           if (error?.status === 'FETCH_ERROR') {
             toast.error('Server Error - Please try again later.');
           } else {
-            toast.error(error?.originalStatus === 409 ? 'E-mail already exists' : error?.data?.message);
+            toast.error(error?.originalStatus === 409 ? 'E-mail or Username already exists' : error?.data?.message);
           }
         });
     }

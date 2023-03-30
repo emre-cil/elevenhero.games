@@ -20,6 +20,7 @@ const ContentWrapper: React.FC<ContentWrapperProps> = ({ accessToken }) => {
             mt: '75px',
             ml: { xs: 0, md: '200px' },
             width: '100%',
+            minHeight: 'calc(100vh - 75px)',
           }}
         >
           <Outlet />

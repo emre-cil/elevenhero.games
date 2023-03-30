@@ -25,3 +25,20 @@ input:-webkit-autofill:active {
 * {
   -webkit-tap-highlight-color: transparent;
 }
+
+/* scroll */
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #191d19;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

@@ -40,8 +40,29 @@ export const userApiSlice = apiSlice.injectEndpoints({
         body,
       }),
     }),
+
+    sendVerificationEmail: builder.mutation({
+      query: (email) => ({
+        url: `/auth/send-verification-mail?email=${email}`,
+        method: 'POST',
+      }),
+    }),
+
+    forgotPassword: builder.mutation({
+      query: (email) => ({
+        url: `/auth/forgot-password?email=${email}`,
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
-export const { useRegisterMutation, useAuthMutation, useRefreshQuery, useLazyLogoutQuery, useVerifyMailQuery } =
-  userApiSlice;
+export const {
+  useRegisterMutation,
+  useAuthMutation,
+  useRefreshQuery,
+  useLazyLogoutQuery,
+  useVerifyMailQuery,
+  useSendVerificationEmailMutation,
+  useForgotPasswordMutation,
+} = userApiSlice;

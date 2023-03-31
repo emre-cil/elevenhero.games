@@ -18,6 +18,7 @@ import React, { useRef, useState } from 'react';
 import { setCredentials } from '../../features/user/userSlice';
 import AuthOutlet from './AuthOutlet';
 import { useAuthMutation } from '../../features/user/userApiSlice';
+import DefaultModal from '@/components/Modals/DefaultModal';
 
 function Login() {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -25,7 +26,11 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [login, { isLoading }] = useAuthMutation();
+  const [sendActivationEmail] = useSendActivationEmailMutation();
+
   const [showPassword, setShowPassword] = useState(false);
+  const [modalText, setModalText] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
@@ -57,6 +62,11 @@ function Login() {
         .catch((error: any) => {
           if (error?.status === 'FETCH_ERROR') {
             toast.error('Server Error - Please try again later.');
+          } else if (error?.data?.message?.includes('verify')) {
+            setIsModalOpen(() => {
+              setModalText(t('activationRequiredText'));
+              return true;
+            });
           } else {
             toast.error(error?.data?.message);
           }
@@ -64,6 +74,19 @@ function Login() {
     }
   };
 
+  const handleVerify = () => {
+    sendActivationEmail(emailRef.current?.value?.trim())
+      .unwrap()
+      .then((res: any) => {
+        console.log(res);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      })
+      .finally(() => {
+        setIsModalOpen(false);
+      });
+  };
   return (
     <AuthOutlet>
       <TextField inputRef={emailRef} type="email" label="E-mail" variant="outlined" autoComplete="off" />
@@ -109,6 +132,17 @@ function Login() {
           Create an account
         </Link>
       </Box>
+      {isModalOpen && (
+        <DefaultModal
+          open={isModalOpen}
+          setOpen={setIsModalOpen}
+          onSuccess={handleVerify}
+          title={modalText}
+          successText="Verification code sent"
+          successColor="success.main"
+          timer="verificationTimer"
+        />
+      )}
     </AuthOutlet>
   );
 }

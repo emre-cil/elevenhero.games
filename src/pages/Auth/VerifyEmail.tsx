@@ -1,21 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { CircularProgress, Stack, Typography, Button } from '@mui/material';
-import { useVerifyMailQuery } from '../../features/user/userApiSlice';
+import { useVerifyMailQuery, useSendVerificationEmailMutation } from '@/features/user/userApiSlice';
+import DefaultModal from '@/components/Modals/DefaultModal';
 
 function VerifyEmail() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const [sendActivationEmail, { isLoading: verificationLoading }] = useSendVerificationEmailMutation();
+  const [modalText, setModalText] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const email = searchParams.get('email');
   const token = searchParams.get('token');
-  console.log('email', email);
-  console.log('token', token);
-  const { data, isLoading, isSuccess, isError } = useVerifyMailQuery({
+  const { data, error, isLoading, isSuccess, isError } = useVerifyMailQuery({
     email,
     verificationToken: token,
   });
 
+  const handleVerify = () => {
+    sendActivationEmail(email?.trim())
+      .unwrap()
+      .then((res: any) => {
+        toast.success("We've sent you an email. Please check your inbox and verify your account.");
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      })
+      .finally(() => {
+        navigate('/login');
+      });
+  };
   useEffect(() => {
     if (isSuccess) {
       toast.success('Email verified! Redirecting to login...');
@@ -24,7 +39,10 @@ function VerifyEmail() {
       }, 1500);
     }
     if (isError) {
-      toast.error('Email verification failed!');
+      setIsModalOpen(() => {
+        setModalText('Email verification failed it may be expired or invalid . Send another verification code?');
+        return true;
+      });
     }
   }, [isSuccess, isError]);
 
@@ -48,16 +66,18 @@ function VerifyEmail() {
           </Typography>
         </>
       )}
-      {isError && (
-        <>
-          <Typography variant="h4" sx={{ mb: 2 }}>
-            Email verification failed!
-          </Typography>
 
-          <Button variant="contained" onClick={() => toast.error('Error: contact with customer service')}>
-            Send Verification Email
-          </Button>
-        </>
+      {isModalOpen && (
+        <DefaultModal
+          open={isModalOpen}
+          setOpen={setIsModalOpen}
+          onSuccess={handleVerify}
+          title={modalText}
+          successText="Send Code"
+          successColor="success.main"
+          timer="verificationTimer"
+          successLoading={verificationLoading}
+        />
       )}
     </Stack>
   );

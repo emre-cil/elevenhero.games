@@ -50,9 +50,9 @@ function Routing({ isLoading, accessToken, hasRefresh }: any) {
           <Route path="/register" element={<Register />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/verify-email" element={<VerifyEmail />} />
         </>
       )}
+      {!hasRefresh && <Route path="/verify-email" element={<VerifyEmail />} />}
     </Routes>
   );
 }

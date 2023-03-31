@@ -10,6 +10,7 @@ type DefaultModalProps = {
   successColor?: string;
   disableCancel?: boolean;
   icon?: React.ReactNode;
+  successLoading?: boolean;
   timer?: string;
 };
 
@@ -21,10 +22,11 @@ const DefaultModal: React.FC<DefaultModalProps> = ({
   title,
   successColor,
   disableCancel = false,
+  successLoading = false,
   icon,
   timer,
 }) => {
-  const [formattedTime, setFormattedTime] = useState(timer ? new Date(localStorage.getItem(timer)) - Date.now() : 0);
+  const [formattedTime, setFormattedTime] = useState(timer ? Number(localStorage.getItem(timer)) - Date.now() : 0);
   useEffect(() => {
     if (timer) {
       try {
@@ -54,8 +56,8 @@ const DefaultModal: React.FC<DefaultModalProps> = ({
     >
       <Stack
         sx={{
-          width: '320px',
-          background: 'white',
+          width: { xs: '80%', sm: '450px' },
+          backgroundColor: 'grey.50',
           outline: 'none',
           borderRadius: 2,
         }}
@@ -76,7 +78,7 @@ const DefaultModal: React.FC<DefaultModalProps> = ({
           </Stack>
         )}
         <Typography
-          variant="body2"
+          variant="h6"
           p={2}
           sx={{
             textAlign: 'center',
@@ -107,18 +109,19 @@ const DefaultModal: React.FC<DefaultModalProps> = ({
           <Button
             fullWidth
             onClick={() => {
-              if (timer!) {
+              if (timer) {
                 localStorage.setItem(timer, (Date.now() + 120000).toString());
               }
               onSuccess();
             }}
-            disabled={timer !== undefined && formattedTime > 0}
+            disabled={(timer !== undefined && formattedTime > 0) || successLoading}
             sx={{
               position: 'relative',
               borderLeft: !disableCancel ? '1px solid' : 'none',
               borderColor: 'grey.200',
               borderRadius: 0,
               py: !disableCancel ? 1.5 : 2,
+              minHeight: '3.5rem',
               color: successColor || 'primary.main',
             }}
           >
@@ -130,7 +133,7 @@ const DefaultModal: React.FC<DefaultModalProps> = ({
                   left: 0,
                   right: 0,
                   top: 6,
-                  py: 0.5,
+                  py: 1.5,
                   fontSize: '1rem',
                   color: 'error.light',
                 }}

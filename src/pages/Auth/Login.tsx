@@ -17,7 +17,7 @@ import { useDispatch } from 'react-redux';
 import React, { useRef, useState } from 'react';
 import { setCredentials } from '../../features/user/userSlice';
 import AuthOutlet from './AuthOutlet';
-import { useAuthMutation } from '../../features/user/userApiSlice';
+import { useAuthMutation, useSendVerificationEmailMutation } from '../../features/user/userApiSlice';
 import DefaultModal from '@/components/Modals/DefaultModal';
 
 function Login() {
@@ -26,7 +26,7 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [login, { isLoading }] = useAuthMutation();
-  const [sendActivationEmail] = useSendActivationEmailMutation();
+  const [sendActivationEmail, { isLoading: verificationLoading }] = useSendVerificationEmailMutation();
 
   const [showPassword, setShowPassword] = useState(false);
   const [modalText, setModalText] = useState('');
@@ -64,7 +64,7 @@ function Login() {
             toast.error('Server Error - Please try again later.');
           } else if (error?.data?.message?.includes('verify')) {
             setIsModalOpen(() => {
-              setModalText(t('activationRequiredText'));
+              setModalText("Your account hasn't been verified yet. Please verify your account to continue.");
               return true;
             });
           } else {
@@ -78,7 +78,7 @@ function Login() {
     sendActivationEmail(emailRef.current?.value?.trim())
       .unwrap()
       .then((res: any) => {
-        console.log(res);
+        toast.success("We've sent you an email. Please check your inbox and verify your account.");
       })
       .catch((e: Error) => {
         console.log(e);
@@ -138,9 +138,10 @@ function Login() {
           setOpen={setIsModalOpen}
           onSuccess={handleVerify}
           title={modalText}
-          successText="Verification code sent"
+          successText="Send Code"
           successColor="success.main"
           timer="verificationTimer"
+          successLoading={verificationLoading}
         />
       )}
     </AuthOutlet>

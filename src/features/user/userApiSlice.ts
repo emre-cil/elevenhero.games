@@ -33,14 +33,21 @@ export const userApiSlice = apiSlice.injectEndpoints({
         credentials: 'include',
       }),
     }),
-    verifyMail: builder.query({
+
+    forgotPassword: builder.mutation({
+      query: (email) => ({
+        url: `/auth/forgot-password?email=${email}`,
+        method: 'POST',
+      }),
+    }),
+
+    resetPassword: builder.mutation({
       query: (body) => ({
-        url: '/auth/verify-mail',
+        url: '/auth/reset-password',
         method: 'PUT',
         body,
       }),
     }),
-
     sendVerificationEmail: builder.mutation({
       query: (email) => ({
         url: `/auth/send-verification-mail?email=${email}`,
@@ -48,10 +55,11 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
-    forgotPassword: builder.mutation({
-      query: (email) => ({
-        url: `/auth/forgot-password?email=${email}`,
-        method: 'POST',
+    verifyMail: builder.query({
+      query: (body) => ({
+        url: '/auth/verify-mail',
+        method: 'PUT',
+        body,
       }),
     }),
   }),
@@ -65,4 +73,5 @@ export const {
   useVerifyMailQuery,
   useSendVerificationEmailMutation,
   useForgotPasswordMutation,
+  useResetPasswordMutation,
 } = userApiSlice;

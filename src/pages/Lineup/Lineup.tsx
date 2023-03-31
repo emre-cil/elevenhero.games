@@ -296,11 +296,7 @@ function Lineup() {
             {selectedFormation.positions?.map((position: any) => (
               <LineUpEmpty key={position.id} x={position.x} y={position.y} id={position.id} name={position.name}>
                 {position.player ? (
-                  <TestLineUpCard
-                    located
-                    player={position.player}
-                    onDoubleClick={() => setAsUnselected(position.player.id)}
-                  />
+                  <TestLineUpCard player={position.player} onDoubleClick={() => setAsUnselected(position.player.id)} />
                 ) : (
                   <span>{position.name}</span>
                 )}

@@ -9,7 +9,7 @@ type TestLineUpCardProps = {
   onDoubleClick?: () => void;
 };
 
-const TestLineUpCard: React.FC<TestLineUpCardProps> = ({ located, player, onDoubleClick }) => {
+const TestLineUpCard: React.FC<TestLineUpCardProps> = ({ player, onDoubleClick }) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: player.id,
   });

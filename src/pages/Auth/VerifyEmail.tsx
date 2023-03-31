@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { CircularProgress, Stack, Typography, Button } from '@mui/material';
+import { CircularProgress, Stack, Typography } from '@mui/material';
 import { useVerifyMailQuery, useSendVerificationEmailMutation } from '@/features/user/userApiSlice';
 import DefaultModal from '@/components/Modals/DefaultModal';
 
@@ -13,7 +13,7 @@ function VerifyEmail() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const email = searchParams.get('email');
   const token = searchParams.get('token');
-  const { data, error, isLoading, isSuccess, isError } = useVerifyMailQuery({
+  const { isLoading, isSuccess, isError } = useVerifyMailQuery({
     email,
     verificationToken: token,
   });
@@ -21,7 +21,7 @@ function VerifyEmail() {
   const handleVerify = () => {
     sendActivationEmail(email?.trim())
       .unwrap()
-      .then((res: any) => {
+      .then(() => {
         toast.success("We've sent you an email. Please check your inbox and verify your account.");
       })
       .catch((e: Error) => {

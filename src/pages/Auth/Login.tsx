@@ -77,7 +77,7 @@ function Login() {
   const handleVerify = () => {
     sendActivationEmail(emailRef.current?.value?.trim())
       .unwrap()
-      .then((res: any) => {
+      .then(() => {
         toast.success("We've sent you an email. Please check your inbox and verify your account.");
       })
       .catch((e: Error) => {

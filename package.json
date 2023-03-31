@@ -28,11 +28,11 @@
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.15",
     "@reduxjs/toolkit": "^1.9.3",
-    "framer-motion": "^10.9.2",
+    "framer-motion": "^10.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
-    "react-router-dom": "^6.9.0",
+    "react-router-dom": "^6.10.0",
     "react-hot-toast": "^2.4.0"
 
   },
@@ -54,7 +54,7 @@
     "eslint-plugin-react": "^7.32.2",
     "prettier": "^2.8.7",
     "prop-types": "^15.8.1",
-    "typescript": "^5.0.2",
+    "typescript": "^5.0.3",
     "vite": "^4.2.1",
     "vitest": "^0.29.8"
   }

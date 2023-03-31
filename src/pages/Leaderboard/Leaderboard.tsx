@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Stack, Typography, styled } from '@mui/material';
+import { Container, Stack, Typography } from '@mui/material';
 import LeaderBoardCard from '../../components/Cards/LeaderBoardCard';
 import { useGetAllTimeLeaderboardQuery, useGetMonthlyLeaderboardQuery } from '@/features/common/commonApiSlice';
 

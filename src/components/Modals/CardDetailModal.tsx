@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Stack, Typography, useTheme } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import CloseIcon from '../../assets/Icons/close.svg';
 
@@ -11,8 +11,6 @@ type CardDetailModalProps = {
 };
 
 const CardDetailModal: React.FC<CardDetailModalProps> = ({ data, setSelected, selected, handleOperation }) => {
-  const theme = useTheme();
-
   const miniCard = (head: string, text: string) => (
     <Stack
       p={3}

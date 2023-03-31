@@ -2,15 +2,16 @@ import { TextField, Button, CircularProgress } from '@mui/material';
 // import { useNavigate, useSearchParams } from 'react-router-dom';
 import React, { useRef, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import AuthOutlet from './AuthOutlet';
+import { useResetPasswordMutation } from '@/features/user/userApiSlice';
 
 function ResetPassword() {
-  // const navigate = useNavigate();
-  // const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const passwordRef = useRef<HTMLInputElement>();
   const confirmPasswordRef = useRef<HTMLInputElement>();
-  const isLoading = false;
-  // const [newPassword, { isLoading }] = useNewPasswordMutation();
+  const [newPassword, { isLoading }] = useResetPasswordMutation();
   const handleRequest = async () => {
     const pwd = passwordRef?.current?.value.replace(/\s+/g, '') || '';
     const pwdConf = confirmPasswordRef?.current?.value.replace(/\s+/g, '') || '';
@@ -26,29 +27,24 @@ function ResetPassword() {
     } else if (pwd.length < 6) {
       toast.error('The password must be at least 6 characters long.');
       passwordRef?.current?.focus();
-    } else if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/.test(pwd)) {
-      toast.error('The password must contain at least one uppercase letter, one lowercase letter, and one number.');
-      passwordRef?.current?.focus();
     } else {
-      // newPassword({
-      //   ForgotToken: searchParams.get('GUID'),
-      //   NewPassword: pwd,
-      //   ReNewPassword: pwdConf,
-      // })
-      //   .unwrap()
-      //   .then((res) => {
-      //     toast.success(res.Data.Message);
-      //     setTimeout(() => {
-      //       navigate('/login');
-      //     }, 4000);
-      //   })
-      //   .catch((error) => {
-      //     if (error?.data?.InfoList[0]?.ShowToUser) {
-      //       toast.error(error.data.InfoList[0]?.Message);
-      //     } else {
-      //       toast.error('An error occurred. Please try again later.');
-      //     }
-      //   });
+      newPassword({
+        email: searchParams.get('email') || '',
+        token: searchParams.get('token') || '',
+        password: pwd,
+      })
+        .unwrap()
+        .then(() => {
+          toast.success("You've successfully changed your password. You can now log in.");
+          setTimeout(() => {
+            navigate('/login');
+          }, 4000);
+        })
+        .catch((error) => {
+          console.log(error);
+          if (error?.data?.message) toast.error(error.data.message);
+          else toast.error('Something went wrong. Please try again later.');
+        });
     }
   };
 

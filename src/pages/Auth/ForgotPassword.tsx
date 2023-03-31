@@ -1,12 +1,14 @@
 import { Typography, TextField, Button, CircularProgress } from '@mui/material';
 import React, { useRef } from 'react';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import AuthOutlet from './AuthOutlet';
+import { useForgotPasswordMutation } from '@/features/user/userApiSlice';
 
 function ForgotPassword() {
+  const navigate = useNavigate();
   const emailRef = useRef<HTMLInputElement>();
-  // const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
-  const isLoading = false;
+  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
   const handleRequest = async () => {
     const email = emailRef?.current?.value.replace(/\s+/g, '') || '';
     if (email === '') {
@@ -16,23 +18,18 @@ function ForgotPassword() {
       toast.error('Please enter a valid e-mail address');
       emailRef?.current?.focus();
     } else {
-      // forgotPassword({
-      //   Email: email,
-      // })
-      //   .unwrap()
-      //   .then((res) => {
-      //     toast.success(res.Data.Message);
-      //     setTimeout(() => {
-      //       navigate('/login');
-      //     }, 4000);
-      //   })
-      //   .catch((error) => {
-      //     if (error?.data?.InfoList[0]?.ShowToUser) {
-      //       toast.error(error.data.InfoList[0]?.Message);
-      //     } else {
-      //       toast.error('Bir hata oluştu.');
-      //     }
-      //   });
+      forgotPassword(email)
+        .unwrap()
+        .then((res) => {
+          toast.success(res?.message);
+          setTimeout(() => {
+            navigate('/login');
+          }, 4000);
+        })
+        .catch((error) => {
+          if (error?.data?.message) toast.error(error.data.message);
+          else toast.error('Something went wrong. Please try again later.');
+        });
     }
   };
 

@@ -25,27 +25,27 @@
     "@dnd-kit/core": "^6.0.8",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@mui/icons-material": "^5.11.11",
-    "@mui/material": "^5.11.15",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.12.0",
     "@reduxjs/toolkit": "^1.9.3",
-    "framer-motion": "^10.10.0",
+    "ethers": "^6.3.0",
+    "framer-motion": "^10.12.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.0",
     "react-redux": "^8.0.5",
-    "react-router-dom": "^6.10.0",
-    "react-hot-toast": "^2.4.0"
-
+    "react-router-dom": "^6.10.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.3",
-    "@types/react": "^18.0.31",
+    "@babel/core": "^7.21.4",
+    "@types/react": "^18.0.35",
     "@types/react-data-grid": "^4.0.8",
     "@types/react-dom": "^18.0.11",
-    "@typescript-eslint/eslint-plugin": "^5.57.0",
-    "@typescript-eslint/parser": "^5.57.0",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
     "@vitejs/plugin-react": "^3.1.0",
-    "csstype": "^3.1.1",
-    "eslint": "^8.37.0",
+    "csstype": "^3.1.2",
+    "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-config-standard-with-typescript": "^34.0.1",
     "eslint-plugin-import": "^2.27.5",
@@ -54,8 +54,8 @@
     "eslint-plugin-react": "^7.32.2",
     "prettier": "^2.8.7",
     "prop-types": "^15.8.1",
-    "typescript": "^5.0.3",
+    "typescript": "^5.0.4",
     "vite": "^4.2.1",
-    "vitest": "^0.29.8"
+    "vitest": "^0.30.1"
   }
 }

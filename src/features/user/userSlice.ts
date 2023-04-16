@@ -6,6 +6,10 @@ const initialState = {
   user: null,
   refreshPending: true,
   mode: 'light',
+  wallet: {
+    balance: 0,
+    address: '',
+  },
 };
 
 export const userSlice = createSlice({
@@ -26,6 +30,10 @@ export const userSlice = createSlice({
 
     setRefreshPending: (state, action) => {
       state.refreshPending = action.payload;
+    },
+
+    setWallet: (state, action) => {
+      state.wallet = action.payload;
     },
     changeMode: (state) => {
       if (state.mode === 'light') {
@@ -48,6 +56,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setCredentials, logout, setRefreshPending, changeMode } = userSlice.actions;
+export const { setCredentials, logout, setRefreshPending, changeMode, setWallet } = userSlice.actions;
 
 export default userSlice.reducer;

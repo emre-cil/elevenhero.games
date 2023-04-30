@@ -1,5 +1,5 @@
 import { Box, Modal, Stack, Typography } from '@mui/material';
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import metamaskImg from '@/assets/images/metamask.webp';
 import walletConnectImg from '@/assets/images/walletconnect.webp';
 import { useAppDispatch } from '@/app/store';

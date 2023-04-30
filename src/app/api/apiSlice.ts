@@ -1,6 +1,6 @@
 // import { setSuccessRefresh, setFailedRefresh } from '@/features/User/userSlice';
 import { BaseQueryApi, createApi, FetchArgs, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { RootState } from '../store';
+import { RootState } from '@/app/store';
 
 // Define a service using a base URL and expected endpoint, and a function to transform the header.
 const baseQuery = (args: any, api: BaseQueryApi, extraOptions: any) =>

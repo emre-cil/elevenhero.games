@@ -1,7 +1,7 @@
-import React from 'react';
+import { FC } from 'react';
 import { Button, Stack, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
-import CloseIcon from '../../assets/Icons/close.svg';
+import CloseIcon from '@/assets/Icons/close.svg';
 
 type CardDetailModalProps = {
   data: any;
@@ -10,7 +10,7 @@ type CardDetailModalProps = {
   handleOperation: any;
 };
 
-const CardDetailModal: React.FC<CardDetailModalProps> = ({ data, setSelected, selected, handleOperation }) => {
+const CardDetailModal: FC<CardDetailModalProps> = ({ data, setSelected, selected, handleOperation }) => {
   const miniCard = (head: string, text: string) => (
     <Stack
       p={3}

@@ -1,13 +1,13 @@
-import React from 'react';
+import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Stack, Typography, Box } from '@mui/material';
-import walletIcon from '../../assets/Icons/walletIcon.svg';
+import walletIcon from '@/assets/Icons/walletIcon.svg';
 
 type BalanceCardProps = {
   accessToken: string | null;
 };
 
-const BalanceCard: React.FC<BalanceCardProps> = ({ accessToken }) => {
+const BalanceCard: FC<BalanceCardProps> = ({ accessToken }) => {
   const navigate = useNavigate();
 
   return (

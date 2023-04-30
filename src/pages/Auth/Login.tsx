@@ -14,10 +14,10 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import React, { useRef, useState } from 'react';
-import { setCredentials } from '../../features/user/userSlice';
+import { useRef, useState, MouseEvent } from 'react';
+import { setCredentials } from '@/features/user/userSlice';
 import AuthOutlet from './AuthOutlet';
-import { useAuthMutation, useSendVerificationEmailMutation } from '../../features/user/userApiSlice';
+import { useAuthMutation, useSendVerificationEmailMutation } from '@/features/user/userApiSlice';
 import DefaultModal from '@/components/Modals/DefaultModal';
 
 function Login() {
@@ -34,7 +34,7 @@ function Login() {
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
-  const loginHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const loginHandler = async (e: MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const email = emailRef?.current?.value.replace(/\s+/g, '');
     const password = passwordRef?.current?.value.replace(/\s+/g, '');

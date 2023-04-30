@@ -1,11 +1,10 @@
-import React from 'react';
 import { CircularProgress } from '@mui/material';
 import { Routes, Route, Outlet, Navigate } from 'react-router-dom';
 import Home from '@/pages/Home/Home';
 import Login from '@/pages/Auth/Login';
 import Register from '@/pages/Auth/Register';
 import Profile from '@/pages/Profile/Profile';
-import ContentWrapper from '@/layout/ContentWrapper/ContentWrapper';
+import ContentWrapper from '@/layout/ContentWrapper';
 import ResetPassword from '@/pages/Auth/ResetPassword';
 import ForgotPassword from '@/pages/Auth/ForgotPassword';
 import Tournament from '@/pages/Tournament/Tournament';

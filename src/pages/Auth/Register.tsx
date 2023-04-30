@@ -1,9 +1,9 @@
 import { Box, Typography, TextField, Button, Link, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import AuthOutlet from './AuthOutlet';
-import { useRegisterMutation } from '../../features/user/userApiSlice';
+import { useRegisterMutation } from '@/features/user/userApiSlice';
 
 function Register() {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -13,7 +13,7 @@ function Register() {
   const navigate = useNavigate();
   const [register, { isLoading }] = useRegisterMutation();
 
-  const registerHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const registerHandler = async (e: MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const email = emailRef?.current?.value.replace(/\s+/g, '') || '';
     const username = usernameRef?.current?.value.replace(/\s+/g, '') || '';

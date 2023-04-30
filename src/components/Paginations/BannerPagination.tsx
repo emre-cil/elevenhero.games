@@ -1,7 +1,7 @@
-import React from 'react';
+import { FC } from 'react';
 import { Box, Stack } from '@mui/material';
-import ArrowLeft from '../../assets/Icons/arrow-left.svg';
-import ArrowRight from '../../assets/Icons/arrow-right.svg';
+import ArrowLeft from '@/assets/Icons/arrow-left.svg';
+import ArrowRight from '@/assets/Icons/arrow-right.svg';
 
 type BannerPaginationProps = {
   current: number;
@@ -9,7 +9,7 @@ type BannerPaginationProps = {
   length: number;
 };
 
-const BannerPagination: React.FC<BannerPaginationProps> = ({ current, setCurrent, length }) => {
+const BannerPagination: FC<BannerPaginationProps> = ({ current, setCurrent, length }) => {
   return (
     <Stack
       direction="row"

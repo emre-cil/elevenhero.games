@@ -1,6 +1,6 @@
 import { TextField, Button, CircularProgress } from '@mui/material';
 // import { useNavigate, useSearchParams } from 'react-router-dom';
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import AuthOutlet from './AuthOutlet';

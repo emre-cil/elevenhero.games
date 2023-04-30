@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Container, Stack, Typography } from '@mui/material';
-import LeaderBoardCard from '../../components/Cards/LeaderBoardCard';
+import LeaderBoardCard from '@/components/Cards/LeaderBoardCard';
 import { useGetAllTimeLeaderboardQuery, useGetMonthlyLeaderboardQuery } from '@/features/common/commonApiSlice';
 
 type score = {

@@ -1,6 +1,6 @@
-import BannerBronze from '../assets/Images/banner-bronze.webp';
-import BannerSilver from '../assets/Images/banner-silver.webp';
-import BannerGold from '../assets/Images/banner-gold.webp';
+import BannerBronze from '@/assets/Images/banner-bronze.webp';
+import BannerSilver from '@/assets/Images/banner-silver.webp';
+import BannerGold from '@/assets/Images/banner-gold.webp';
 
 export default [
   {

@@ -1,12 +1,12 @@
+import { FC } from 'react';
 import { Stack } from '@mui/material';
-import React from 'react';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
 type LeaderBoardCardProps = {
   color: string;
   mt?: string | number;
 };
-const LeaderBoardCard: React.FC<LeaderBoardCardProps> = ({ color, mt }) => {
+const LeaderBoardCard: FC<LeaderBoardCardProps> = ({ color, mt }) => {
   return (
     <Stack
       sx={{

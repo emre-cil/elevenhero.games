@@ -1,7 +1,8 @@
-import React from 'react';
+import { ReactNode, FC } from 'react';
 import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
+
 type AppThemeProviderProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 declare module '@mui/material/styles' {
@@ -29,7 +30,7 @@ declare module '@mui/material/styles' {
   }
 }
 
-const AppThemeProvider: React.FC<AppThemeProviderProps> = ({ children }) => {
+const AppThemeProvider: FC<AppThemeProviderProps> = ({ children }) => {
   const mode = 'dark';
   const theme = responsiveFontSizes(
     createTheme({

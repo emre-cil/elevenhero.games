@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
 import { useDraggable } from '@dnd-kit/core';
 import { Grid, Stack } from '@mui/material';
+import { FC } from 'react';
 
 type TestLineUpCardProps = {
   located?: boolean;
@@ -9,7 +9,7 @@ type TestLineUpCardProps = {
   onDoubleClick?: () => void;
 };
 
-const TestLineUpCard: React.FC<TestLineUpCardProps> = ({ player, onDoubleClick }) => {
+const TestLineUpCard: FC<TestLineUpCardProps> = ({ player, onDoubleClick }) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: player.id,
   });

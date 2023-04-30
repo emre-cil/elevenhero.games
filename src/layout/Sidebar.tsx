@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, FC, Fragment } from 'react';
 import { Stack, ClickAwayListener } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -9,7 +9,7 @@ type SidebarProps = {
   setIsOpen: (isOpen: boolean) => void;
 };
 
-const Sidebar: React.FC<SidebarProps> = ({ accessToken, isOpen, setIsOpen }) => {
+const Sidebar: FC<SidebarProps> = ({ accessToken, isOpen, setIsOpen }) => {
   const [selected, setSelected] = useState<any>(null);
 
   const links = [
@@ -75,7 +75,7 @@ const Sidebar: React.FC<SidebarProps> = ({ accessToken, isOpen, setIsOpen }) => 
               }}
             >
               {links.map((link) => (
-                <React.Fragment key={link.id}>
+                <Fragment key={link.id}>
                   {accessToken || !link.requiredToken ? (
                     <Stack
                       sx={{
@@ -107,7 +107,7 @@ const Sidebar: React.FC<SidebarProps> = ({ accessToken, isOpen, setIsOpen }) => 
                       />
                     </Stack>
                   ) : null}
-                </React.Fragment>
+                </Fragment>
               ))}
             </Stack>
           </motion.div>

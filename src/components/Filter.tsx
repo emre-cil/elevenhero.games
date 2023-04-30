@@ -1,8 +1,8 @@
 import { Box, Slider, Stack, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import { useState, FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ArrowDownIcon from '../../assets/Icons/arrow-down.svg';
-import FilterTypes from '../../data/FilterTypes.json';
+import ArrowDownIcon from '@/assets/Icons/arrow-down.svg';
+import FilterTypes from '@/data/FilterTypes.json';
 
 type FilterProps = {
   range: number[];
@@ -14,15 +14,7 @@ type FilterProps = {
   filterValues: any;
 };
 
-const Filter: React.FC<FilterProps> = ({
-  range,
-  cardType,
-  position,
-  setRange,
-  setCardType,
-  setPosition,
-  filterValues,
-}) => {
+const Filter: FC<FilterProps> = ({ range, cardType, position, setRange, setCardType, setPosition, filterValues }) => {
   const [open, setOpen] = useState<any>([]);
 
   const filterHeader = (filter: any) => (

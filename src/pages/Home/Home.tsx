@@ -1,10 +1,9 @@
 import { Button, Container, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@/app/store';
-import React from 'react';
-import { logout } from '../../features/user/userSlice';
-import AppSlider from '../../components/Banner/Banner';
-import { useLazyLogoutQuery } from '../../features/user/userApiSlice';
-// import { useGetCardWithIdQuery } from '../../features/user/userApiSlice';
+import { logout } from '@/features/user/userSlice';
+import AppSlider from '@/components/Banner';
+import { useLazyLogoutQuery } from '@/features/user/userApiSlice';
+// import { useGetCardWithIdQuery } from '@/features/user/userApiSlice';
 
 function Home() {
   const dispatch = useAppDispatch();

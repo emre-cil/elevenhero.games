@@ -1,5 +1,5 @@
+import { useEffect, useState, FC, ReactNode } from 'react';
 import { Button, Modal, Stack, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
 
 type DefaultModalProps = {
   open: boolean;
@@ -9,12 +9,12 @@ type DefaultModalProps = {
   title: string;
   successColor?: string;
   disableCancel?: boolean;
-  icon?: React.ReactNode;
+  icon?: ReactNode;
   successLoading?: boolean;
   timer?: string;
 };
 
-const DefaultModal: React.FC<DefaultModalProps> = ({
+const DefaultModal: FC<DefaultModalProps> = ({
   open,
   setOpen,
   onSuccess,

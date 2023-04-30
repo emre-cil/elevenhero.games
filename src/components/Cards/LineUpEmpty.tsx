@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { Stack } from '@mui/material';
 import { useDroppable } from '@dnd-kit/core';
 
@@ -10,7 +10,7 @@ type LineUpEmptyProps = {
   name: string;
 };
 
-const LineUpEmpty: React.FC<LineUpEmptyProps> = ({ x, y, children, id, name }) => {
+const LineUpEmpty: FC<LineUpEmptyProps> = ({ x, y, children, id, name }) => {
   const { isOver, setNodeRef } = useDroppable({
     id,
   });

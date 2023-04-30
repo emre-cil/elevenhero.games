@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { useState, FC } from 'react';
 import { Box, Stack } from '@mui/material';
 import { Outlet } from 'react-router-dom';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
-import Sidebar from '../Sidebar/Sidebar';
+import Footer from '@/layout/Footer';
+import Header from '@/layout/Header';
+import Sidebar from '@/layout/Sidebar';
 
 type ContentWrapperProps = {
   accessToken: string | null;
 };
-const ContentWrapper: React.FC<ContentWrapperProps> = ({ accessToken }) => {
+const ContentWrapper: FC<ContentWrapperProps> = ({ accessToken }) => {
   const [isOpen, setIsOpen] = useState(!(window.innerWidth < 900));
   return (
     <>

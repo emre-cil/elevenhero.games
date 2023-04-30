@@ -1,8 +1,8 @@
 import { Stack, Typography, Grid, Pagination, Box } from '@mui/material';
-import React, { useState, useMemo } from 'react';
+import { FC, useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import Filter from '../../components/Filter/Filter';
-import PlayerCard from '../../components/Cards/PlayerCard';
+import Filter from '@/components/Filter';
+import PlayerCard from '@/components/Cards/PlayerCard';
 
 type SectionWrapperProps = {
   title: string;
@@ -11,7 +11,7 @@ type SectionWrapperProps = {
   handleOperation: any;
 };
 
-const SectionWrapper: React.FC<SectionWrapperProps> = ({ title, sectionId, setSelected, handleOperation }) => {
+const SectionWrapper: FC<SectionWrapperProps> = ({ title, sectionId, setSelected, handleOperation }) => {
   const multiData = [
     {
       id: '0',

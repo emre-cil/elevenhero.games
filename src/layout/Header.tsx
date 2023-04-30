@@ -1,18 +1,18 @@
-import React from 'react';
+import { FC } from 'react';
 import { Stack } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
-import BalanceCard from '../../components/Cards/BalanceCard';
+import BalanceCard from '@/components/Cards/BalanceCard';
 // LOGO TEXT in public foler
-import LOGO_TEXT from '../../assets/Images/LOGO-TEXT.webp';
-import LOGO_11H from '../../assets/Images/LOGO-11H.webp';
+import LOGO_TEXT from '@/assets/Images/LOGO-TEXT.webp';
+import LOGO_11H from '@/assets/Images/LOGO-11H.webp';
 
 type HeaderProps = {
   accessToken: string | null;
   setIsOpen: (p: any) => void;
 };
 
-const Header: React.FC<HeaderProps> = ({ accessToken, setIsOpen }) => {
+const Header: FC<HeaderProps> = ({ accessToken, setIsOpen }) => {
   const navigate = useNavigate();
 
   return (

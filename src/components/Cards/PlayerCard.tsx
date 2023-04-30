@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { Button, Stack, Typography } from '@mui/material';
 
 type PlayerCardProps = {
@@ -8,7 +8,7 @@ type PlayerCardProps = {
   handleOperation: (operation: string, item: any) => void;
 };
 
-const PlayerCard: React.FC<PlayerCardProps> = ({ item, section, onClick, handleOperation }) => {
+const PlayerCard: FC<PlayerCardProps> = ({ item, section, onClick, handleOperation }) => {
   return (
     <Stack
       sx={{

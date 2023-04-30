@@ -1,13 +1,13 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/no-array-index-key */
 import { Box, Container, Grid, IconButton, MenuItem, Pagination, Stack, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { DndContext } from '@dnd-kit/core';
-import lineupImg from '../../assets/Images/lineup.webp';
-import TestImg from '../../assets/Images/testImg.webp';
-import LineUpEmpty from '../../components/Cards/LineUpEmpty';
-import TestLineUpCard from '../../components/Cards/TestLineUpCard';
-import formations from '../../data/formations';
+import lineupImg from '@/assets/Images/lineup.webp';
+import TestImg from '@/assets/Images/testImg.webp';
+import LineUpEmpty from '@/components/Cards/LineUpEmpty';
+import TestLineUpCard from '@/components/Cards/TestLineUpCard';
+import formations from '@/data/formations';
 import CenterFocusStrongIcon from '@mui/icons-material/CenterFocusStrong';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Container, Stack } from '@mui/material';
-import ConnectWallet from '../../components/ConnectWallet';
+import ConnectWallet from '@/components/ConnectWallet';
 
 function Profile() {
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);

@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/no-array-index-key */
 import { Box, Container, Grid, IconButton, MenuItem, Pagination, Stack, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import lineupImg from '@/assets/Images/lineup.webp';
 import TestImg from '@/assets/Images/testImg.webp';
@@ -78,6 +78,10 @@ function Lineup() {
   ];
 
   const [unSelectedPlayers, setUnSelectedPlayers] = useState(players);
+
+  useEffect(() => {
+    setUnSelectedPlayers(players);
+  }, [selectedFormation?.name]);
 
   function LineTactics({ line }: any) {
     return (
@@ -298,7 +302,17 @@ function Lineup() {
                 {position.player ? (
                   <TestLineUpCard player={position.player} onDoubleClick={() => setAsUnselected(position.player.id)} />
                 ) : (
-                  <span>{position.name}</span>
+                  <Box
+                    sx={{
+                      width: '100%',
+                      textAlign: 'center',
+                      color: 'white',
+                      opacity: 0.9,
+                      mt: '45%',
+                    }}
+                  >
+                    {position.name}
+                  </Box>
                 )}
               </LineUpEmpty>
             ))}

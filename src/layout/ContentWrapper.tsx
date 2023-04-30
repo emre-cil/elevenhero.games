@@ -1,4 +1,4 @@
-import { useState, FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { Box, Stack } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import Footer from '@/layout/Footer';
@@ -10,6 +10,19 @@ type ContentWrapperProps = {
 };
 const ContentWrapper: FC<ContentWrapperProps> = ({ accessToken }) => {
   const [isOpen, setIsOpen] = useState(!(window.innerWidth < 900));
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 900) {
+        setIsOpen(false);
+      } else {
+        setIsOpen(true);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <>
       <Header accessToken={accessToken} setIsOpen={setIsOpen} />

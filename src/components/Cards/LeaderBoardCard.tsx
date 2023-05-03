@@ -13,7 +13,7 @@ const LeaderBoardCard: FC<LeaderBoardCardProps> = ({ color, mt }) => {
         clipPath: 'polygon(0 0, 100% 0, 100% 100%, 50% 75%, 0 100%)',
         backgroundColor: color,
         width: { xs: '20vw', sm: '10vw' },
-        height: { xs: '20vw', sm: '10vw' },
+        aspectRatio: '1/1',
         maxWidth: '350px',
         maxHeight: '350px',
         justifyContent: 'center',

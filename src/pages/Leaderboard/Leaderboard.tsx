@@ -23,6 +23,28 @@ function Leaderboard() {
         borderRadius: '14px',
         backgroundColor: 'Ink.Base',
         p: '1rem',
+        '&:nth-of-type(1)': {
+          background: 'linear-gradient(90deg, #ffb900 0%, #E3D294 100%)',
+          h3: {
+            color: 'grey.100',
+          },
+        },
+        '&:nth-of-type(2)': {
+          background: 'linear-gradient(90deg, #69797e 0%, #DFDFDF 100%)',
+          h3: {
+            color: 'grey.100',
+          },
+        },
+        '&:nth-of-type(3)': {
+          background: 'linear-gradient(90deg, #847545 0%, #E8C8A9 100%)',
+          h3: {
+            color: 'grey.100',
+          },
+        },
+        h3: {
+          fontWeight: 'bold',
+          fontSize: '1rem',
+        },
       }}
     >
       <Typography variant="body2" component="h3" color="white">
@@ -38,6 +60,7 @@ function Leaderboard() {
   );
   return (
     <Container
+      maxWidth="sm"
       sx={{
         py: 3,
       }}

@@ -8,13 +8,13 @@ function Tournament() {
       </Typography>
       <Stack direction="row" spacing={2} justifyContent="center">
         <Typography variant="h6" component="h2" gutterBottom>
-          X_TEAM
+          X
         </Typography>
         <Typography variant="h6" component="h2" gutterBottom>
           VS
         </Typography>
         <Typography variant="h6" component="h2" gutterBottom>
-          Y_TEAM
+          Y
         </Typography>
       </Stack>
     </Container>

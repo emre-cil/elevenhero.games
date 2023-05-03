@@ -40,8 +40,8 @@ function Routing({ isLoading, accessToken, hasRefresh }: any) {
           <Route path="/team" element={<Team />} />
           <Route path="/lineup" element={<Lineup />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/market" element={<Market />} />
         </Route>
-        <Route path="/market" element={<Market />} />
       </Route>
       {(!hasRefresh || !accessToken) && !isLoading && (
         <>

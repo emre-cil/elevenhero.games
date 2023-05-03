@@ -1,7 +1,7 @@
 import { Box, Modal, Stack, Typography } from '@mui/material';
 import { FC, useEffect } from 'react';
-import metamaskImg from '@/assets/images/metamask.webp';
-import walletConnectImg from '@/assets/images/walletconnect.webp';
+import metamaskImg from '@/assets/Images/metamask.webp';
+import walletConnectImg from '@/assets/Images/walletconnect.webp';
 import { useAppDispatch } from '@/app/store';
 import { ethers } from 'ethers';
 import { setWallet } from '@/features/user/userSlice';

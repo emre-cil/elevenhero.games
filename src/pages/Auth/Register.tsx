@@ -13,7 +13,7 @@ function Register() {
   const navigate = useNavigate();
   const [register, { isLoading }] = useRegisterMutation();
 
-  const registerHandler = async (e: MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const registerHandler = async (e: any) => {
     e.preventDefault();
     const email = emailRef?.current?.value.replace(/\s+/g, '') || '';
     const username = usernameRef?.current?.value.replace(/\s+/g, '') || '';

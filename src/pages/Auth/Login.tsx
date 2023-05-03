@@ -34,7 +34,7 @@ function Login() {
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
-  const loginHandler = async (e: MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const loginHandler = async (e:any) => {
     e.preventDefault();
     const email = emailRef?.current?.value.replace(/\s+/g, '');
     const password = passwordRef?.current?.value.replace(/\s+/g, '');

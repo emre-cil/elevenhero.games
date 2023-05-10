@@ -3,7 +3,7 @@ import { Button, Modal, Stack, Typography } from '@mui/material';
 
 type DefaultModalProps = {
   open: boolean;
-  setOpen: (open: boolean) => void;
+  setOpen: (open: any) => void;
   onSuccess: () => void;
   successText: string;
   title: string;
@@ -47,7 +47,7 @@ const DefaultModal: FC<DefaultModalProps> = ({
   return (
     <Modal
       open={open}
-      onClose={() => setOpen(false)}
+      onClose={() => setOpen(null)}
       sx={{
         display: 'flex',
         alignItems: 'center',
@@ -101,7 +101,7 @@ const DefaultModal: FC<DefaultModalProps> = ({
                 color: 'grey.500',
               }}
               fullWidth
-              onClick={() => setOpen(false)}
+              onClick={() => setOpen(null)}
             >
               Cancel
             </Button>

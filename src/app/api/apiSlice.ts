@@ -5,7 +5,7 @@ import { RootState } from '@/app/store';
 // Define a service using a base URL and expected endpoint, and a function to transform the header.
 const baseQuery = (args: any, api: BaseQueryApi, extraOptions: any) =>
   fetchBaseQuery({
-    baseUrl: 'https://api.elevenhero.games/api',
+    baseUrl: `${import.meta.env.VITE_API_URL}/api`,
     prepareHeaders: (headers, { getState }) => {
       const { accessToken } = (getState() as RootState).user;
       if (accessToken && !extraOptions?.noToken) {

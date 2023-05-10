@@ -10,7 +10,7 @@ function VerifyEmail() {
   const [searchParams] = useSearchParams();
   const [sendActivationEmail, { isLoading: verificationLoading }] = useSendVerificationEmailMutation();
   const [modalText, setModalText] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<any>(null);
   const email = searchParams.get('email');
   const token = searchParams.get('token');
   const { isLoading, isSuccess, isError } = useVerifyMailQuery({

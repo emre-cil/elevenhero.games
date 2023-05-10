@@ -30,7 +30,7 @@ function Login() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [modalText, setModalText] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<any>(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 

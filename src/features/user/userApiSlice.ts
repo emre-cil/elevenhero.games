@@ -8,6 +8,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body,
       }),
+      extraOptions: {
+        noToken: true,
+      },
     }),
     auth: builder.mutation({
       query: (body) => ({
@@ -17,7 +20,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         credentials: 'include',
       }),
       extraOptions: {
-        initialRefresh: true,
+        noToken: true,
       },
     }),
     refresh: builder.query({
@@ -45,6 +48,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
         url: `/auth/forgot-password?email=${email}`,
         method: 'POST',
       }),
+      extraOptions: {
+        noToken: true,
+      },
     }),
 
     resetPassword: builder.mutation({
@@ -53,12 +59,18 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: 'PUT',
         body,
       }),
+      extraOptions: {
+        noToken: true,
+      },
     }),
     sendVerificationEmail: builder.mutation({
       query: (email) => ({
         url: `/auth/send-verification-mail?email=${email}`,
         method: 'POST',
       }),
+      extraOptions: {
+        noToken: true,
+      },
     }),
 
     verifyMail: builder.query({
@@ -67,6 +79,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: 'PUT',
         body,
       }),
+      extraOptions: {
+        noToken: true,
+      },
     }),
 
     getMoney: builder.query({

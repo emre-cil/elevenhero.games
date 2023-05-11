@@ -14,7 +14,6 @@ type HeaderProps = {
 
 const Header: FC<HeaderProps> = ({ accessToken, setIsOpen }) => {
   const navigate = useNavigate();
-
   return (
     <Stack
       direction="row"

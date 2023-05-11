@@ -13,6 +13,7 @@ import Leaderboard from '@/pages/Leaderboard/Leaderboard';
 import Lineup from '@/pages/Lineup/Lineup';
 import Team from '@/pages/Team/Team';
 import VerifyEmail from '@/pages/Auth/VerifyEmail';
+import Inventory from '@/pages/Inventory';
 
 function Routing({ isLoading, accessToken, hasRefresh }: any) {
   function ProtectedRoute() {
@@ -41,6 +42,7 @@ function Routing({ isLoading, accessToken, hasRefresh }: any) {
           <Route path="/lineup" element={<Lineup />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/market" element={<Market />} />
+          <Route path="/inventory" element={<Inventory />} />
         </Route>
       </Route>
       {(!hasRefresh || !accessToken) && !isLoading && (

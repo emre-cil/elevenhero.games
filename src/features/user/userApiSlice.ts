@@ -16,6 +16,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
         body,
         credentials: 'include',
       }),
+      extraOptions: {
+        initialRefresh: true,
+      },
     }),
     refresh: builder.query({
       query: () => ({

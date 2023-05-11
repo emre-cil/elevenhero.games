@@ -13,6 +13,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         url: `/products/buy?id=${id}&count=1`,
         method: 'POST',
       }),
+      invalidatesTags: ['Money'],
     }),
   }),
 });

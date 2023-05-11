@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Stack, Typography, Box } from '@mui/material';
+import { Stack, Typography, Box, CircularProgress } from '@mui/material';
 import walletIcon from '@/assets/Icons/walletIcon.svg';
+import { useGetMoneyQuery } from '@/features/user/userApiSlice';
 
 type BalanceCardProps = {
   accessToken: string | null;
@@ -9,6 +10,7 @@ type BalanceCardProps = {
 
 const BalanceCard: FC<BalanceCardProps> = ({ accessToken }) => {
   const navigate = useNavigate();
+  const { data: money, isLoading } = useGetMoneyQuery(undefined);
 
   return (
     <Stack
@@ -39,16 +41,20 @@ const BalanceCard: FC<BalanceCardProps> = ({ accessToken }) => {
           >
             <img src={walletIcon} alt="wallet icon" />
           </Box>
-          <Typography
-            variant="h6"
-            sx={{
-              color: 'grey.900',
-              textAlign: 'center',
-              width: '100%',
-            }}
-          >
-            0
-          </Typography>
+          {isLoading ? (
+            <CircularProgress size={20} />
+          ) : (
+            <Typography
+              variant="h6"
+              sx={{
+                color: 'grey.900',
+                textAlign: 'center',
+                width: '100%',
+              }}
+            >
+              {money?.money}
+            </Typography>
+          )}
         </>
       ) : (
         <Typography

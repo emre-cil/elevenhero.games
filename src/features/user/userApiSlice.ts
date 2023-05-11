@@ -24,6 +24,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
         credentials: 'include',
         withCredentials: true,
       }),
+      extraOptions: {
+        initialRefresh: true,
+      },
     }),
     logout: builder.query({
       query: () => ({
@@ -62,6 +65,14 @@ export const userApiSlice = apiSlice.injectEndpoints({
         body,
       }),
     }),
+
+    getMoney: builder.query({
+      query: () => ({
+        url: '/users/getMoney',
+        method: 'GET',
+      }),
+      providesTags: ['Money'],
+    }),
   }),
 });
 
@@ -74,4 +85,5 @@ export const {
   useSendVerificationEmailMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
+  useGetMoneyQuery,
 } = userApiSlice;

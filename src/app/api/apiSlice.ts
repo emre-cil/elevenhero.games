@@ -16,10 +16,11 @@ const baseQuery = (args: any, api: BaseQueryApi, extraOptions: any) =>
   })(args, api, extraOptions);
 
 const baseQueryWithReauth = async (args: string | FetchArgs, api: any, extraOptions: any) => {
-  // while (api?.getState()?.user?.refreshPending === true && !extraOptions?.initialRefresh && !extraOptions?.noToken) {
-  //   // eslint-disable-next-line no-await-in-loop, no-promise-executor-return
-  //   await new Promise((resolve) => setTimeout(resolve, 50));
-  // }
+  console.log(!extraOptions?.initialRefresh);
+  while (api?.getState()?.user?.refreshPending === true && !extraOptions?.initialRefresh && !extraOptions?.noToken) {
+    // eslint-disable-next-line no-await-in-loop, no-promise-executor-return
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  }
   const result = await baseQuery(args, api, extraOptions);
   // if (result?.error?.status === 401 || result?.error?.status === 403) {
   //   const refreshResult = await baseQuery(
@@ -49,6 +50,7 @@ const baseQueryWithReauth = async (args: string | FetchArgs, api: any, extraOpti
 const apiSlice = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
+  tagTypes: ['Money'],
 });
 
 export default apiSlice;

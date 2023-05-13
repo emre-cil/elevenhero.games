@@ -1,4 +1,5 @@
 import InventoryCard from '@/components/Cards/InventoryCard';
+import NFTCard from '@/components/Cards/NFTCard';
 import { useGetInventoryQuery } from '@/features/inventoryApiSlice';
 import { Container, Grid, Stack, Typography } from '@mui/material';
 
@@ -6,7 +7,11 @@ const Inventory = () => {
   const { data: inventory, isLoading } = useGetInventoryQuery(undefined);
   console.log(inventory);
   return (
-    <Container>
+    <Container
+      sx={{
+        py: 2,
+      }}
+    >
       <Stack gap={2}>
         <Typography variant="h3">Products</Typography>
         <Grid container spacing={2}>
@@ -15,6 +20,11 @@ const Inventory = () => {
           ))}
         </Grid>
         <Typography variant="h3">NFTS</Typography>
+        <Grid container spacing={2}>
+          {inventory?.nfts?.map((item: any) => (
+            <NFTCard key={item._id} item={item} />
+          ))}
+        </Grid>
       </Stack>
     </Container>
   );

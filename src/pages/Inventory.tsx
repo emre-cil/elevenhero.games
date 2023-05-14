@@ -16,7 +16,7 @@ const Inventory = () => {
         <Typography variant="h3">Products</Typography>
         <Grid container spacing={2}>
           {inventory?.products?.map((item: any) => (
-            <InventoryCard key={item._id} item={item.product} count={item.count} />
+            <InventoryCard key={item._id} item={item.product} count={item.count} prodId={item._id} />
           ))}
         </Grid>
         <Typography variant="h3">NFTS</Typography>

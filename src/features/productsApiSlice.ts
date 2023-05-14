@@ -13,9 +13,16 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         url: `/products/buy?id=${id}&count=1`,
         method: 'POST',
       }),
-      invalidatesTags: ['Money', 'Products'],
+      invalidatesTags: ['Money', 'Inventory'],
+    }),
+    openBox: builder.mutation({
+      query: (data: any) => ({
+        url: `/products/openBox?boxId=${data.boxId}&prodId=${data.prodId}`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['Inventory'],
     }),
   }),
 });
 
-export const { useGetProductsQuery, useBuyProductMutation } = productsApiSlice;
+export const { useGetProductsQuery, useBuyProductMutation, useOpenBoxMutation } = productsApiSlice;

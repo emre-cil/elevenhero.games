@@ -7,7 +7,7 @@ export const inventoryApiSlice = apiSlice.injectEndpoints({
         url: '/inventories',
         method: 'GET',
       }),
-      providesTags: ['Products'],
+      providesTags: ['Inventory'],
     }),
   }),
 });

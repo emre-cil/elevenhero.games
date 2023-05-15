@@ -1,33 +1,21 @@
 import { FC } from 'react';
 import { Button, CircularProgress, Grid, Stack, Typography } from '@mui/material';
 import { useOpenBoxMutation } from '@/features/productsApiSlice';
-import { toast } from 'react-hot-toast';
 
 interface InventoryCardProps {
   item: any;
   count: number;
-  prodId: string;
+  openHandler: any;
 }
 
-const InventoryCard: FC<InventoryCardProps> = ({ item, count, prodId }) => {
+const InventoryCard: FC<InventoryCardProps> = ({ item, count, openHandler }) => {
   const [openBox, { isLoading }] = useOpenBoxMutation();
-  console.log(item);
-  const openHandler = () => {
-    openBox({ boxId: item._id, prodId: prodId })
-      .then((res) => {
-        toast.success('Box opened');
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error('Error opening box');
-      });
-  };
+
   return (
     <Grid item xs={6} sm={6} md={4} sx={{}}>
       <Stack
         sx={{
-          backgroundColor: 'grey.50',
+          backgroundColor: 'secondary.dark',
           p: 1,
         }}
         gap={0.5}
@@ -42,7 +30,7 @@ const InventoryCard: FC<InventoryCardProps> = ({ item, count, prodId }) => {
           sx={{
             borderRadius: 0,
           }}
-          onClick={openHandler}
+          onClick={() => openHandler(item._id, openBox)}
           disabled={isLoading}
         >
           {isLoading ? <CircularProgress size={22} /> : 'Open'}

@@ -1,18 +1,19 @@
 import { FC } from 'react';
-import { Button, Grid, Stack, Typography } from '@mui/material';
+import { Grid, Stack, Typography } from '@mui/material';
 
 interface NFTCardProps {
   item: any;
 }
 
 const NFTCard: FC<NFTCardProps> = ({ item }) => {
-  console.log(item);
   return (
     <Grid item xs={6} sm={6} md={4} sx={{}}>
       <Stack
         sx={{
-          backgroundColor: 'grey.50',
-          p: 1,
+          img: {
+            webkitFilter: 'drop-shadow(5px 5px 5px #222)',
+            filter: 'drop-shadow(5px 5px 15px #222)',
+          },
         }}
         gap={0.5}
       >

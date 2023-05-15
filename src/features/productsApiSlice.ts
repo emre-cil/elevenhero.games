@@ -16,8 +16,8 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['Money', 'Inventory'],
     }),
     openBox: builder.mutation({
-      query: (data: any) => ({
-        url: `/products/openBox?boxId=${data.boxId}&prodId=${data.prodId}`,
+      query: (id: string) => ({
+        url: `/products/openBox?boxId=${id}`,
         method: 'POST',
       }),
       invalidatesTags: ['Inventory'],

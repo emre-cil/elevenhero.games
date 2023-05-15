@@ -52,14 +52,17 @@ const DefaultModal: FC<DefaultModalProps> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        zIndex: 9999,
       }}
     >
       <Stack
         sx={{
-          width: { xs: '80%', sm: '450px' },
-          backgroundColor: 'grey.50',
+          width: { xs: '75%', sm: '400px' },
+          background: `linear-gradient(0deg, #0b0f0c 0%, #0f1b12 15%, #16331c 45%,#1E5128 65%, #217532 100%)`,
           outline: 'none',
           borderRadius: 2,
+          overflow: 'hidden',
+          boxShadow: 5,
         }}
       >
         {icon && (
@@ -69,7 +72,7 @@ const DefaultModal: FC<DefaultModalProps> = ({
             sx={{
               pt: 2,
               svg: {
-                color: 'grey.500',
+                color: 'grey.600',
                 fontSize: '4rem',
               },
             }}
@@ -92,13 +95,13 @@ const DefaultModal: FC<DefaultModalProps> = ({
           sx={{
             mt: 1,
             borderTop: '1px solid',
-            borderColor: 'grey.200',
+            borderColor: 'grey.700',
           }}
         >
           {!disableCancel && (
             <Button
               sx={{
-                color: 'grey.500',
+                color: 'error.light',
               }}
               fullWidth
               onClick={() => setOpen(null)}
@@ -118,11 +121,11 @@ const DefaultModal: FC<DefaultModalProps> = ({
             sx={{
               position: 'relative',
               borderLeft: !disableCancel ? '1px solid' : 'none',
-              borderColor: 'grey.200',
+              borderColor: 'grey.700',
               borderRadius: 0,
               py: !disableCancel ? 1.5 : 2,
               minHeight: '3.5rem',
-              color: successColor || 'primary.main',
+              color: successColor || 'text.main',
             }}
           >
             {formattedTime > 0 ? (
@@ -135,7 +138,7 @@ const DefaultModal: FC<DefaultModalProps> = ({
                   top: 6,
                   py: 1.5,
                   fontSize: '1rem',
-                  color: 'error.light',
+                  color: 'text.primary',
                 }}
               >
                 0{Math.floor(formattedTime / 1000 / 60)} : {Math.floor((formattedTime / 1000) % 60) < 10 && '0'}

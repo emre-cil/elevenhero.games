@@ -135,7 +135,7 @@ function Lineup() {
       <DndContext onDragEnd={handleDragEnd}>
         <Stack
           gap={3}
-          direction={{ xs: 'column', sm: 'row' }}
+          direction={{ xs: 'column', lg: 'row' }}
           sx={{
             mb: 3,
           }}
@@ -234,74 +234,79 @@ function Lineup() {
               <LineTactics line="Lower Line" />
             </Stack>
           </Stack>
-          <Box
-            sx={{
-              mx: 'auto',
-              width: 'fit-content',
-              height: 'fit-content',
-              position: 'relative',
-              '#grass': {
-                width: { xs: '100%', sm: '300px', md: '400px', lg: '450px', xl: '500px' },
-                zIndex: -1,
-                userSelect: 'none',
-              },
-            }}
-          >
-            <img id="grass" src={lineupImg} alt="" />
-            {selectedFormation.positions?.map((position: any) => (
-              <LineUpEmpty key={position.id} x={position.x} y={position.y} id={position.id} name={position.name}>
-                {position.player ? (
-                  <TestLineUpCard player={position.player} onDoubleClick={() => setAsUnselected(position.player.id)} />
-                ) : (
-                  <Box
-                    sx={{
-                      width: '100%',
-                      textAlign: 'center',
-                      color: 'white',
-                      opacity: 0.9,
-                      mt: '45%',
-                    }}
-                  >
-                    {position.name}
-                  </Box>
-                )}
-              </LineUpEmpty>
-            ))}
-          </Box>
-          <Stack
-            sx={{
-              flex: 3,
-              borderRadius: '5px',
-              border: '1px solid gray',
-              p: 2,
-            }}
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <Stack
-              direction="row"
-              gap={1}
-              flexWrap="wrap"
+          <Stack gap={3} direction={{ xs: 'column', sm: 'row' }}>
+            <Box
               sx={{
-                borderBottom: '1px solid gray',
-                pb: 1,
-                mb: 1,
+                mx: 'auto',
+                width: 'fit-content',
+                height: 'fit-content',
+                position: 'relative',
+                '#grass': {
+                  width: { xs: '100%', sm: '300px', md: '400px', lg: '450px', xl: '500px' },
+                  zIndex: -1,
+                  userSelect: 'none',
+                },
               }}
             >
-              {playerPositions.map((position) => (
-                <Box key={position}>{position}</Box>
+              <img id="grass" src={lineupImg} alt="" />
+              {selectedFormation.positions?.map((position: any) => (
+                <LineUpEmpty key={position.id} x={position.x} y={position.y} id={position.id} name={position.name}>
+                  {position.player ? (
+                    <TestLineUpCard
+                      player={position.player}
+                      onDoubleClick={() => setAsUnselected(position.player.id)}
+                    />
+                  ) : (
+                    <Box
+                      sx={{
+                        width: '100%',
+                        textAlign: 'center',
+                        color: 'white',
+                        opacity: 0.9,
+                        mt: '45%',
+                      }}
+                    >
+                      {position.name}
+                    </Box>
+                  )}
+                </LineUpEmpty>
               ))}
+            </Box>
+            <Stack
+              sx={{
+                flex: 3,
+                borderRadius: '5px',
+                border: '1px solid gray',
+                p: 2,
+              }}
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <Stack
+                direction="row"
+                gap={1}
+                flexWrap="wrap"
+                sx={{
+                  borderBottom: '1px solid gray',
+                  pb: 1,
+                  mb: 1,
+                }}
+              >
+                {playerPositions.map((position) => (
+                  <Box key={position}>{position}</Box>
+                ))}
+              </Stack>
+              <Grid container>
+                {unSelectedPlayers?.slice((page - 1) * 9, page * 9)?.map((player: any) => (
+                  <TestLineUpCard key={player.id} player={player} />
+                ))}
+              </Grid>
+              <Pagination
+                count={Math.ceil(unSelectedPlayers.length / 9)}
+                page={page}
+                onChange={(e, value) => setPage(value)}
+              />
             </Stack>
-            <Grid container>
-              {unSelectedPlayers?.slice((page - 1) * 9, page * 9)?.map((player: any) => (
-                <TestLineUpCard key={player.id} player={player} />
-              ))}
-            </Grid>
-            <Pagination
-              count={Math.ceil(unSelectedPlayers.length / 9)}
-              page={page}
-              onChange={(e, value) => setPage(value)}
-            />
           </Stack>
         </Stack>
       </DndContext>

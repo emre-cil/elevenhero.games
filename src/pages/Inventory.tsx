@@ -1,30 +1,62 @@
 import InventoryCard from '@/components/Cards/InventoryCard';
 import NFTCard from '@/components/Cards/NFTCard';
+import BoxOpenModal from '@/components/Modals/BoxOpenModal';
 import { useGetInventoryQuery } from '@/features/inventoryApiSlice';
 import { Container, Grid, Stack, Typography } from '@mui/material';
-
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 const Inventory = () => {
   const { data: inventory, isLoading } = useGetInventoryQuery(undefined);
-  console.log(inventory);
+  const [isOpen, setIsOpen] = useState(null);
+  const openHandler = (itemId: string, openBox: any) => {
+    openBox(itemId)
+      .then((res: any) => {
+        console.log(res);
+        if (res?.data?.data?._id) {
+          setIsOpen(res.data.data);
+        } else {
+          toast.error('Error occured');
+        }
+      })
+      .catch((err: any) => {
+        console.log(err);
+        toast.error('Error opening box');
+      });
+  };
+
   return (
     <Container
       sx={{
         py: 2,
       }}
     >
+      {isOpen && <BoxOpenModal isOpen={isOpen} setIsOpen={setIsOpen} />}
       <Stack gap={2}>
-        <Typography variant="h3">Products</Typography>
-        <Grid container spacing={2}>
-          {inventory?.products?.map((item: any) => (
-            <InventoryCard key={item._id} item={item.product} count={item.count} prodId={item._id} />
-          ))}
-        </Grid>
-        <Typography variant="h3">NFTS</Typography>
-        <Grid container spacing={2}>
-          {inventory?.nfts?.map((item: any) => (
-            <NFTCard key={item._id} item={item} />
-          ))}
-        </Grid>
+        {inventory?.products?.length > 0 && (
+          <>
+            <Typography variant="h3">Products</Typography>
+            <Grid container spacing={2}>
+              {inventory?.products?.map((item: any) => (
+                <InventoryCard
+                  key={item.product._id}
+                  item={item.product}
+                  count={item.count}
+                  openHandler={openHandler}
+                />
+              ))}
+            </Grid>
+          </>
+        )}
+        {inventory?.nfts?.length > 0 && (
+          <>
+            <Typography variant="h3">NFTS</Typography>
+            <Grid container spacing={2}>
+              {inventory?.nfts?.map((item: any) => (
+                <NFTCard key={item._id} item={item} />
+              ))}
+            </Grid>
+          </>
+        )}
       </Stack>
     </Container>
   );

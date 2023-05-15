@@ -34,7 +34,17 @@ const Inventory = () => {
       <Stack gap={2}>
         {inventory?.products?.length > 0 && (
           <>
-            <Typography variant="h3">Products</Typography>
+            <Typography
+              variant="h3"
+              textAlign="center"
+              sx={{
+                boxShadow: 4,
+                p: 1,
+                background: 'linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(61, 117, 65, 0.5) 50%, rgba(0,0,0,0) 100%)',
+              }}
+            >
+              Products
+            </Typography>
             <Grid container spacing={2}>
               {inventory?.products?.map((item: any) => (
                 <InventoryCard
@@ -49,7 +59,17 @@ const Inventory = () => {
         )}
         {inventory?.nfts?.length > 0 && (
           <>
-            <Typography variant="h3">NFTS</Typography>
+            <Typography
+              variant="h3"
+              textAlign="center"
+              sx={{
+                boxShadow: 4,
+                p: 1,
+                background: 'linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(61, 117, 65, 0.5) 50%, rgba(0,0,0,0) 100%)',
+              }}
+            >
+              NFTS
+            </Typography>
             <Grid container spacing={2}>
               {inventory?.nfts?.map((item: any) => (
                 <NFTCard key={item._id} item={item} />

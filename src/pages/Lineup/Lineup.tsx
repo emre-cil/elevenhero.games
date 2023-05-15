@@ -13,65 +13,6 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { useLazyGetFormationQuery } from '@/features/formationApiSlice';
 
-const players = [
-  {
-    id: 2,
-    name: 'GK',
-    img: TestImg,
-  },
-  {
-    id: 212,
-    name: 'LB',
-    img: TestImg,
-  },
-  {
-    id: 32,
-    name: 'CB',
-    img: TestImg,
-  },
-  {
-    id: 44,
-    name: 'CB',
-    img: TestImg,
-  },
-  {
-    id: 11,
-    name: 'RB',
-
-    img: TestImg,
-  },
-  {
-    id: 623,
-    name: 'LM',
-    img: TestImg,
-  },
-  {
-    id: 723,
-    name: 'CM',
-    img: TestImg,
-  },
-  {
-    id: 844,
-    name: 'CM',
-    img: TestImg,
-  },
-  {
-    id: 923,
-    name: 'RM',
-    img: TestImg,
-  },
-  {
-    id: 102,
-    name: 'ST',
-    img: TestImg,
-  },
-  {
-    id: 112,
-    name: 'ST',
-    img: TestImg,
-  },
-];
-
 function Lineup() {
   // 11 players 4-4-2 img 500x500 cards 50x75
   const [selectedFormation, setSelectedFormation] = useState<any>(formations[0]);
@@ -117,14 +58,14 @@ function Lineup() {
   const setAsUnselected = (id: any) => {
     // if unselected contains the player
     if (unSelectedPlayers.find((p: any) => p.id === id) !== undefined) return;
-    // update the unselected players
-    setUnSelectedPlayers((prev: any) => {
-      const player = players.find((p) => p.id === id);
-      if (player) {
-        return [...prev, player];
-      }
-      return prev;
-    });
+    // // update the unselected players
+    // setUnSelectedPlayers((prev: any) => {
+    //   const player = players.find((p) => p.id === id);
+    //   if (player) {
+    //     return [...prev, player];
+    //   }
+    //   return prev;
+    // });
     // remove the player from the dropped
     setSelectedFormation((prev: any) => {
       const NewDropped = prev.positions.map((position: any) => {
@@ -144,52 +85,49 @@ function Lineup() {
   };
 
   const handleDragEnd = (event: any) => {
-    if (event.over) {
-      setUnSelectedPlayers((prev) => {
-        let NewUnselecteds = prev;
-        const isPlayerUnselected = prev.find((p: any) => p.id === event.active.id) !== undefined;
-        const destination = selectedFormation.positions.find((p: any) => p.id === event.over.id);
-        setSelectedFormation((x: any) => {
-          const NewDropped = x.positions.map((position: any) => {
-            if (position.player && position.player.id === event.active.id) {
-              return {
-                ...position,
-                player: destination?.player || null,
-              };
-            }
-            // if the position is the same as the one
-            if (position.id === event.over.id && isPlayerUnselected) {
-              // if the position is empty not empty
-              NewUnselecteds = position.player
-                ? prev.filter((p: any) => p.id !== event.active.id).concat(position.player)
-                : prev.filter((p: any) => p.id !== event.active.id);
-              return {
-                ...position,
-                player: players.find((p: any) => p.id === event.active.id),
-              };
-            }
-            // inside movement
-            if (position.id === event.over.id && !isPlayerUnselected) {
-              return {
-                ...position,
-                player: players.find((p: any) => p.id === event.active.id),
-              };
-            }
-
-            return position;
-          });
-
-          return {
-            ...x,
-            positions: NewDropped,
-          };
-        });
-
-        return NewUnselecteds;
-      });
-    } else {
-      setAsUnselected(event.active.id);
-    }
+    // if (event.over) {
+    //   setUnSelectedPlayers((prev) => {
+    //     let NewUnselecteds = prev;
+    //     const isPlayerUnselected = prev.find((p: any) => p.id === event.active.id) !== undefined;
+    //     const destination = selectedFormation.positions.find((p: any) => p.id === event.over.id);
+    //     setSelectedFormation((x: any) => {
+    //       const NewDropped = x.positions.map((position: any) => {
+    //         if (position.player && position.player.id === event.active.id) {
+    //           return {
+    //             ...position,
+    //             player: destination?.player || null,
+    //           };
+    //         }
+    //         // if the position is the same as the one
+    //         if (position.id === event.over.id && isPlayerUnselected) {
+    //           // if the position is empty not empty
+    //           NewUnselecteds = position.player
+    //             ? prev.filter((p: any) => p.id !== event.active.id).concat(position.player)
+    //             : prev.filter((p: any) => p.id !== event.active.id);
+    //           return {
+    //             ...position,
+    //             player: players.find((p: any) => p.id === event.active.id),
+    //           };
+    //         }
+    //         // inside movement
+    //         if (position.id === event.over.id && !isPlayerUnselected) {
+    //           return {
+    //             ...position,
+    //             player: players.find((p: any) => p.id === event.active.id),
+    //           };
+    //         }
+    //         return position;
+    //       });
+    //       return {
+    //         ...x,
+    //         positions: NewDropped,
+    //       };
+    //     });
+    //     return NewUnselecteds;
+    //   });
+    // } else {
+    //   setAsUnselected(event.active.id);
+    // }
   };
 
   return (
@@ -359,7 +297,11 @@ function Lineup() {
                 <TestLineUpCard key={player.id} player={player} />
               ))}
             </Grid>
-            <Pagination count={Math.ceil(players.length / 9)} page={page} onChange={(e, value) => setPage(value)} />
+            <Pagination
+              count={Math.ceil(unSelectedPlayers.length / 9)}
+              page={page}
+              onChange={(e, value) => setPage(value)}
+            />
           </Stack>
         </Stack>
       </DndContext>

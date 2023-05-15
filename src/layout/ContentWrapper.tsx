@@ -27,11 +27,11 @@ const ContentWrapper: FC<ContentWrapperProps> = ({ accessToken }) => {
     <>
       <Header accessToken={accessToken} setIsOpen={setIsOpen} />
       <Stack direction="row">
-        <Sidebar accessToken={accessToken} isOpen={isOpen} setIsOpen={setIsOpen} />
+        {accessToken && <Sidebar accessToken={accessToken} isOpen={isOpen} setIsOpen={setIsOpen} />}
         <Box
           sx={{
             mt: '75px',
-            ml: { xs: 0, md: '200px' },
+            ml: { xs: 0, md: accessToken ? '200px' : 0 },
             width: '100%',
             minHeight: 'calc(100vh - 75px)',
           }}
@@ -39,7 +39,7 @@ const ContentWrapper: FC<ContentWrapperProps> = ({ accessToken }) => {
           <Outlet />
         </Box>
       </Stack>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

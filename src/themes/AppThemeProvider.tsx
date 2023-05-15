@@ -36,9 +36,26 @@ const AppThemeProvider: FC<AppThemeProviderProps> = ({ children }) => {
     createTheme({
       palette: {
         mode,
+
+        // bg 191A19
+        // 1E5128
+        // 4E9F3D
+        // D8E9A8
         primary: {
-          main: '#0F8B0F',
+          main: '#1E5128',
         },
+        secondary: {
+          main: '#4E9F3D',
+        },
+        background: {
+          default: '#191A19',
+          paper: '#1E5128',
+        },
+        text: {
+          primary: '#e4e6df',
+          secondary: '#D8E9A8',
+        },
+
         Ink: {
           Darkest: '#000000',
           Darker: '#222222',
@@ -110,8 +127,9 @@ const AppThemeProvider: FC<AppThemeProviderProps> = ({ children }) => {
         MuiCssBaseline: {
           styleOverrides: {
             body: {
-              backgroundColor: '#000',
               height: '100%',
+              // lineargradient top to bottom
+              background: `linear-gradient(180deg, #0b0f0c 0%, #0f1b12 25%, #16331c 50%,#1E5128 75%, #217532 100%)`,
             },
           },
         },

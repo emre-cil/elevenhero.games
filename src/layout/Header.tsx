@@ -30,7 +30,7 @@ const Header: FC<HeaderProps> = ({ accessToken, setIsOpen }) => {
         width: '100%',
         height: '75px',
         alignItems: 'center',
-        backgroundColor: 'black',
+        backgroundColor: 'transparent',
         justifyContent: 'space-between',
         '.header-img': {
           height: '60px',
@@ -40,10 +40,10 @@ const Header: FC<HeaderProps> = ({ accessToken, setIsOpen }) => {
           },
           cursor: 'pointer',
         },
+        // blur
+        backdropFilter: 'blur(15px)',
         borderBottom: '3px solid',
-        borderColor: 'Green.Base',
-        borderBottomLeftRadius: '20px',
-        borderBottomRightRadius: '20px',
+        borderColor: 'text.secondary',
       }}
     >
       <img

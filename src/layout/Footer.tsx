@@ -18,9 +18,7 @@ function Footer() {
         lineHeight: '16px',
         textAlign: 'center',
         borderTop: '3px solid',
-        borderColor: 'Green.Base',
-        borderTopLeftRadius: '20px',
-        borderTopRightRadius: '20px',
+        borderColor: 'text.secondary',
       }}
     >
       <p>© 2023 - All rights reserved</p>

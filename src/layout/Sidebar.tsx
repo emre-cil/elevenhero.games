@@ -2,6 +2,9 @@ import { useState, FC, Fragment } from 'react';
 import { Stack, ClickAwayListener } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAppDispatch, useAppSelector } from '@/app/store';
+import { logout } from '@/features/user/userSlice';
+import { useLazyLogoutQuery } from '@/features/user/userApiSlice';
 
 type SidebarProps = {
   accessToken: string | null;
@@ -11,7 +14,19 @@ type SidebarProps = {
 
 const Sidebar: FC<SidebarProps> = ({ accessToken, isOpen, setIsOpen }) => {
   const [selected, setSelected] = useState<any>(null);
-
+  const dispatch = useAppDispatch();
+  const [logoutF] = useLazyLogoutQuery();
+  const logoutHandler = () => {
+    dispatch(logout());
+    logoutF(undefined)
+      .unwrap()
+      .then((res: any) => {
+        console.log(res);
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
+  };
   const links = [
     {
       id: 1,
@@ -47,7 +62,7 @@ const Sidebar: FC<SidebarProps> = ({ accessToken, isOpen, setIsOpen }) => {
       id: 6,
       label: 'MARKET',
       path: '/market',
-      requiredToken: false,
+      requiredToken: true,
     },
     {
       id: 7,
@@ -65,19 +80,26 @@ const Sidebar: FC<SidebarProps> = ({ accessToken, isOpen, setIsOpen }) => {
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ duration: 0.3 }}
-            style={{ zIndex: 9999, position: 'fixed', top: 0, left: 0, height: '100vh', width: '200px' }}
+            style={{
+              zIndex: 9999,
+              position: 'fixed',
+              marginTop: '75px',
+              top: 0,
+              left: 0,
+              height: 'calc(100vh - 75px)',
+              width: '200px',
+            }}
           >
             <Stack
               gap={1}
               sx={{
                 height: '100%',
                 width: '100%',
-                pt: '95px',
+                pt: '15px',
                 px: 3.5,
-                backgroundColor: 'black',
+                background: `linear-gradient(180deg, #0b0f0c 0%, #0f1b12 25%, #16331c 50%,#1E5128 75%, #217532 100%)`,
                 borderRight: '3px solid',
-                borderColor: 'Green.Base',
-                borderBottomRightRadius: '20px',
+                borderColor: 'text.secondary',
               }}
             >
               {links.map((link) => (

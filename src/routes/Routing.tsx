@@ -11,7 +11,6 @@ import Tournament from '@/pages/Tournament/Tournament';
 import Market from '@/pages/Market/Market';
 import Leaderboard from '@/pages/Leaderboard/Leaderboard';
 import Lineup from '@/pages/Lineup/Lineup';
-import Team from '@/pages/Team/Team';
 import VerifyEmail from '@/pages/Auth/VerifyEmail';
 import Inventory from '@/pages/Inventory';
 
@@ -34,11 +33,10 @@ function Routing({ isLoading, accessToken, hasRefresh }: any) {
   return (
     <Routes>
       <Route element={<ContentWrapper accessToken={accessToken} />}>
-        <Route path="*" element={<Home />} />
         <Route element={<ProtectedRoute />}>
+          <Route path="*" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/tournament" element={<Tournament />} />
-          <Route path="/team" element={<Team />} />
           <Route path="/lineup" element={<Lineup />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/market" element={<Market />} />

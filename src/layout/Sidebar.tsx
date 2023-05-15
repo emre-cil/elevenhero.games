@@ -40,12 +40,7 @@ const Sidebar: FC<SidebarProps> = ({ accessToken, isOpen, setIsOpen }) => {
       path: '/inventory',
       requiredToken: true,
     },
-    {
-      id: 3,
-      label: 'TEAM',
-      path: '/team',
-      requiredToken: true,
-    },
+
     {
       id: 4,
       label: 'LINEUP',

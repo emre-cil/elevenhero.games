@@ -50,7 +50,7 @@ const baseQueryWithReauth = async (args: string | FetchArgs, api: any, extraOpti
 const apiSlice = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
-  tagTypes: ['Money', 'Inventory'],
+  tagTypes: ['Money', 'Inventory', 'Formation'],
 });
 
 export default apiSlice;

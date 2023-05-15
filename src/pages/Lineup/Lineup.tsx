@@ -11,77 +11,90 @@ import formations from '@/data/formations';
 import CenterFocusStrongIcon from '@mui/icons-material/CenterFocusStrong';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import { useLazyGetFormationQuery } from '@/features/formationApiSlice';
+
+const players = [
+  {
+    id: 2,
+    name: 'GK',
+    img: TestImg,
+  },
+  {
+    id: 212,
+    name: 'LB',
+    img: TestImg,
+  },
+  {
+    id: 32,
+    name: 'CB',
+    img: TestImg,
+  },
+  {
+    id: 44,
+    name: 'CB',
+    img: TestImg,
+  },
+  {
+    id: 11,
+    name: 'RB',
+
+    img: TestImg,
+  },
+  {
+    id: 623,
+    name: 'LM',
+    img: TestImg,
+  },
+  {
+    id: 723,
+    name: 'CM',
+    img: TestImg,
+  },
+  {
+    id: 844,
+    name: 'CM',
+    img: TestImg,
+  },
+  {
+    id: 923,
+    name: 'RM',
+    img: TestImg,
+  },
+  {
+    id: 102,
+    name: 'ST',
+    img: TestImg,
+  },
+  {
+    id: 112,
+    name: 'ST',
+    img: TestImg,
+  },
+];
+
 function Lineup() {
   // 11 players 4-4-2 img 500x500 cards 50x75
-  const [selectedFormation, setSelectedFormation] = useState(formations[0]);
+  const [selectedFormation, setSelectedFormation] = useState<any>(formations[0]);
   const [page, setPage] = useState(1);
   const playerPositions = ['ALL', 'GK', 'LB', 'CB', 'RB', 'LM', 'CM', 'RM', 'ST', 'CAM', 'LW', 'RW', 'CDM'];
+  const [unSelectedPlayers, setUnSelectedPlayers] = useState([]);
+
+  const [getFormation, { data, isLoading, isError }] = useLazyGetFormationQuery();
   // top 5 most used formations
 
-  const players = [
-    {
-      id: 2,
-      name: 'GK',
-      img: TestImg,
-    },
-    {
-      id: 212,
-      name: 'LB',
-      img: TestImg,
-    },
-    {
-      id: 32,
-      name: 'CB',
-      img: TestImg,
-    },
-    {
-      id: 44,
-      name: 'CB',
-      img: TestImg,
-    },
-    {
-      id: 11,
-      name: 'RB',
-
-      img: TestImg,
-    },
-    {
-      id: 623,
-      name: 'LM',
-      img: TestImg,
-    },
-    {
-      id: 723,
-      name: 'CM',
-      img: TestImg,
-    },
-    {
-      id: 844,
-      name: 'CM',
-      img: TestImg,
-    },
-    {
-      id: 923,
-      name: 'RM',
-      img: TestImg,
-    },
-    {
-      id: 102,
-      name: 'ST',
-      img: TestImg,
-    },
-    {
-      id: 112,
-      name: 'ST',
-      img: TestImg,
-    },
-  ];
-
-  const [unSelectedPlayers, setUnSelectedPlayers] = useState(players);
+  // useEffect(() => {
+  //   setUnSelectedPlayers(players);
+  // }, [selectedFormation?.name]);
 
   useEffect(() => {
-    setUnSelectedPlayers(players);
-  }, [selectedFormation?.name]);
+    getFormation(undefined)
+      .then((res) => {
+        setUnSelectedPlayers(res?.data?.unselectedPlayers || []);
+      })
+      .catch((err) => {
+        alert(err?.message || 'Error');
+      });
+  }, []);
 
   function LineTactics({ line }: any) {
     return (
@@ -103,9 +116,9 @@ function Lineup() {
   }
   const setAsUnselected = (id: any) => {
     // if unselected contains the player
-    if (unSelectedPlayers.find((p) => p.id === id) !== undefined) return;
+    if (unSelectedPlayers.find((p: any) => p.id === id) !== undefined) return;
     // update the unselected players
-    setUnSelectedPlayers((prev) => {
+    setUnSelectedPlayers((prev: any) => {
       const player = players.find((p) => p.id === id);
       if (player) {
         return [...prev, player];
@@ -113,7 +126,7 @@ function Lineup() {
       return prev;
     });
     // remove the player from the dropped
-    setSelectedFormation((prev) => {
+    setSelectedFormation((prev: any) => {
       const NewDropped = prev.positions.map((position: any) => {
         if (position?.player && position.player.id === id) {
           return {
@@ -134,8 +147,8 @@ function Lineup() {
     if (event.over) {
       setUnSelectedPlayers((prev) => {
         let NewUnselecteds = prev;
-        const isPlayerUnselected = prev.find((p) => p.id === event.active.id) !== undefined;
-        const destination = selectedFormation.positions.find((p) => p.id === event.over.id);
+        const isPlayerUnselected = prev.find((p: any) => p.id === event.active.id) !== undefined;
+        const destination = selectedFormation.positions.find((p: any) => p.id === event.over.id);
         setSelectedFormation((x: any) => {
           const NewDropped = x.positions.map((position: any) => {
             if (position.player && position.player.id === event.active.id) {
@@ -148,18 +161,18 @@ function Lineup() {
             if (position.id === event.over.id && isPlayerUnselected) {
               // if the position is empty not empty
               NewUnselecteds = position.player
-                ? prev.filter((p) => p.id !== event.active.id).concat(position.player)
-                : prev.filter((p) => p.id !== event.active.id);
+                ? prev.filter((p: any) => p.id !== event.active.id).concat(position.player)
+                : prev.filter((p: any) => p.id !== event.active.id);
               return {
                 ...position,
-                player: players.find((p) => p.id === event.active.id),
+                player: players.find((p: any) => p.id === event.active.id),
               };
             }
             // inside movement
             if (position.id === event.over.id && !isPlayerUnselected) {
               return {
                 ...position,
-                player: players.find((p) => p.id === event.active.id),
+                player: players.find((p: any) => p.id === event.active.id),
               };
             }
 
@@ -342,7 +355,7 @@ function Lineup() {
               ))}
             </Stack>
             <Grid container>
-              {unSelectedPlayers.slice((page - 1) * 9, page * 9).map((player) => (
+              {unSelectedPlayers?.slice((page - 1) * 9, page * 9)?.map((player: any) => (
                 <TestLineUpCard key={player.id} player={player} />
               ))}
             </Grid>

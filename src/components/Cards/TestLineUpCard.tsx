@@ -11,7 +11,7 @@ type TestLineUpCardProps = {
 
 const TestLineUpCard: FC<TestLineUpCardProps> = ({ player, onDoubleClick }) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: player.id,
+    id: player._id,
   });
 
   return (
@@ -38,21 +38,7 @@ const TestLineUpCard: FC<TestLineUpCardProps> = ({ player, onDoubleClick }) => {
         zIndex: transform ? 1 : 0,
       }}
     >
-      <img src={player.img} alt="player" />
-      <Stack
-        sx={{
-          position: 'absolute',
-          top: '50%',
-          textAlign: 'center',
-          width: '100%',
-          color: 'grey.200',
-          fontSize: '0.8rem',
-          lineHeight: '0.8rem',
-        }}
-      >
-        <span>{player.id}</span>
-        <span>{player.name}</span>
-      </Stack>
+      <img src={`${import.meta.env.VITE_API_URL}/nfts/${player.image}.webp`} alt="player" />
     </Grid>
   );
 };

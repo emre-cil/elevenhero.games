@@ -6,10 +6,9 @@ export const FormSX = {
   top: '50%',
   left: '50%',
   color: 'white',
-  border: '3px solid',
-  borderColor: 'primary.main',
   transform: 'translate(-50%, -50%)',
   userSelect: 'none',
+  background: `linear-gradient(0deg, #0b0f0c 0%, #0f1b12 15%, #16331c 45%,#1E5128 65%, #217532 100%)`,
   overflow: 'hidden',
   position: 'absolute',
   borderRadius: '10px',
@@ -24,8 +23,6 @@ export const FormSX = {
 
   button: {
     height: '3rem',
-    color: 'white',
-    textShadow: '1px 1px 1px rgba(0, 0, 0, 0.6)',
     textTransform: 'capitalize',
   },
 
@@ -59,14 +56,14 @@ export const FormSX = {
     top: '-35%',
     left: '75%',
     animation: 'wawes 6s linear infinite',
-    background: 'linear-gradient(90deg, rgba(0, 101, 243, 0.2) 0%, rgba(0, 120, 255, 0.4) 100%)',
+    background: 'linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.4) 100%)',
   },
 
   '&::after': {
     top: '-30%',
     left: '70%',
     animation: 'wawes 8s linear infinite',
-    background: 'linear-gradient(90deg, rgba(0, 110, 255, 0.5) 0%, rgba(0, 120, 255, 0.3) 100%)',
+    background: 'linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%)',
   },
 
   '& span': {
@@ -82,13 +79,5 @@ export const FormSX = {
   },
   '& .MuiFormLabel-root': {
     fontSize: '16px',
-  },
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: 'primary.main',
-    },
-    '&:hover fieldset': {
-      borderColor: 'Green.Lighter',
-    },
   },
 };

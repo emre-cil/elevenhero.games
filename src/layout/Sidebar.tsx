@@ -2,9 +2,6 @@ import { useState, FC, Fragment } from 'react';
 import { Stack, ClickAwayListener } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useAppDispatch, useAppSelector } from '@/app/store';
-import { logout } from '@/features/user/userSlice';
-import { useLazyLogoutQuery } from '@/features/user/userApiSlice';
 
 type SidebarProps = {
   accessToken: string | null;
@@ -14,19 +11,7 @@ type SidebarProps = {
 
 const Sidebar: FC<SidebarProps> = ({ accessToken, isOpen, setIsOpen }) => {
   const [selected, setSelected] = useState<any>(null);
-  const dispatch = useAppDispatch();
-  const [logoutF] = useLazyLogoutQuery();
-  const logoutHandler = () => {
-    dispatch(logout());
-    logoutF(undefined)
-      .unwrap()
-      .then((res: any) => {
-        console.log(res);
-      })
-      .catch((err: any) => {
-        console.log(err);
-      });
-  };
+
   const links = [
     {
       id: 1,

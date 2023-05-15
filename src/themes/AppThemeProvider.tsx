@@ -42,7 +42,7 @@ const AppThemeProvider: FC<AppThemeProviderProps> = ({ children }) => {
         // 4E9F3D
         // D8E9A8
         primary: {
-          main: '#1E5128',
+          main: '#e4e6df',
         },
         secondary: {
           main: '#4E9F3D',
@@ -53,7 +53,7 @@ const AppThemeProvider: FC<AppThemeProviderProps> = ({ children }) => {
         },
         text: {
           primary: '#e4e6df',
-          secondary: '#D8E9A8',
+          secondary: '#e4e6df',
         },
 
         Ink: {
@@ -133,19 +133,7 @@ const AppThemeProvider: FC<AppThemeProviderProps> = ({ children }) => {
             },
           },
         },
-        MuiLink: {
-          styleOverrides: {
-            root: {
-              // cursor: 'pointer',
-              // textDecoration: 'none',
-              // lineHeight: '16px',
-              // transition: 'all 0.1s ease-in-out',
-              // '&:hover': {
-              //   opacity: 0.8,
-              // },
-            },
-          },
-        },
+
         MuiTypography: {
           styleOverrides: {
             root: {
@@ -157,6 +145,23 @@ const AppThemeProvider: FC<AppThemeProviderProps> = ({ children }) => {
           styleOverrides: {
             root: {
               aspectRatio: '1/1',
+            },
+          },
+        },
+        // '& .MuiOutlinedInput-root': {
+        //   '& fieldset': {
+        //     borderColor: 'primary.main',
+        //   },
+        //   '&:hover fieldset': {
+        //     borderColor: 'secondary.main',
+        //   },
+        // },
+        MuiLink: {
+          styleOverrides: {
+            root: {
+              cursor: 'pointer',
+              textDecoration: 'none',
+              color: '#D8E9A8',
             },
           },
         },

@@ -23,7 +23,6 @@ const Inventory = () => {
         toast.error('Error opening box');
       });
   };
-  console.log(inventory);
 
   return (
     <Container

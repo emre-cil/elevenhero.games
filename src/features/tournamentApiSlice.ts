@@ -2,7 +2,7 @@ import apiSlice from '@/app/api/apiSlice';
 
 export const tournamentApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getActives: builder.query({
+    getActiveTournaments: builder.query({
       query: () => ({
         url: '/tournaments/getActives',
         method: 'GET',
@@ -41,7 +41,7 @@ export const tournamentApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-  useGetActivesQuery,
+  useGetActiveTournamentsQuery,
   useCreateTournamentMutation,
   useJoinTournamentMutation,
   useCancelTournamentMutation,

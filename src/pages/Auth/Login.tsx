@@ -116,13 +116,10 @@ function Login() {
         <Link variant="body2" textAlign="right" onClick={() => navigate('/forgot-password')}>
           Forgot password?
         </Link>
-        {!isLoading ? (
-          <Button variant="contained" onClick={loginHandler}>
-            Login
-          </Button>
-        ) : (
-          <CircularProgress sx={{ margin: '0 auto', width: '100%', my: 0.5 }} />
-        )}
+
+        <Button disabled={isLoading} variant="contained" onClick={loginHandler}>
+          {isLoading ? <CircularProgress size={16} /> : 'Login'}
+        </Button>
       </Stack>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Typography variant="body2" component="p">

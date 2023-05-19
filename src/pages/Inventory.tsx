@@ -23,6 +23,7 @@ const Inventory = () => {
         toast.error('Error opening box');
       });
   };
+  console.log(inventory);
 
   return (
     <Container
@@ -47,12 +48,16 @@ const Inventory = () => {
             </Typography>
             <Grid container spacing={2}>
               {inventory?.products?.map((item: any) => (
-                <InventoryCard
-                  key={item.product._id}
-                  item={item.product}
-                  count={item.count}
-                  openHandler={openHandler}
-                />
+                <>
+                  {item?.product && (
+                    <InventoryCard
+                      key={item.product?._id}
+                      item={item.product}
+                      count={item.count}
+                      openHandler={openHandler}
+                    />
+                  )}
+                </>
               ))}
             </Grid>
           </>
@@ -72,7 +77,7 @@ const Inventory = () => {
             </Typography>
             <Grid container spacing={2}>
               {inventory?.nfts?.map((item: any) => (
-                <NFTCard key={item._id} item={item} />
+                <NFTCard key={item?._id} item={item} />
               ))}
             </Grid>
           </>

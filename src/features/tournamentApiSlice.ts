@@ -15,20 +15,21 @@ export const tournamentApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body,
       }),
-      invalidatesTags: ['Tournament'],
+      invalidatesTags: ['Tournament', 'Money'],
     }),
     joinTournament: builder.mutation({
-      query: (body) => ({
-        url: '/tournaments/join',
+      query: (id) => ({
+        url: `/tournaments/join?tournamentId=${id}`,
         method: 'PUT',
-        body,
       }),
+      invalidatesTags: ['Tournament', 'Money'],
     }),
     cancelTournament: builder.mutation({
-      query: (body) => ({
-        url: '/tournaments/cancel',
+      query: (id) => ({
+        url: `/tournaments/cancel?tournamentId=${id}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['Tournament', 'Money'],
     }),
 
     getUsersTournaments: builder.query({

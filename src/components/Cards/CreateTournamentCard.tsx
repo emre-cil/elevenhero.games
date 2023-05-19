@@ -31,11 +31,15 @@ const CreateTournamentCard = () => {
         boxShadow: 4,
         p: 2,
         borderRadius: 2,
+        backgroundColor: 'rgba(255, 255, 255, 0.08)',
+        backdropFilter: 'blur(10px)',
       }}
     >
       <TextField label="Amount" type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Typography variant="subtitle1">Estimated Reward: {amount !== '' && parseFloat(amount) * 0.95 * 2}</Typography>
+        <Typography variant="subtitle1">
+          Estimated Reward: {amount !== '' && (parseFloat(amount) * 0.95 * 2).toFixed(2)}
+        </Typography>
         <Button
           variant="contained"
           sx={{

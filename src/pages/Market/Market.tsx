@@ -4,10 +4,11 @@ import { Container, Grid } from '@mui/material';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import DefaultModal from '@/components/Modals/DefaultModal';
+import Loading from '@/components/Loading';
 
 function Market() {
   const [buyItem, setBuyItem] = useState<any>(null);
-  const { data: products } = useGetProductsQuery(undefined);
+  const { data: products, isLoading: productsLoading } = useGetProductsQuery(undefined);
   const [buyProduct, { isLoading }] = useBuyProductMutation();
   const handleBuy = () => {
     buyProduct({
@@ -29,11 +30,15 @@ function Market() {
 
   return (
     <Container sx={{ py: 3 }}>
-      <Grid container spacing={3}>
-        {products?.map((item: any) => (
-          <ProductCard key={item?._id} item={item} setBuyItem={setBuyItem} />
-        ))}
-      </Grid>
+      {productsLoading ? (
+        <Loading loading={productsLoading} />
+      ) : (
+        <Grid container spacing={3}>
+          {products?.map((item: any, idx: number) => (
+            <ProductCard key={item?._id} item={item} setBuyItem={setBuyItem} idx={idx} />
+          ))}
+        </Grid>
+      )}
       <DefaultModal
         open={buyItem !== null}
         setOpen={setBuyItem}

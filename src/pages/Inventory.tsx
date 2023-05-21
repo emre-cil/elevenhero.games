@@ -40,7 +40,7 @@ const Inventory = () => {
               <>
                 <SectionHeader title="Products" />
                 <Grid container spacing={2}>
-                  {inventory?.products?.map((item: any) => (
+                  {inventory?.products?.map((item: any, idx: number) => (
                     <>
                       {item?.product && (
                         <InventoryCard
@@ -48,6 +48,7 @@ const Inventory = () => {
                           item={item.product}
                           count={item.count}
                           openHandler={openHandler}
+                          idx={idx}
                         />
                       )}
                     </>
@@ -59,8 +60,8 @@ const Inventory = () => {
               <>
                 <SectionHeader title="NFTS" />
                 <Grid container spacing={2}>
-                  {inventory?.nfts?.map((item: any) => (
-                    <NFTCard key={item?._id} item={item} />
+                  {inventory?.nfts?.map((item: any, idx: number) => (
+                    <NFTCard key={item?._id} item={item} idx={idx} />
                   ))}
                 </Grid>
               </>

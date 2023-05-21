@@ -4,7 +4,6 @@ import { Box, Container, Grid, IconButton, MenuItem, Pagination, Stack, TextFiel
 import { useState, useEffect } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import lineupImg from '@/assets/Images/lineup.webp';
-import TestImg from '@/assets/Images/testImg.webp';
 import LineUpEmpty from '@/components/Cards/LineUpEmpty';
 import TestLineUpCard from '@/components/Cards/TestLineUpCard';
 import formations from '@/data/formations';
@@ -15,7 +14,7 @@ import { useLazyGetFormationQuery } from '@/features/formationApiSlice';
 
 function Lineup() {
   // 11 players 4-4-2 img 500x500 cards 50x75
-  const [selectedFormation, setSelectedFormation] = useState<any>(formations[0]);
+  const [selectedFormation, setSelectedFormation] = useState<any>([]);
   const [page, setPage] = useState(1);
   const playerPositions = ['ALL', 'GK', 'LB', 'CB', 'RB', 'LM', 'CM', 'RM', 'ST', 'CAM', 'LW', 'RW', 'CDM'];
   const [unSelectedPlayers, setUnSelectedPlayers] = useState([]);
@@ -26,11 +25,26 @@ function Lineup() {
   // useEffect(() => {
   //   setUnSelectedPlayers(players);
   // }, [selectedFormation?.name]);
-
+  console.log('selected', selectedFormation);
+  console.log('unselected', unSelectedPlayers);
   useEffect(() => {
     getFormation(undefined)
-      .then((res) => {
-        setUnSelectedPlayers(res?.data?.unselectedPlayers || []);
+      .then((res: any) => {
+        if (res?.data?._id) {
+          const data = res?.data;
+          setSelectedFormation(() => {
+            const formation = formations[data?.formation];
+            const newFormations = formation.map((position: any) => {
+              return {
+                ...position,
+                player: data?.players[position.id].player,
+              };
+            });
+
+            return newFormations;
+          });
+          setUnSelectedPlayers(data?.unselectedPlayers || []);
+        }
       })
       .catch((err) => {
         alert(err?.message || 'Error');
@@ -56,78 +70,84 @@ function Lineup() {
     );
   }
   const setAsUnselected = (id: any) => {
-    // if unselected contains the player
-    if (unSelectedPlayers.find((p: any) => p.id === id) !== undefined) return;
-    // // update the unselected players
-    // setUnSelectedPlayers((prev: any) => {
-    //   const player = players.find((p) => p.id === id);
-    //   if (player) {
-    //     return [...prev, player];
-    //   }
-    //   return prev;
-    // });
-    // remove the player from the dropped
-    setSelectedFormation((prev: any) => {
-      const NewDropped = prev.positions.map((position: any) => {
-        if (position?.player && position.player.id === id) {
-          return {
-            ...position,
-            player: null,
-          };
-        }
-        return position;
+    // if unselected contains the player skip the function
+    if (unSelectedPlayers.find((p: any) => p._id === id) !== undefined) return;
+    // update the unselected players
+    setUnSelectedPlayers((u: any) => {
+      let player;
+      // remove the player from the dropped
+      setSelectedFormation((prev: any) => {
+        player = prev.find((p: any) => p.player?._id === id)?.player;
+        if (!player) return prev;
+        console.log('burda');
+        const NewDropped = prev.map((position: any) => {
+          if (position?.player && position.player._id === id) {
+            return {
+              ...position,
+              player: null,
+            };
+          }
+          return position;
+        });
+        console.log('NewDropped', NewDropped);
+        return NewDropped;
       });
-      return {
-        ...prev,
-        positions: NewDropped,
-      };
+
+      if (player) {
+        return [...u, player];
+      }
+      return u;
     });
   };
-
   const handleDragEnd = (event: any) => {
-    // if (event.over) {
-    //   setUnSelectedPlayers((prev) => {
-    //     let NewUnselecteds = prev;
-    //     const isPlayerUnselected = prev.find((p: any) => p.id === event.active.id) !== undefined;
-    //     const destination = selectedFormation.positions.find((p: any) => p.id === event.over.id);
-    //     setSelectedFormation((x: any) => {
-    //       const NewDropped = x.positions.map((position: any) => {
-    //         if (position.player && position.player.id === event.active.id) {
-    //           return {
-    //             ...position,
-    //             player: destination?.player || null,
-    //           };
-    //         }
-    //         // if the position is the same as the one
-    //         if (position.id === event.over.id && isPlayerUnselected) {
-    //           // if the position is empty not empty
-    //           NewUnselecteds = position.player
-    //             ? prev.filter((p: any) => p.id !== event.active.id).concat(position.player)
-    //             : prev.filter((p: any) => p.id !== event.active.id);
-    //           return {
-    //             ...position,
-    //             player: players.find((p: any) => p.id === event.active.id),
-    //           };
-    //         }
-    //         // inside movement
-    //         if (position.id === event.over.id && !isPlayerUnselected) {
-    //           return {
-    //             ...position,
-    //             player: players.find((p: any) => p.id === event.active.id),
-    //           };
-    //         }
-    //         return position;
-    //       });
-    //       return {
-    //         ...x,
-    //         positions: NewDropped,
-    //       };
-    //     });
-    //     return NewUnselecteds;
-    //   });
-    // } else {
-    //   setAsUnselected(event.active.id);
-    // }
+    if (event.over) {
+      setUnSelectedPlayers((prev: any) => {
+        let NewUnselecteds = prev;
+        const isPlayerUnselected = prev.find((p: any) => p._id === event.active.id) !== undefined;
+        const destination = selectedFormation.find((p: any) => p.id === event.over.id);
+        setSelectedFormation((x: any) => {
+          const NewDropped = x.map((position: any) => {
+            // if the position has the player
+            if (position.player && position.player._id === event.active.id) {
+              return {
+                ...position,
+                player: destination?.player || null,
+              };
+            }
+            // if the position is the same as the one
+            console.log(position.id, event.over.id, isPlayerUnselected);
+            if (position.id === event.over.id) {
+              if (isPlayerUnselected) {
+                // if the position is not empty swap players
+                NewUnselecteds = position.player
+                  ? prev.filter((p: any) => p._id !== event.active.id).concat(position.player)
+                  : prev.filter((p: any) => p._id !== event.active.id);
+                return {
+                  ...position,
+                  player: prev.find((p: any) => p._id === event.active.id) || null,
+                };
+              }
+              // inside movement
+              else {
+                console.log(event.active.id);
+
+                return {
+                  ...position,
+                  player: x.find((p: any) => p.player?._id === event.active.id)?.player || null,
+                };
+              }
+            }
+
+            return position;
+          });
+          console.log('NewDropped', NewDropped);
+          return NewDropped;
+        });
+        return NewUnselecteds;
+      });
+    } else {
+      setAsUnselected(event.active.id);
+    }
   };
 
   return (
@@ -213,17 +233,17 @@ function Lineup() {
               select
               label="Formation"
               value={selectedFormation.name}
-              onChange={(e) => {
-                setSelectedFormation(
-                  formations.find((formation) => formation.name === e.target.value) ?? formations[0],
-                );
-              }}
+              // onChange={(e) => {
+              //   setSelectedFormation(
+              //     formations.find((formation: any) => formation.name === e.target.value) ?? formations[0],
+              //   );
+              // }}
             >
-              {formations.map((option) => (
+              {/* {formations?.map((option: any) => (
                 <MenuItem key={option.name} value={option.name}>
                   {option.name}
                 </MenuItem>
-              ))}
+              ))} */}
             </TextField>
             <Stack>
               <Typography variant="h6" textAlign="center">
@@ -249,28 +269,29 @@ function Lineup() {
               }}
             >
               <img id="grass" src={lineupImg} alt="" />
-              {selectedFormation.positions?.map((position: any) => (
-                <LineUpEmpty key={position.id} x={position.x} y={position.y} id={position.id} name={position.name}>
-                  {position.player ? (
-                    <TestLineUpCard
-                      player={position.player}
-                      onDoubleClick={() => setAsUnselected(position.player.id)}
-                    />
-                  ) : (
-                    <Box
-                      sx={{
-                        width: '100%',
-                        textAlign: 'center',
-                        color: 'white',
-                        opacity: 0.9,
-                        mt: '45%',
-                      }}
-                    >
-                      {position.name}
-                    </Box>
-                  )}
-                </LineUpEmpty>
-              ))}
+              {selectedFormation?.length > 0 &&
+                selectedFormation.map((position: any) => (
+                  <LineUpEmpty key={position.id} x={position.x} y={position.y} id={position.id} name={position.name}>
+                    {position.player ? (
+                      <TestLineUpCard
+                        player={position.player}
+                        onDoubleClick={() => setAsUnselected(position.player.id)}
+                      />
+                    ) : (
+                      <Box
+                        sx={{
+                          width: '100%',
+                          textAlign: 'center',
+                          color: 'white',
+                          opacity: 0.9,
+                          mt: '45%',
+                        }}
+                      >
+                        {position.name}
+                      </Box>
+                    )}
+                  </LineUpEmpty>
+                ))}
             </Box>
             <Stack
               sx={{
@@ -297,12 +318,12 @@ function Lineup() {
                 ))}
               </Stack>
               <Grid container>
-                {unSelectedPlayers?.slice((page - 1) * 9, page * 9)?.map((player: any) => (
+                {unSelectedPlayers?.slice((page - 1) * 6, page * 6)?.map((player: any) => (
                   <TestLineUpCard key={player.id} player={player} />
                 ))}
               </Grid>
               <Pagination
-                count={Math.ceil(unSelectedPlayers.length / 9)}
+                count={Math.ceil(unSelectedPlayers.length / 6)}
                 page={page}
                 onChange={(e, value) => setPage(value)}
               />

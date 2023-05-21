@@ -18,9 +18,9 @@ const TestLineUpCard: FC<TestLineUpCardProps> = ({ player, onDoubleClick }) => {
     <Grid
       item
       xs={2}
-      sm={4}
-      md={4}
-      lg={4}
+      sm={6}
+      md={6}
+      lg={6}
       xl={4}
       onDoubleClick={onDoubleClick}
       ref={setNodeRef}

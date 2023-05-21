@@ -19,7 +19,6 @@ const TournamentCard: FC<TournamentCardProps> = ({ tournament, owner, userId, re
       // cancel tournament
       cancelTournament(tournament?._id)
         .then((res) => {
-          console.log(res);
           toast.success('Tournament canceled');
         })
         .catch((err) => {
@@ -36,7 +35,6 @@ const TournamentCard: FC<TournamentCardProps> = ({ tournament, owner, userId, re
           toast.success('Tournament joined');
         })
         .catch((err) => {
-          console.log('burda');
           toast.error(err.message);
         });
     }

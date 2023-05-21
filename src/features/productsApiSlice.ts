@@ -9,8 +9,8 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     buyProduct: builder.mutation({
-      query: (id: number) => ({
-        url: `/products/buy?id=${id}&count=1`,
+      query: (item) => ({
+        url: `/products/buy?id=${item.id}&count=${item.count}`,
         method: 'POST',
       }),
       invalidatesTags: ['Money', 'Inventory'],

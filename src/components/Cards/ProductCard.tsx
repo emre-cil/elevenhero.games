@@ -1,5 +1,6 @@
-import { FC } from 'react';
-import { Button, Grid, Stack, Typography } from '@mui/material';
+import { FC, useRef } from 'react';
+import { Button, Grid, Input, Stack, Typography } from '@mui/material';
+import { toast } from 'react-hot-toast';
 
 interface ProductCardProps {
   item: any;
@@ -7,6 +8,7 @@ interface ProductCardProps {
 }
 
 const ProductCard: FC<ProductCardProps> = ({ item, setBuyItem }) => {
+  const countRef = useRef<any>(null);
   return (
     <Grid
       item
@@ -45,14 +47,67 @@ const ProductCard: FC<ProductCardProps> = ({ item, setBuyItem }) => {
         >
           {item?.serie?.title}
         </Typography>
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <Typography variant="h6">${item.price}</Typography>
+        <Stack
+          direction={{
+            xs: 'column',
+            sm: 'row',
+          }}
+          justifyContent="space-between"
+          gap={1}
+        >
+          <Stack direction="row" justifyContent="space-between" alignItems="center" gap={0.5}>
+            <Typography
+              variant="h6"
+              sx={{
+                lineHeight: '32px',
+              }}
+            >
+              ${item.price}
+            </Typography>
+            <Input
+              type="number"
+              sx={{
+                width: '50px',
+                mr: 1,
+                textAlign: 'center',
+                input: {
+                  textAlign: 'center',
+                  // set buttons to left
+                  position: 'relative',
+                  '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
+                    '-webkit-appearance': 'none',
+                    margin: 0,
+                  },
+                  '&[type=number]': {
+                    '-moz-appearance': 'textfield',
+                  },
+                },
+              }}
+              defaultValue={1}
+              inputRef={countRef}
+              inputProps={{
+                min: 1,
+              }}
+            />
+          </Stack>
           <Button
             variant="contained"
             sx={{
               borderRadius: 0,
             }}
-            onClick={() => setBuyItem(item)}
+            onClick={() => {
+              const value = parseInt(countRef.current.value);
+              // if value non or less than 1
+              if (!value || value < 1) {
+                toast.error('Please enter a valid number');
+                return;
+              } else {
+                setBuyItem({
+                  ...item,
+                  count: countRef.current.value,
+                });
+              }
+            }}
           >
             Buy
           </Button>

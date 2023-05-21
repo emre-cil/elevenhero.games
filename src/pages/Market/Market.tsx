@@ -9,16 +9,17 @@ function Market() {
   const [buyItem, setBuyItem] = useState<any>(null);
   const { data: products } = useGetProductsQuery(undefined);
   const [buyProduct, { isLoading }] = useBuyProductMutation();
-  console.log(products);
   const handleBuy = () => {
-    buyProduct(buyItem?._id)
+    buyProduct({
+      id: buyItem?._id,
+      count: buyItem?.count,
+    })
       .unwrap()
       .then(() => {
         toast.success('Product bought successfully!');
         setBuyItem(null);
       })
       .catch((err) => {
-        console.log(err);
         toast.error(err?.data?.message);
       })
       .finally(() => {
@@ -38,7 +39,9 @@ function Market() {
         setOpen={setBuyItem}
         onSuccess={handleBuy}
         successText="Buy"
-        title={`Are you sure you want to buy ${buyItem?.title}?`}
+        title={`Are you sure you want to buy ${buyItem?.count} x ${buyItem?.title} for ${
+          buyItem?.count * buyItem?.price
+        }?`}
         successColor="success.main"
         successLoading={isLoading}
       />

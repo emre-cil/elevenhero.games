@@ -3,7 +3,7 @@ import { BaseQueryApi, createApi, FetchArgs, fetchBaseQuery } from '@reduxjs/too
 import { RootState } from '@/app/store';
 
 // Define a service using a base URL and expected endpoint, and a function to transform the header.
-const baseQuery = (args: any, api: BaseQueryApi, extraOptions: any) =>
+const baseQuery = (args: any, api: any, extraOptions: any) =>
   fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_API_URL}/api`,
     prepareHeaders: (headers, { getState }) => {
@@ -15,7 +15,7 @@ const baseQuery = (args: any, api: BaseQueryApi, extraOptions: any) =>
     },
   })(args, api, extraOptions);
 
-const baseQueryWithReauth = async (args: string | FetchArgs, api: any, extraOptions: any) => {
+const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
   console.log(!extraOptions?.initialRefresh);
   while (api?.getState()?.user?.refreshPending === true && !extraOptions?.initialRefresh && !extraOptions?.noToken) {
     // eslint-disable-next-line no-await-in-loop, no-promise-executor-return

@@ -15,7 +15,6 @@ const ConnectWallet: FC<ConnectWalletProps> = ({ isOpen, setIsOpen }) => {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const changeAccountHandler = (address: string) => {
     window?.ethereum?.request({ method: 'eth_getBalance', params: [address, 'latest'] }).then((balance: any) => {
-      console.log(address, balance);
       setIsOpen(false);
     });
   };
@@ -27,13 +26,11 @@ const ConnectWallet: FC<ConnectWalletProps> = ({ isOpen, setIsOpen }) => {
   }, []);
 
   const metamaskHandler = () => {
-    console.log('Metamask');
     if (isMobile && !window?.ethereum) {
       window.open(DAPP, '_blank');
     }
 
     if (window?.ethereum) {
-      console.log(window?.ethereum?.chainId);
       if (window?.ethereum?.chainId === '0x13881') {
         window.ethereum.request({ method: 'eth_requestAccounts' }).then((accounts: any) => {
           changeAccountHandler(accounts[0]);
@@ -49,9 +46,7 @@ const ConnectWallet: FC<ConnectWalletProps> = ({ isOpen, setIsOpen }) => {
       alert('Please install Metamask');
     }
   };
-  const walletConnectHandler = () => {
-    console.log('WalletConnect');
-  };
+  const walletConnectHandler = () => {};
   const wallets = [
     {
       name: 'Metamask',

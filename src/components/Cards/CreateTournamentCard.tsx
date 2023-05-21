@@ -13,12 +13,10 @@ const CreateTournamentCard = () => {
     createTournament({ amount: parseFloat(amount) })
       .unwrap()
       .then((res) => {
-        console.log(res);
         toast.success('Tournament created successfully');
         setAmount('');
       })
       .catch((err) => {
-        console.log(err);
         toast.error(err.data.message);
       });
   };

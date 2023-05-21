@@ -16,7 +16,6 @@ const baseQuery = (args: any, api: any, extraOptions: any) =>
   })(args, api, extraOptions);
 
 const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
-  console.log(!extraOptions?.initialRefresh);
   while (api?.getState()?.user?.refreshPending === true && !extraOptions?.initialRefresh && !extraOptions?.noToken) {
     // eslint-disable-next-line no-await-in-loop, no-promise-executor-return
     await new Promise((resolve) => setTimeout(resolve, 50));

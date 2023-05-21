@@ -29,6 +29,7 @@ const InventoryCard: FC<InventoryCardProps> = ({ item, count, openHandler }) => 
           variant="contained"
           sx={{
             borderRadius: 0,
+            height: 40,
           }}
           onClick={() => openHandler(item._id, openBox)}
           disabled={isLoading}

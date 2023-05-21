@@ -13,7 +13,6 @@ function Leaderboard() {
   const [selectedBoard, setSelectedBoard] = useState(1);
   const { data: monthlyScores } = useGetMonthlyLeaderboardQuery(undefined, { skip: selectedBoard !== 1 });
   const { data: allTimeScores } = useGetAllTimeLeaderboardQuery(undefined, { skip: selectedBoard !== 2 });
-  console.log(monthlyScores, allTimeScores);
 
   const ScoreItem = (score: score, index: number) => (
     <Stack

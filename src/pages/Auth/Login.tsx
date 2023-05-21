@@ -80,9 +80,7 @@ function Login() {
       .then(() => {
         toast.success("We've sent you an email. Please check your inbox and verify your account.");
       })
-      .catch((e: Error) => {
-        console.log(e);
-      })
+      .catch((e: Error) => {})
       .finally(() => {
         setIsModalOpen(null);
       });

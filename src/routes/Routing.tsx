@@ -13,26 +13,16 @@ import Leaderboard from '@/pages/Leaderboard/Leaderboard';
 import Lineup from '@/pages/Lineup/Lineup';
 import VerifyEmail from '@/pages/Auth/VerifyEmail';
 import Inventory from '@/pages/Inventory';
+import ProtectedLoading from '@/components/ProtectedLoading';
 
 function Routing({ isLoading, accessToken, hasRefresh }: any) {
   function ProtectedRoute() {
-    return isLoading ? (
-      <CircularProgress
-        sx={{
-          my: '10vh',
-          ml: '50%',
-        }}
-      />
-    ) : accessToken ? (
-      <Outlet />
-    ) : (
-      <Navigate to="/login" replace />
-    );
+    return isLoading ? <ProtectedLoading /> : accessToken ? <Outlet /> : <Navigate to="/login" replace />;
   }
 
   return (
     <Routes>
-      <Route element={<ContentWrapper accessToken={accessToken} />}>
+      <Route element={<ContentWrapper accessToken={accessToken} loading={isLoading} />}>
         <Route element={<ProtectedRoute />}>
           <Route path="*" element={<Home />} />
           <Route path="/profile" element={<Profile />} />

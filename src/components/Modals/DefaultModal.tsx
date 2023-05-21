@@ -39,9 +39,7 @@ const DefaultModal: FC<DefaultModalProps> = ({
             return time;
           });
         }, 1000);
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
     }
   }, []);
   return (

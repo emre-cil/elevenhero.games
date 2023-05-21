@@ -55,7 +55,7 @@ const ProductCard: FC<ProductCardProps> = ({ item, setBuyItem }) => {
           justifyContent="space-between"
           gap={1}
         >
-          <Stack direction="row" justifyContent="space-between" alignItems="center" gap={0.5}>
+          <Stack direction="row" flex={1} justifyContent="space-between" alignItems="center" gap={0.5}>
             <Typography
               variant="h6"
               sx={{

@@ -11,14 +11,7 @@ function Profile() {
   const [logoutF] = useLazyLogoutQuery();
   const logoutHandler = () => {
     dispatch(logout());
-    logoutF(undefined)
-      .unwrap()
-      .then((res: any) => {
-        console.log(res);
-      })
-      .catch((err: any) => {
-        console.log(err);
-      });
+    logoutF(undefined);
   };
   return (
     <Container maxWidth="md" sx={{ py: 3 }}>

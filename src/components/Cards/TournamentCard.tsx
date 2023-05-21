@@ -13,7 +13,6 @@ interface TournamentCardProps {
 const TournamentCard: FC<TournamentCardProps> = ({ tournament, owner, userId, resulted }) => {
   const [cancelTournament, { isLoading: cancelLoading }] = useCancelTournamentMutation();
   const [joinTournament, { isLoading: joinLoading }] = useJoinTournamentMutation();
-
   const handleOperation = () => {
     if (owner) {
       // cancel tournament
@@ -80,16 +79,17 @@ const TournamentCard: FC<TournamentCardProps> = ({ tournament, owner, userId, re
           backgroundColor: 'rgba(255, 255, 255, 0.2)',
           backdropFilter: 'blur(10px)',
           minHeight: '150px',
-          border:
-            resulted && tournament.status === 1
+          border: resulted
+            ? tournament.status === 1
               ? '2px solid orange'
               : tournament?.winner === 0
               ? '2px solid white'
               : tournament?.winner === -1 && tournament?.player1?._id === userId
               ? '2px solid green'
-              : tournament?.winner === -1 && tournament?.player2?._id === userId
+              : tournament?.winner === 1 && tournament?.player2?._id === userId
               ? '2px solid green'
-              : '2px solid red',
+              : '2px solid red'
+            : 'none',
 
           animation: tournament.status === 1 ? 'pulse 2s infinite' : 'none',
           '@keyframes pulse': {

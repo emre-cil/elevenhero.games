@@ -41,7 +41,6 @@ function ResetPassword() {
           }, 4000);
         })
         .catch((error) => {
-          console.log(error);
           if (error?.data?.message) toast.error(error.data.message);
           else toast.error('Something went wrong. Please try again later.');
         });

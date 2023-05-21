@@ -7,8 +7,9 @@ import Sidebar from '@/layout/Sidebar';
 
 type ContentWrapperProps = {
   accessToken: string | null;
+  loading?: boolean;
 };
-const ContentWrapper: FC<ContentWrapperProps> = ({ accessToken }) => {
+const ContentWrapper: FC<ContentWrapperProps> = ({ accessToken, loading }) => {
   const [isOpen, setIsOpen] = useState(!(window.innerWidth < 900));
 
   useEffect(() => {
@@ -25,7 +26,7 @@ const ContentWrapper: FC<ContentWrapperProps> = ({ accessToken }) => {
 
   return (
     <>
-      <Header accessToken={accessToken} setIsOpen={setIsOpen} />
+      {!loading && <Header accessToken={accessToken} setIsOpen={setIsOpen} />}
       <Stack direction="row">
         {accessToken && <Sidebar accessToken={accessToken} isOpen={isOpen} setIsOpen={setIsOpen} />}
         <Box

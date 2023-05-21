@@ -27,7 +27,8 @@ const CreateTournamentCard = () => {
     <Stack
       gap={2}
       sx={{
-        maxWidth: 345,
+        maxWidth: 400,
+        width: '100%',
         boxShadow: 4,
         p: 2,
         borderRadius: 2,

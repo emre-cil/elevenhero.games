@@ -6,9 +6,11 @@ import { toast } from 'react-hot-toast';
 interface TournamentCardProps {
   tournament: any;
   owner: boolean;
+  userId: any;
+  resulted?: boolean;
 }
 
-const TournamentCard: FC<TournamentCardProps> = ({ tournament, owner }) => {
+const TournamentCard: FC<TournamentCardProps> = ({ tournament, owner, userId, resulted }) => {
   const [cancelTournament, { isLoading: cancelLoading }] = useCancelTournamentMutation();
   const [joinTournament, { isLoading: joinLoading }] = useJoinTournamentMutation();
 
@@ -70,25 +72,39 @@ const TournamentCard: FC<TournamentCardProps> = ({ tournament, owner }) => {
     );
   };
   return (
-    <Grid
-      item
-      xs={12}
-      md={6}
-      lg={4}
-      sx={{
-        p: 2,
-        boxShadow: 1,
-        borderRadius: 2,
-        backgroundColor: 'rgba(255, 255, 255, 0.2)',
-        backdropFilter: 'blur(10px)',
-        minHeight: '150px',
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
+    <Grid item xs={12} sm={6} md={4} xl={3}>
       <Stack
         sx={{
           width: '100%',
+          p: 2,
+          boxShadow: 1,
+          borderRadius: 2,
+          backgroundColor: 'rgba(255, 255, 255, 0.2)',
+          backdropFilter: 'blur(10px)',
+          minHeight: '150px',
+          border:
+            resulted && tournament.status === 1
+              ? '2px solid orange'
+              : tournament?.winner === 0
+              ? '2px solid white'
+              : tournament?.winner === -1 && tournament?.player1?._id === userId
+              ? '2px solid green'
+              : tournament?.winner === -1 && tournament?.player2?._id === userId
+              ? '2px solid green'
+              : '2px solid red',
+
+          animation: tournament.status === 1 ? 'pulse 2s infinite' : 'none',
+          '@keyframes pulse': {
+            '0%': {
+              boxShadow: '0 0 0 0 rgba(238, 180, 6, 0.8)',
+            },
+            '50%': {
+              boxShadow: '0 0 0 10px rgba(0, 0, 0, 0)',
+            },
+            '100%': {
+              boxShadow: '0 0 0 0 rgba(0, 0, 0, 0)',
+            },
+          },
         }}
         gap={2}
       >
@@ -109,7 +125,7 @@ const TournamentCard: FC<TournamentCardProps> = ({ tournament, owner }) => {
                 ? `Live ${
                     // remove started at to current date
                     Math.floor((new Date().getTime() - new Date(tournament?.startedAt).getTime()) / 1000 / 60)
-                  }`
+                  }'`
                 : 'Resulted'}
             </Typography>
           ) : (

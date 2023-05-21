@@ -47,13 +47,29 @@ function Leaderboard() {
         },
       }}
     >
-      <Typography variant="body2" component="h3" color="white">
+      <Typography
+        variant="body2"
+        component="h3"
+        color="white"
+        sx={{
+          minWidth: '50px',
+          textAlign: 'left',
+        }}
+      >
         {index + 1}
       </Typography>
       <Typography variant="body2" component="h3" color="white">
         {score.username}
       </Typography>
-      <Typography variant="body2" component="h3" color="white">
+      <Typography
+        variant="body2"
+        component="h3"
+        color="white"
+        sx={{
+          minWidth: '50px',
+          textAlign: 'right',
+        }}
+      >
         {selectedBoard === 1 ? score.monthlyScore : score.totalScore}
       </Typography>
     </Stack>

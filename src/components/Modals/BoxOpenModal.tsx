@@ -1,5 +1,6 @@
 import { Modal } from '@mui/material';
 import { FC } from 'react';
+import { motion } from 'framer-motion';
 
 interface BoxOpenModalProps {
   isOpen: any;
@@ -27,7 +28,13 @@ const BoxOpenModal: FC<BoxOpenModalProps> = ({ isOpen, setIsOpen }) => {
         },
       }}
     >
-      <img src={`${import.meta.env.VITE_API_URL}/nfts/${isOpen.image}.webp`} alt={isOpen.name} />
+      <motion.img
+        initial={{ opacity: 0, y: 20, rotateY: 360 }}
+        animate={{ opacity: 1, y: 0, rotateY: 0 }}
+        transition={{ delay: 0.32, duration: 1.5 }}
+        src={`${import.meta.env.VITE_API_URL}/nfts/${isOpen.image}.webp`}
+        alt={isOpen.name}
+      />
     </Modal>
   );
 };

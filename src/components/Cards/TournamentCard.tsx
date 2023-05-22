@@ -69,7 +69,7 @@ const TournamentCard: FC<TournamentCardProps> = ({ tournament, owner, userId, re
     );
   };
   return (
-    <Grid item xs={12} sm={6} md={4} xl={3}>
+    <Grid item xs={12} sm={6} lg={4} xl={3}>
       <Stack
         sx={{
           width: '100%',
@@ -108,7 +108,19 @@ const TournamentCard: FC<TournamentCardProps> = ({ tournament, owner, userId, re
       >
         <Stack direction="row" justifyContent="space-between" alignItems="center">
           {userArea(tournament?.player1?.username)}
-          <RemoveIcon sx={{ fontSize: '2rem' }} />
+          <Typography
+            variant="h4"
+            textAlign="center"
+            sx={{
+              width: '120px',
+              mb: 3,
+            }}
+          >
+            {tournament?.p1Goals?.length}
+            {' - '}
+            {tournament?.p2Goals?.length}
+          </Typography>
+
           {userArea(tournament?.player2?.username)}
         </Stack>
         <Stack direction="row" alignItems="center" justifyContent="space-between" gap={1}>

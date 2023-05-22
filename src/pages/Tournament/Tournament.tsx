@@ -10,6 +10,7 @@ function Tournament() {
   const { data: tournaments, isLoading } = useGetActiveTournamentsQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
+  console.log(tournaments);
   const user = useAppSelector((state) => state.user.user) as any;
   return (
     <Container sx={{ py: 3 }}>

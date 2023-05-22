@@ -18,20 +18,35 @@ function Lineup() {
   const [page, setPage] = useState(1);
   const playerPositions = ['ALL', 'GK', 'LB', 'CB', 'RB', 'LM', 'CM', 'RM', 'ST', 'CAM', 'LW', 'RW', 'CDM'];
   const [unSelectedPlayers, setUnSelectedPlayers] = useState([]);
-
+  const [selectFormation, setSelectFormation] = useState('');
+  const formationTypes = ['4-4-2', '4-3-3A', '4-3-3D', '4-2-3-1', '4-1-2-1-2', '3-4-3'];
   const [getFormation, { data, isLoading, isError }] = useLazyGetFormationQuery();
   // top 5 most used formations
 
-  // useEffect(() => {
-  //   setUnSelectedPlayers(players);
-  // }, [selectedFormation?.name]);
-  console.log('selected', selectedFormation);
-  console.log('unselected', unSelectedPlayers);
+  useEffect(() => {
+    if (selectedFormation?.length > 0) {
+      setSelectedFormation((prev: any) => {
+        const old = prev;
+
+        const formation = formations[selectFormation];
+        const newFormations = formation.map((position: any) => {
+          return {
+            ...position,
+            player: old[position.id].player,
+          };
+        });
+
+        return newFormations;
+      });
+    }
+  }, [selectFormation]);
+
   useEffect(() => {
     getFormation(undefined)
       .then((res: any) => {
         if (res?.data?._id) {
           const data = res?.data;
+          setSelectFormation(data?.formation);
           setSelectedFormation(() => {
             const formation = formations[data?.formation];
             const newFormations = formation.map((position: any) => {
@@ -232,18 +247,16 @@ function Lineup() {
               fullWidth
               select
               label="Formation"
-              value={selectedFormation.name}
-              // onChange={(e) => {
-              //   setSelectedFormation(
-              //     formations.find((formation: any) => formation.name === e.target.value) ?? formations[0],
-              //   );
-              // }}
+              value={selectFormation}
+              onChange={(e) => {
+                setSelectFormation(e.target.value);
+              }}
             >
-              {/* {formations?.map((option: any) => (
-                <MenuItem key={option.name} value={option.name}>
-                  {option.name}
+              {formationTypes?.map((option: any) => (
+                <MenuItem key={option} value={option}>
+                  {option}
                 </MenuItem>
-              ))} */}
+              ))}
             </TextField>
             <Stack>
               <Typography variant="h6" textAlign="center">
@@ -317,7 +330,7 @@ function Lineup() {
                   <Box key={position}>{position}</Box>
                 ))}
               </Stack>
-              <Grid container>
+              <Grid container spacing={1}>
                 {unSelectedPlayers?.slice((page - 1) * 6, page * 6)?.map((player: any) => (
                   <TestLineUpCard key={player.id} player={player} />
                 ))}

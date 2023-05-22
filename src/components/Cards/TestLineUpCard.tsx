@@ -18,8 +18,8 @@ const TestLineUpCard: FC<TestLineUpCardProps> = ({ player, onDoubleClick }) => {
     <Grid
       item
       xs={2}
-      sm={6}
-      md={6}
+      sm={4}
+      md={4}
       lg={6}
       xl={4}
       onDoubleClick={onDoubleClick}
@@ -34,7 +34,6 @@ const TestLineUpCard: FC<TestLineUpCardProps> = ({ player, onDoubleClick }) => {
         },
         position: 'relative',
         touchAction: 'none',
-
         zIndex: transform ? 1 : 0,
       }}
     >

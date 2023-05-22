@@ -15,8 +15,7 @@ function Home() {
       <Container
         maxWidth="xl"
         sx={{
-          p: '122px 40px',
-          pt: 0,
+          py: 3,
         }}
       >
         {tournament && (

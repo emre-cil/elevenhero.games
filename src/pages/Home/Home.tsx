@@ -19,12 +19,14 @@ function Home() {
           pt: 0,
         }}
       >
-        <TournamentCard
-          key={tournament?._id}
-          tournament={tournament}
-          owner={tournament?.player1?._id === user?.id}
-          userId={user?.id}
-        />
+        {tournament && (
+          <TournamentCard
+            key={tournament[0]?._id}
+            tournament={tournament[0]}
+            owner={tournament[0]?.player1?._id === user?.id}
+            userId={user?.id}
+          />
+        )}
       </Container>
     </>
   );

@@ -134,7 +134,7 @@ const TournamentCard: FC<TournamentCardProps> = ({ tournament, owner, userId, re
               {tournament.status === 1
                 ? `Live ${
                     // remove started at to current date
-                    Math.floor((new Date().getTime() - new Date(tournament?.startedAt).getTime()) / 1000 / 60)
+                    Math.floor((new Date().getTime() + 100 - new Date(tournament?.startedAt).getTime()) / 1000 / 60)
                   }'`
                 : 'Resulted'}
             </Typography>

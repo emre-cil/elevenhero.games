@@ -9,6 +9,7 @@ import { Container, Grid, Stack } from '@mui/material';
 function Tournament() {
   const { data: tournaments, isLoading } = useGetActiveTournamentsQuery(undefined, {
     refetchOnMountOrArgChange: true,
+    pollingInterval: 60000,
   });
   console.log(tournaments);
   const user = useAppSelector((state) => state.user.user) as any;

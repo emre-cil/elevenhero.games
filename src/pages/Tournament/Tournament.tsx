@@ -11,7 +11,6 @@ function Tournament() {
     refetchOnMountOrArgChange: true,
     pollingInterval: 60000,
   });
-  console.log(tournaments);
   const user = useAppSelector((state) => state.user.user) as any;
   return (
     <Container sx={{ py: 3 }}>

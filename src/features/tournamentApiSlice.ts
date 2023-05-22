@@ -9,6 +9,13 @@ export const tournamentApiSlice = apiSlice.injectEndpoints({
       }),
       providesTags: ['Tournament'],
     }),
+    getLatestTournament: builder.query({
+      query: () => ({
+        url: '/tournaments/getLatest',
+        method: 'GET',
+      }),
+      providesTags: ['Tournament'],
+    }),
     createTournament: builder.mutation({
       query: (body) => ({
         url: '/tournaments',
@@ -47,4 +54,5 @@ export const {
   useJoinTournamentMutation,
   useCancelTournamentMutation,
   useGetUsersTournamentsQuery,
+  useGetLatestTournamentQuery,
 } = tournamentApiSlice;

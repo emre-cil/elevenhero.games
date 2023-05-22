@@ -13,7 +13,6 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { useLazyGetFormationQuery } from '@/features/formationApiSlice';
 
 function Lineup() {
-  // 11 players 4-4-2 img 500x500 cards 50x75
   const [selectedFormation, setSelectedFormation] = useState<any>([]);
   const [page, setPage] = useState(1);
   const playerPositions = ['ALL', 'GK', 'LB', 'CB', 'RB', 'LM', 'CM', 'RM', 'ST', 'CAM', 'LW', 'RW', 'CDM'];
@@ -22,8 +21,10 @@ function Lineup() {
   const formationTypes = ['4-4-2', '4-3-3A', '4-3-3D', '4-2-3-1', '4-1-2-1-2', '3-4-3'];
   const [getFormation, { data, isLoading, isError }] = useLazyGetFormationQuery();
   const [overall, setOverall] = useState(0);
-  // top 5 most used formations
-
+  const [changedFlag, setChangedFlag] = useState(false);
+  const [upperLine, setUpperLine] = useState<any>(0);
+  const [middleLine, setMiddleLine] = useState<any>(0);
+  const [lowerLine, setLowerLine] = useState<any>(0);
   useEffect(() => {
     if (selectedFormation?.length > 0) {
       setSelectedFormation((prev: any) => {
@@ -64,6 +65,9 @@ function Lineup() {
             return newFormations;
           });
           setUnSelectedPlayers(data?.unselectedPlayers || []);
+          setUpperLine(data?.upperVariant || 0);
+          setMiddleLine(data?.middleVariant || 0);
+          setLowerLine(data?.lowerVariant || 0);
         }
       })
       .catch((err) => {
@@ -84,19 +88,37 @@ function Lineup() {
     return 0;
   };
 
-  function LineTactics({ line }: any) {
+  function LineTactics({ line, value, setter }: any) {
     return (
       <Stack direction="row" alignItems="center">
         <Typography variant="body2" sx={{ minWidth: '5rem' }}>
           {line}
         </Typography>
-        <IconButton sx={{ color: 'green' }}>
+        <IconButton
+          sx={{ color: value === 0 ? 'green' : 'white' }}
+          onClick={() => {
+            if (value === 0) return;
+            setter(0);
+          }}
+        >
           <ArrowUpwardIcon />
         </IconButton>
-        <IconButton>
+        <IconButton
+          onClick={() => {
+            if (value === 1) return;
+            setter(1);
+          }}
+          sx={{ color: value === 1 ? 'green' : 'white' }}
+        >
           <CenterFocusStrongIcon />
         </IconButton>
-        <IconButton>
+        <IconButton
+          onClick={() => {
+            if (value === 2) return;
+            setter(2);
+          }}
+          sx={{ color: value === 2 ? 'green' : 'white' }}
+        >
           <ArrowDownwardIcon />
         </IconButton>
       </Stack>
@@ -112,7 +134,6 @@ function Lineup() {
       setSelectedFormation((prev: any) => {
         player = prev.find((p: any) => p.player?._id === id)?.player;
         if (!player) return prev;
-        console.log('burda');
         const NewDropped = prev.map((position: any) => {
           if (position?.player && position.player._id === id) {
             return {
@@ -280,9 +301,9 @@ function Lineup() {
               <Typography variant="h6" textAlign="center">
                 Line Tactics
               </Typography>
-              <LineTactics line="Upper Line" />
-              <LineTactics line="Middle Line" />
-              <LineTactics line="Lower Line" />
+              <LineTactics line="Upper Line" value={upperLine} setter={setUpperLine} />
+              <LineTactics line="Middle Line" value={middleLine} setter={setMiddleLine} />
+              <LineTactics line="Lower Line" value={lowerLine} setter={setLowerLine} />
             </Stack>
           </Stack>
           <Stack gap={3} direction={{ xs: 'column', sm: 'row' }}>

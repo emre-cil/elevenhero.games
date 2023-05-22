@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/no-array-index-key */
 import { Box, Container, Grid, IconButton, MenuItem, Pagination, Stack, TextField, Typography } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import lineupImg from '@/assets/Images/lineup.webp';
 import LineUpEmpty from '@/components/Cards/LineUpEmpty';
@@ -21,6 +21,7 @@ function Lineup() {
   const [selectFormation, setSelectFormation] = useState('');
   const formationTypes = ['4-4-2', '4-3-3A', '4-3-3D', '4-2-3-1', '4-1-2-1-2', '3-4-3'];
   const [getFormation, { data, isLoading, isError }] = useLazyGetFormationQuery();
+  const [overall, setOverall] = useState(0);
   // top 5 most used formations
 
   useEffect(() => {
@@ -40,6 +41,10 @@ function Lineup() {
       });
     }
   }, [selectFormation]);
+
+  useEffect(() => {
+    setOverall(getOverall());
+  }, [selectedFormation]);
 
   useEffect(() => {
     getFormation(undefined)
@@ -65,6 +70,19 @@ function Lineup() {
         alert(err?.message || 'Error');
       });
   }, []);
+
+  const getOverall = () => {
+    if (selectedFormation?.length > 0) {
+      let overall = 0.1;
+      selectedFormation.forEach((position: any) => {
+        if (position.player) {
+          overall += position.player.overall;
+        }
+      });
+      return Math.round(overall / 11);
+    }
+    return 0;
+  };
 
   function LineTactics({ line }: any) {
     return (
@@ -208,7 +226,7 @@ function Lineup() {
                   pt: '8px',
                 }}
               >
-                90
+                {overall}
               </Box>
             </Box>
             <Box

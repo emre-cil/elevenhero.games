@@ -64,7 +64,7 @@ const Inventory = () => {
                 <SectionHeader title="NFTS" />
                 <Grid container spacing={2}>
                   {inventory?.nfts?.map((item: any, idx: number) => (
-                    <NFTCard key={item?._id} item={item} idx={idx} />
+                    <NFTCard key={item?._id} item={item} idx={idx} setDetailOpen={setDetailOpen} />
                   ))}
                 </Grid>
               </>

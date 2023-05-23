@@ -18,7 +18,7 @@ function Home() {
           py: 3,
         }}
       >
-        {tournament && (
+        {tournament?.length > 0 && (
           <TournamentCard
             key={tournament[0]?._id}
             tournament={tournament[0]}

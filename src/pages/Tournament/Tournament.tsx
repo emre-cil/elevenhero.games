@@ -22,7 +22,7 @@ function Tournament() {
           <>
             {tournaments?.live?.length > 0 && (
               <>
-                <SectionHeader title="Waiting" />
+                <SectionHeader title="Live" />
                 <Grid container spacing={2.5}>
                   {tournaments.live.map((tournament: any) => (
                     <TournamentCard

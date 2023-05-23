@@ -2,6 +2,7 @@ import InventoryCard from '@/components/Cards/InventoryCard';
 import NFTCard from '@/components/Cards/NFTCard';
 import Loading from '@/components/Loading';
 import BoxOpenModal from '@/components/Modals/BoxOpenModal';
+import NFTDetailModal from '@/components/Modals/NFTDetailModal';
 import SectionHeader from '@/components/SectionHeader';
 import { useGetInventoryQuery } from '@/features/inventoryApiSlice';
 import { Container, Grid, Stack } from '@mui/material';
@@ -10,6 +11,7 @@ import { toast } from 'react-hot-toast';
 const Inventory = () => {
   const { data: inventory, isLoading } = useGetInventoryQuery(undefined);
   const [isOpen, setIsOpen] = useState(null);
+  const [detailOpen, setDetailOpen] = useState(null);
   const openHandler = (itemId: string, openBox: any) => {
     openBox(itemId)
       .then((res: any) => {
@@ -31,6 +33,7 @@ const Inventory = () => {
       }}
     >
       {isOpen && <BoxOpenModal isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {detailOpen && <NFTDetailModal isOpen={detailOpen} setIsOpen={setDetailOpen} />}
       <Stack gap={2}>
         {isLoading ? (
           <Loading loading={isLoading} />

@@ -1,6 +1,7 @@
 // import { setSuccessRefresh, setFailedRefresh } from '@/features/User/userSlice';
 import { BaseQueryApi, createApi, FetchArgs, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@/app/store';
+import { setCredentials } from '@/features/user/userSlice';
 
 // Define a service using a base URL and expected endpoint, and a function to transform the header.
 const baseQuery = (args: any, api: any, extraOptions: any) =>
@@ -21,27 +22,30 @@ const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
     await new Promise((resolve) => setTimeout(resolve, 50));
   }
   const result = await baseQuery(args, api, extraOptions);
-  // if (result?.error?.status === 401 || result?.error?.status === 403) {
-  //   const refreshResult = await baseQuery(
-  //     {
-  //       url: '/RefreshToken/getRefreshToken',
-  //       method: 'GET',
-  //       credentials: 'include',
-  //       withCredentials: true,
-  //     },
-  //     api,
-  //     {
-  //       ...extraOptions,
-  //       noToken: true,
-  //     },
-  //   );
-  //   if (refreshResult?.data) {
-  //     api.dispatch(setSuccessRefresh(refreshResult?.data));
-  //     return baseQuery(args, api, extraOptions);
-  //   }
-  //   api.dispatch(setFailedRefresh());
-  //   return { error: { status: 401 } };
-  // }
+  if (result?.error?.status === 401) {
+    const refreshResult = await baseQuery(
+      {
+        url: '/auth/refresh',
+        method: 'GET',
+        credentials: 'include',
+        withCredentials: true,
+      },
+      api,
+      {
+        ...extraOptions,
+        noToken: true,
+        initialRefresh: true,
+      },
+    );
+    // if there is data on result, we assume it is the new credentials
+    if (refreshResult?.data) {
+      api.dispatch(setCredentials(refreshResult?.data));
+      return baseQuery(args, api, extraOptions);
+    }
+    // else we assume the refresh failed and we clear the credentials
+    api.dispatch(setCredentials({}));
+    return { error: { status: 401 } };
+  }
 
   return result;
 };

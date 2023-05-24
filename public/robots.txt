@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /cgi-bin/
+Disallow: /search/
+Disallow: /checkout/
+Disallow: /cart/
+Disallow: /thank-you/

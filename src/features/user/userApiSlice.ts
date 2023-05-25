@@ -91,6 +91,24 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
       providesTags: ['Money'],
     }),
+
+    getDetails: builder.query({
+      query: () => ({
+        url: '/users/getDetails',
+        method: 'GET',
+      }),
+      providesTags: ['Profile', 'Money'],
+    }),
+
+    updateImage: builder.mutation({
+      query: (body) => ({
+        url: '/users/updateImage',
+        method: 'PUT',
+        body: body.data,
+        formData: true,
+      }),
+      invalidatesTags: ['Profile'],
+    }),
   }),
 });
 
@@ -104,4 +122,6 @@ export const {
   useForgotPasswordMutation,
   useResetPasswordMutation,
   useGetMoneyQuery,
+  useGetDetailsQuery,
+  useUpdateImageMutation,
 } = userApiSlice;

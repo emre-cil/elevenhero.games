@@ -1,6 +1,5 @@
 import { Button, Grid, Stack, Typography } from '@mui/material';
 import { FC } from 'react';
-import RemoveIcon from '@mui/icons-material/Remove';
 import { useCancelTournamentMutation, useJoinTournamentMutation } from '@/features/tournamentApiSlice';
 import { toast } from 'react-hot-toast';
 interface TournamentCardProps {
@@ -83,7 +82,7 @@ const TournamentCard: FC<TournamentCardProps> = ({ tournament, owner, userId, re
             ? tournament.status === 1
               ? '2px solid orange'
               : tournament?.winner === 0
-              ? '2px solid white'
+              ? '2px solid #3e3e3e'
               : tournament?.winner === -1 && tournament?.player1?._id === userId
               ? '2px solid green'
               : tournament?.winner === 1 && tournament?.player2?._id === userId
@@ -136,7 +135,11 @@ const TournamentCard: FC<TournamentCardProps> = ({ tournament, owner, userId, re
                     // remove started at to current date
                     Math.floor((new Date().getTime() + 100 - new Date(tournament?.startedAt).getTime()) / 1000 / 60)
                   }'`
-                : 'Resulted'}
+                : tournament?.winner === 0
+                ? 'Draw'
+                : tournament?.winner === -1
+                ? tournament?.player1?.username
+                : tournament?.player2?.username}
             </Typography>
           ) : (
             <Button variant="contained" onClick={handleOperation}>

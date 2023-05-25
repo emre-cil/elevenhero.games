@@ -143,7 +143,7 @@ function Lineup() {
           }
           return position;
         });
-        console.log('NewDropped', NewDropped);
+
         return NewDropped;
       });
 
@@ -169,7 +169,6 @@ function Lineup() {
               };
             }
             // if the position is the same as the one
-            console.log(position.id, event.over.id, isPlayerUnselected);
             if (position.id === event.over.id) {
               if (isPlayerUnselected) {
                 // if the position is not empty swap players
@@ -183,8 +182,6 @@ function Lineup() {
               }
               // inside movement
               else {
-                console.log(event.active.id);
-
                 return {
                   ...position,
                   player: x.find((p: any) => p.player?._id === event.active.id)?.player || null,
@@ -194,7 +191,6 @@ function Lineup() {
 
             return position;
           });
-          console.log('NewDropped', NewDropped);
           return NewDropped;
         });
         return NewUnselecteds;

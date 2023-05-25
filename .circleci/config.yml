@@ -1,0 +1,34 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:16.10
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: npm ci
+      - run:
+          name: Build Project
+          command: npm run build
+
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh root@64.226.76.239 'cd /var/www/elevenhero.games/11HERO-FRONT && git pull && npm install && npm run build'
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: main

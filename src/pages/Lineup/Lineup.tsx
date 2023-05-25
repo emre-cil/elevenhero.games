@@ -1,6 +1,18 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/no-array-index-key */
-import { Box, Container, Grid, IconButton, MenuItem, Pagination, Stack, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  IconButton,
+  MenuItem,
+  Pagination,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
+import { toast } from 'react-hot-toast';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import lineupImg from '@/assets/Images/lineup.webp';
@@ -10,7 +22,7 @@ import formations from '@/data/formations';
 import CenterFocusStrongIcon from '@mui/icons-material/CenterFocusStrong';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import { useLazyGetFormationQuery } from '@/features/formationApiSlice';
+import { useLazyGetFormationQuery, useUpdateFormationMutation } from '@/features/formationApiSlice';
 
 function Lineup() {
   const [selectedFormation, setSelectedFormation] = useState<any>([]);
@@ -20,6 +32,7 @@ function Lineup() {
   const [selectFormation, setSelectFormation] = useState('');
   const formationTypes = ['4-4-2', '4-3-3A', '4-3-3D', '4-2-3-1', '4-1-2-1-2', '3-4-3'];
   const [getFormation, { data, isLoading, isError }] = useLazyGetFormationQuery();
+  const [updateFormation, { isLoading: upLoading }] = useUpdateFormationMutation();
   const [overall, setOverall] = useState(0);
   const [changedFlag, setChangedFlag] = useState(false);
   const [upperLine, setUpperLine] = useState<any>(0);
@@ -44,7 +57,9 @@ function Lineup() {
   }, [selectFormation]);
 
   useEffect(() => {
-    setOverall(getOverall());
+    if (selectedFormation?.length > 0) {
+      setOverall(getOverall());
+    }
   }, [selectedFormation]);
 
   useEffect(() => {
@@ -75,6 +90,29 @@ function Lineup() {
       });
   }, []);
 
+  const updateLineup = () => {
+    updateFormation({
+      _id: data?._id,
+      formation: selectFormation,
+      lowerVariant: lowerLine,
+      middleVariant: middleLine,
+      upperVariant: upperLine,
+      players: selectedFormation.map((position: any) => {
+        return {
+          player: position.player?._id,
+          position: position.id,
+        };
+      }),
+    })
+      .unwrap()
+      .then((res: any) => {
+        toast.success('Lineup Updated Successfully');
+        setChangedFlag(false);
+      })
+      .catch((err) => {
+        toast.error(err?.message || 'Error');
+      });
+  };
   const getOverall = () => {
     if (selectedFormation?.length > 0) {
       let overall = 0.1;
@@ -154,6 +192,7 @@ function Lineup() {
     });
   };
   const handleDragEnd = (event: any) => {
+    !changedFlag && setChangedFlag(true);
     if (event.over) {
       setUnSelectedPlayers((prev: any) => {
         let NewUnselecteds = prev;
@@ -379,6 +418,9 @@ function Lineup() {
           </Stack>
         </Stack>
       </DndContext>
+      <Button variant="contained" onClick={updateLineup} disabled={!changedFlag}>
+        Save
+      </Button>
     </Container>
   );
 }

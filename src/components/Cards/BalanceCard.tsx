@@ -42,7 +42,7 @@ const BalanceCard: FC<BalanceCardProps> = ({ accessToken }) => {
             <img src={walletIcon} alt="wallet icon" />
           </Box>
           {isLoading ? (
-            <CircularProgress size={20} />
+            <CircularProgress size={16} sx={{ mx: 'auto' }} />
           ) : (
             <Typography
               variant="h6"

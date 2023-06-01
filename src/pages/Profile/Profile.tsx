@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { Box, Button, Container, Link, Stack } from '@mui/material';
+import { Box, Button, Container, Link, Stack, Typography } from '@mui/material';
 import ConnectWallet from '@/components/ConnectWallet';
 import { useAppDispatch } from '@/app/store';
 import { logout } from '@/features/user/userSlice';
 import { useGetDetailsQuery, useLazyLogoutQuery, useUpdateImageMutation } from '@/features/user/userApiSlice';
 import Loading from '@/components/Loading';
+import TextBadgeCard from '@/components/Cards/TextBadgeCard';
 
 function Profile() {
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
   const [imageSrc, setImageSrc] = useState<any>();
-  const [selectedImage, setSelectedImage] = useState<any>(null);
   const dispatch = useAppDispatch();
   const [logoutF] = useLazyLogoutQuery();
   const { data: details, isLoading } = useGetDetailsQuery(undefined);
@@ -17,7 +17,7 @@ function Profile() {
 
   console.log(details);
 
-  const handleOperation = () => {
+  const handleOperation = (img: any) => {
     //     .then((res: any) => {
     //       if (res?.data?.message) {
     //         toast.success(res?.data?.message);
@@ -51,20 +51,21 @@ function Profile() {
     //       toast.error('Add product failed');
     //     });
     // }
-    console.log(selectedImage);
     const formData = new FormData();
-    formData.append('image', selectedImage);
+    formData.append('image', img);
 
-    updateImage({
-      data: formData,
-    })
-      .unwrap()
-      .then((res: any) => {
-        console.log(res);
+    if (img) {
+      updateImage({
+        data: formData,
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .unwrap()
+        .then((res: any) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
   // wins, losses, draws, monthlyScore, totalScore, username, walletAddress, image
   const logoutHandler = () => {
@@ -73,61 +74,99 @@ function Profile() {
   };
   return (
     <Container maxWidth="md" sx={{ py: 3 }}>
-      <Stack>
+      <Stack gap={2}>
         <Loading loading={isLoading} />
-        <Box
+        <Stack
+          direction={{
+            xs: 'column',
+            md: 'row',
+          }}
+          alignItems="center"
+          justifyContent="space-between"
+          gap={2}
           sx={{
-            display: 'flex',
-            '& .file-dropzone': {
-              p: 1.5,
-              borderRadius: '50%',
-              width: 200,
-              height: 200,
-              border: '1px dashed #ccc',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              '&:hover': {
-                backgroundColor: '#f5f5f5',
-              },
-            },
-            '& .file-input': {
-              display: 'none',
-            },
+            borderRadius: '8px',
+            overflow: 'hidden',
           }}
         >
-          <label htmlFor="image" className="file-dropzone">
-            <img
-              src={imageSrc ? imageSrc : `${import.meta.env.VITE_API_URL}/uploads/${details?.image}`}
-              alt="profile"
-              style={{
-                height: '100%',
-                maxWidth: '100%',
-                objectFit: 'cover',
-              }}
-            />
+          <Box
+            sx={{
+              display: 'flex',
+              '& .file-dropzone': {
+                p: 1.5,
+                borderRadius: '50%',
+                width: 200,
+                height: 200,
+                border: '1px dashed #ccc',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                '&:hover': {
+                  backgroundColor: '#f5f5f5',
+                },
+              },
+              '& .file-input': {
+                display: 'none',
+              },
+            }}
+          >
+            <label htmlFor="image" className="file-dropzone">
+              <img
+                src={imageSrc ? imageSrc : `${import.meta.env.VITE_API_URL}/uploads/${details?.image}`}
+                alt="profile"
+                style={{
+                  height: '100%',
+                  maxWidth: '100%',
+                  objectFit: 'cover',
+                }}
+              />
 
-            <input
-              type="file"
-              id="image"
-              accept="image/*"
-              onChange={(e: any) => {
-                if (e.target.files[0]) {
-                  setSelectedImage(e.target.files[0]);
-                  const reader = new FileReader();
-                  reader.onload = () => {
-                    const imageSrc = reader.result as string;
-                    setImageSrc(imageSrc);
-                  };
-                  reader.readAsDataURL(e.target.files[0]);
-                }
-                handleOperation();
-              }}
-              className="file-input"
-            />
-          </label>
-        </Box>
+              <input
+                type="file"
+                id="image"
+                accept="image/*"
+                onChange={(e: any) => {
+                  if (e.target.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                      const imageSrc = reader.result as string;
+                      setImageSrc(imageSrc);
+                    };
+                    reader.readAsDataURL(e.target.files[0]);
+                  }
+                  handleOperation(e.target.files[0]);
+                }}
+                className="file-input"
+              />
+            </label>
+          </Box>
+          <Stack
+            gap={2}
+            sx={{
+              flex: 1,
+              width: '100%',
+              backgroundColor: 'Ink.Base',
+              p: 2,
+              borderRadius: '8px',
+            }}
+          >
+            <Stack direction="row" gap={2}>
+              <TextBadgeCard title="Username" text={details?.username} />
+              <TextBadgeCard title="Money" text={details?.money} />
+            </Stack>
+
+            <Stack direction="row" gap={2}>
+              <TextBadgeCard title="Total Score" text={details?.totalScore} />
+              <TextBadgeCard title="Monthly Score" text={details?.monthlyScore} />
+            </Stack>
+            <Stack direction="row" gap={2}>
+              <TextBadgeCard title="Wins" text={details?.wins} />
+              <TextBadgeCard title="Draws" text={details?.draws} />
+              <TextBadgeCard title="Losses" text={details?.losses} />
+            </Stack>
+          </Stack>
+        </Stack>
         <Button variant="contained" onClick={() => setIsWalletModalOpen(true)}>
           Connect Wallet
         </Button>

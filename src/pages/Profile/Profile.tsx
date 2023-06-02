@@ -6,6 +6,7 @@ import { logout } from '@/features/user/userSlice';
 import { useGetDetailsQuery, useLazyLogoutQuery, useUpdateImageMutation } from '@/features/user/userApiSlice';
 import Loading from '@/components/Loading';
 import TextBadgeCard from '@/components/Cards/TextBadgeCard';
+import ProfileImageList from '@/components/ProfileImageList';
 
 function Profile() {
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
@@ -76,6 +77,7 @@ function Profile() {
     <Container maxWidth="md" sx={{ py: 3 }}>
       <Stack gap={2}>
         <Loading loading={isLoading} />
+        <ProfileImageList />
         <Stack
           direction={{
             xs: 'column',

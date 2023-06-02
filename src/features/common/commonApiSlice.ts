@@ -1,6 +1,6 @@
 import apiSlice from '@/app/api/apiSlice';
 
-export const ticketApiSlice = apiSlice.injectEndpoints({
+export const commonApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllTimeLeaderboard: builder.query({
       query: (body) => ({
@@ -16,7 +16,14 @@ export const ticketApiSlice = apiSlice.injectEndpoints({
         body,
       }),
     }),
+    getProfileImages: builder.query({
+      query: () => ({
+        url: '/common/getProfileImgs',
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const { useGetAllTimeLeaderboardQuery, useGetMonthlyLeaderboardQuery } = ticketApiSlice;
+export const { useGetAllTimeLeaderboardQuery, useGetMonthlyLeaderboardQuery, useGetProfileImagesQuery } =
+  commonApiSlice;

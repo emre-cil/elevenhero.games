@@ -87,60 +87,23 @@ function Profile() {
           sx={{
             borderRadius: '8px',
             overflow: 'hidden',
+            img: {
+              width: 200,
+              height: 200,
+              objectFit: 'cover',
+              borderRadius: '50%',
+            },
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              '& .file-dropzone': {
-                p: 1.5,
-                borderRadius: '50%',
-                width: 200,
-                height: 200,
-                border: '1px dashed #ccc',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                '&:hover': {
-                  backgroundColor: '#f5f5f5',
-                },
-              },
-              '& .file-input': {
-                display: 'none',
-              },
+          <img
+            src={`${import.meta.env.VITE_API_URL}/profiles/${details?.image ? details?.image : 'blankProfile.webp'}`}
+            alt="profile"
+            style={{
+              height: '100%',
+              maxWidth: '100%',
+              objectFit: 'cover',
             }}
-          >
-            <label htmlFor="image" className="file-dropzone">
-              <img
-                src={imageSrc ? imageSrc : `${import.meta.env.VITE_API_URL}/uploads/${details?.image}`}
-                alt="profile"
-                style={{
-                  height: '100%',
-                  maxWidth: '100%',
-                  objectFit: 'cover',
-                }}
-              />
-
-              <input
-                type="file"
-                id="image"
-                accept="image/*"
-                onChange={(e: any) => {
-                  if (e.target.files[0]) {
-                    const reader = new FileReader();
-                    reader.onload = () => {
-                      const imageSrc = reader.result as string;
-                      setImageSrc(imageSrc);
-                    };
-                    reader.readAsDataURL(e.target.files[0]);
-                  }
-                  handleOperation(e.target.files[0]);
-                }}
-                className="file-input"
-              />
-            </label>
-          </Box>
+          />
           <Stack
             gap={2}
             sx={{

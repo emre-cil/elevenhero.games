@@ -104,8 +104,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
       query: (body) => ({
         url: '/users/updateImage',
         method: 'PUT',
-        body: body.data,
-        formData: true,
+        body,
       }),
       invalidatesTags: ['Profile'],
     }),

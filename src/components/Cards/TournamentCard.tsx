@@ -133,7 +133,7 @@ const TournamentCard: FC<TournamentCardProps> = ({ tournament, owner, userId, re
               {tournament.status === 1
                 ? `Live ${
                     // remove started at to current date
-                    Math.floor((new Date().getTime() + 100 - new Date(tournament?.startedAt).getTime()) / 1000 / 60)
+                    Math.ceil((new Date().getTime() - new Date(tournament?.startedAt).getTime()) / 1000 / 60)
                   }'`
                 : tournament?.winner === 0
                 ? 'Draw'

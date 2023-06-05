@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 function ProfileImageList({ setIsOpen }: { setIsOpen: any }) {
   const { data, isLoading } = useGetProfileImagesQuery(undefined);
   const [updateImage] = useUpdateImageMutation();
-  console.log(data);
+
   const updateImageHandler = (img: string) => {
     updateImage({ image: img })
       .unwrap()

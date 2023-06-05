@@ -13,7 +13,6 @@ const NFTDetailModal: FC<NFTDetailModalProps> = ({ isOpen, setIsOpen }) => {
 
   const usernameHandler = () => {
     const username = usernameRef.current?.value?.trim();
-    console.log(username);
     if (!username) {
       toast.error('Please enter username');
     } else if (username.length < 3) {

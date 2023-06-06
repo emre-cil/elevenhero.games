@@ -97,7 +97,7 @@ function Lineup() {
       upperVariant: upperLine,
       players: selectedFormation.map((position: any) => {
         return {
-          player: position.player?._id,
+          player: position.player?._id || null,
           position: position.id,
         };
       }),

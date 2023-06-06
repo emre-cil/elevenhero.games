@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Box, Button, Container, Link, Stack, Typography } from '@mui/material';
+import { Button, Container, Link, Stack } from '@mui/material';
 import ConnectWallet from '@/components/ConnectWallet';
 import { useAppDispatch } from '@/app/store';
 import { logout } from '@/features/user/userSlice';
-import { useGetDetailsQuery, useLazyLogoutQuery } from '@/features/user/userApiSlice';
+import { useGetDetailsQuery } from '@/features/user/userApiSlice';
 import Loading from '@/components/Loading';
 import TextBadgeCard from '@/components/Cards/TextBadgeCard';
 import ProfileImage from './ProfileImage';
@@ -11,14 +11,8 @@ import ProfileImage from './ProfileImage';
 function Profile() {
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
   const dispatch = useAppDispatch();
-  const [logoutF] = useLazyLogoutQuery();
   const { data: details, isLoading } = useGetDetailsQuery(undefined);
 
-  // wins, losses, draws, monthlyScore, totalScore, username, walletAddress, image
-  const logoutHandler = () => {
-    dispatch(logout());
-    logoutF(undefined);
-  };
   return (
     <Container maxWidth="md" sx={{ py: 3 }}>
       <Stack gap={2}>
@@ -67,7 +61,7 @@ function Profile() {
           Connect Wallet
         </Button>
         <Stack alignItems="center" justifyContent="center" sx={{ py: 2 }}>
-          <Link onClick={logoutHandler}>Log out</Link>
+          <Link onClick={() => dispatch(logout())}>Log out</Link>
         </Stack>
       </Stack>
       <ConnectWallet isOpen={isWalletModalOpen} setIsOpen={setIsWalletModalOpen} />

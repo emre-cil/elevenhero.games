@@ -34,14 +34,6 @@ export const userApiSlice = apiSlice.injectEndpoints({
         initialRefresh: true,
       },
     }),
-    logout: builder.query({
-      query: () => ({
-        url: '/auth/logout',
-        method: 'GET',
-        withCredentials: true,
-        credentials: 'include',
-      }),
-    }),
 
     forgotPassword: builder.mutation({
       query: (email) => ({
@@ -115,7 +107,6 @@ export const {
   useRegisterMutation,
   useAuthMutation,
   useRefreshQuery,
-  useLazyLogoutQuery,
   useVerifyMailQuery,
   useSendVerificationEmailMutation,
   useForgotPasswordMutation,

@@ -13,17 +13,18 @@ import { toast } from 'react-hot-toast';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useRef, useState, MouseEvent } from 'react';
+import { useRef, useState } from 'react';
 import { setCredentials } from '@/features/user/userSlice';
 import AuthOutlet from './AuthOutlet';
 import { useAuthMutation, useSendVerificationEmailMutation } from '@/features/user/userApiSlice';
 import DefaultModal from '@/components/Modals/DefaultModal';
+import { useAppDispatch } from '@/app/store';
+import apiSlice from '@/app/api/apiSlice';
 
 function Login() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [login, { isLoading }] = useAuthMutation();
   const [sendActivationEmail, { isLoading: verificationLoading }] = useSendVerificationEmailMutation();
@@ -45,6 +46,7 @@ function Login() {
       toast.error('Please enter your password');
       passwordRef?.current?.focus();
     } else {
+      dispatch(apiSlice.util.resetApiState());
       login({
         email,
         password,
@@ -80,7 +82,9 @@ function Login() {
       .then(() => {
         toast.success("We've sent you an email. Please check your inbox and verify your account.");
       })
-      .catch((e: Error) => {})
+      .catch((e: Error) => {
+        toast.error(e.message);
+      })
       .finally(() => {
         setIsModalOpen(null);
       });

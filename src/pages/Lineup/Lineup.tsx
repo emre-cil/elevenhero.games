@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable react/no-array-index-key */
 import {
   Box,
   Button,
@@ -13,7 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 import { toast } from 'react-hot-toast';
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import lineupImg from '@/assets/Images/lineup.webp';
 import LineUpEmpty from '@/components/Cards/LineUpEmpty';
@@ -31,8 +29,8 @@ function Lineup() {
   const [unSelectedPlayers, setUnSelectedPlayers] = useState([]);
   const [selectFormation, setSelectFormation] = useState('');
   const formationTypes = ['4-4-2', '4-3-3A', '4-3-3D', '4-2-3-1', '4-1-2-1-2', '3-4-3'];
-  const [getFormation, { data, isLoading, isError }] = useLazyGetFormationQuery();
-  const [updateFormation, { isLoading: upLoading }] = useUpdateFormationMutation();
+  const [getFormation, { data }] = useLazyGetFormationQuery();
+  const [updateFormation] = useUpdateFormationMutation();
   const [overall, setOverall] = useState(0);
   const [changedFlag, setChangedFlag] = useState(false);
   const [upperLine, setUpperLine] = useState<any>(0);
@@ -105,7 +103,7 @@ function Lineup() {
       }),
     })
       .unwrap()
-      .then((res: any) => {
+      .then(() => {
         toast.success('Lineup Updated Successfully');
         setChangedFlag(false);
       })

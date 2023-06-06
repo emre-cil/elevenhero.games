@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useDraggable } from '@dnd-kit/core';
-import { Grid, Stack } from '@mui/material';
+import { Grid } from '@mui/material';
 import { FC } from 'react';
 
 type TestLineUpCardProps = {

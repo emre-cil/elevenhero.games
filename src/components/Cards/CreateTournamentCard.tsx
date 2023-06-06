@@ -12,7 +12,7 @@ const CreateTournamentCard = () => {
     if (pAmount < 0.1) return toast.error('Amount must be greater than 0.1');
     createTournament({ amount: parseFloat(amount) })
       .unwrap()
-      .then((res) => {
+      .then(() => {
         toast.success('Tournament created successfully');
         setAmount('');
       })

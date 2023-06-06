@@ -2,19 +2,20 @@ import { Box, Modal, Stack, Typography } from '@mui/material';
 import { FC, useEffect } from 'react';
 import metamaskImg from '@/assets/Images/metamask.webp';
 import walletConnectImg from '@/assets/Images/walletconnect.webp';
-import { useAppDispatch } from '@/app/store';
-import { ethers } from 'ethers';
-import { setWallet } from '@/features/user/userSlice';
+// import { useAppDispatch } from '@/app/store';
+// import { ethers } from 'ethers';
+// import { setWallet } from '@/features/user/userSlice';
 const DAPP = 'https://metamask.app.link/dapp/elevenhere.games';
 interface ConnectWalletProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
 }
 const ConnectWallet: FC<ConnectWalletProps> = ({ isOpen, setIsOpen }) => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const changeAccountHandler = (address: string) => {
     window?.ethereum?.request({ method: 'eth_getBalance', params: [address, 'latest'] }).then((balance: any) => {
+      console.log(balance);
       setIsOpen(false);
     });
   };
@@ -46,7 +47,9 @@ const ConnectWallet: FC<ConnectWalletProps> = ({ isOpen, setIsOpen }) => {
       alert('Please install Metamask');
     }
   };
-  const walletConnectHandler = () => {};
+  const walletConnectHandler = () => {
+    console.log('walletConnectHandler');
+  };
   const wallets = [
     {
       name: 'Metamask',

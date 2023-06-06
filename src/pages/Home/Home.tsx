@@ -4,7 +4,7 @@ import { Container } from '@mui/material';
 import { useAppSelector } from '@/app/store';
 
 function Home() {
-  const { data: tournament, isLoading } = useGetLatestTournamentQuery(undefined, {
+  const { data: tournament } = useGetLatestTournamentQuery(undefined, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 60000,
   });

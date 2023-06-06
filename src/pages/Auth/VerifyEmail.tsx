@@ -24,7 +24,9 @@ function VerifyEmail() {
       .then(() => {
         toast.success("We've sent you an email. Please check your inbox and verify your account.");
       })
-      .catch((e: Error) => {})
+      .catch((e: Error) => {
+        toast.error(e.message);
+      })
       .finally(() => {
         navigate('/login');
       });

@@ -9,7 +9,7 @@ interface NFTDetailModalProps {
 
 const NFTDetailModal: FC<NFTDetailModalProps> = ({ isOpen, setIsOpen }) => {
   const usernameRef = useRef<any>(null);
-  const [addUsername, { isLoading }] = useAddUsernameMutation();
+  const [addUsername] = useAddUsernameMutation();
 
   const usernameHandler = () => {
     const username = usernameRef.current?.value?.trim();
@@ -22,7 +22,7 @@ const NFTDetailModal: FC<NFTDetailModalProps> = ({ isOpen, setIsOpen }) => {
     } else {
       addUsername({ username, id: isOpen._id })
         .unwrap()
-        .then((res: any) => {
+        .then(() => {
           toast.success('Username added successfully');
         })
         .catch((e) => {

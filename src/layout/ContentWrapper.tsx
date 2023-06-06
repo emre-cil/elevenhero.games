@@ -1,7 +1,6 @@
 import { FC, useState, useEffect } from 'react';
 import { Box, Stack } from '@mui/material';
 import { Outlet } from 'react-router-dom';
-import Footer from '@/layout/Footer';
 import Header from '@/layout/Header';
 import Sidebar from '@/layout/Sidebar';
 
@@ -40,7 +39,6 @@ const ContentWrapper: FC<ContentWrapperProps> = ({ accessToken, loading }) => {
           <Outlet />
         </Box>
       </Stack>
-      {/* <Footer /> */}
     </>
   );
 };

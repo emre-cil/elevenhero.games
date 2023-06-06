@@ -1,5 +1,4 @@
-// import { setSuccessRefresh, setFailedRefresh } from '@/features/User/userSlice';
-import { BaseQueryApi, createApi, FetchArgs, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@/app/store';
 import { setCredentials } from '@/features/user/userSlice';
 

@@ -10,13 +10,13 @@ interface TournamentCardProps {
 }
 
 const TournamentCard: FC<TournamentCardProps> = ({ tournament, owner, userId, resulted }) => {
-  const [cancelTournament, { isLoading: cancelLoading }] = useCancelTournamentMutation();
-  const [joinTournament, { isLoading: joinLoading }] = useJoinTournamentMutation();
+  const [cancelTournament] = useCancelTournamentMutation();
+  const [joinTournament] = useJoinTournamentMutation();
   const handleOperation = () => {
     if (owner) {
       // cancel tournament
       cancelTournament(tournament?._id)
-        .then((res) => {
+        .then(() => {
           toast.success('Tournament canceled');
         })
         .catch((err) => {

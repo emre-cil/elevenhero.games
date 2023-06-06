@@ -4,7 +4,7 @@ import { Container } from '@mui/material';
 import { toast } from 'react-hot-toast';
 
 function ProfileImageList({ setIsOpen }: { setIsOpen: any }) {
-  const { data, isLoading } = useGetProfileImagesQuery(undefined);
+  const { data } = useGetProfileImagesQuery(undefined);
   const [updateImage] = useUpdateImageMutation();
 
   const updateImageHandler = (img: string) => {

@@ -192,45 +192,48 @@ function Lineup() {
   const handleDragEnd = (event: any) => {
     !changedFlag && setChangedFlag(true);
     if (event.over) {
-      setUnSelectedPlayers((prev: any) => {
-        let NewUnselecteds = prev;
-        const isPlayerUnselected = prev.find((p: any) => p._id === event.active.id) !== undefined;
-        const destination = selectedFormation.find((p: any) => p.id === event.over.id);
-        setSelectedFormation((x: any) => {
-          const NewDropped = x.map((position: any) => {
-            // if the position has the player
-            if (position.player && position.player._id === event.active.id) {
+      // check if the player in the unselected list or not
+      const isPlayerUnselected = unSelectedPlayers.find((p: any) => p._id === event.active.id) !== undefined;
+      console.log(isPlayerUnselected);
+      const destination = selectedFormation.find((p: any) => p.id === event.over.id);
+      setSelectedFormation((x: any) => {
+        const NewDropped = x.map((position: any) => {
+          // if the position has the player
+          if (position.player && position.player._id === event.active.id) {
+            return {
+              ...position,
+              player: destination?.player || null,
+            };
+          }
+          // if the position is the same as the one
+          if (position.id === event.over.id) {
+            if (isPlayerUnselected) {
+              // if the position is not empty swap players
+              console.log('positoinplayer', position.player);
+              const player = unSelectedPlayers.find((p: any) => p._id === event.active.id) || null;
+              setUnSelectedPlayers((u: any) => {
+                return position.player
+                  ? u.filter((p: any) => p._id !== event.active.id).concat(position.player)
+                  : u.filter((p: any) => p._id !== event.active.id);
+              });
+
               return {
                 ...position,
-                player: destination?.player || null,
+                player: player,
               };
             }
-            // if the position is the same as the one
-            if (position.id === event.over.id) {
-              if (isPlayerUnselected) {
-                // if the position is not empty swap players
-                NewUnselecteds = position.player
-                  ? prev.filter((p: any) => p._id !== event.active.id).concat(position.player)
-                  : prev.filter((p: any) => p._id !== event.active.id);
-                return {
-                  ...position,
-                  player: prev.find((p: any) => p._id === event.active.id) || null,
-                };
-              }
-              // inside movement
-              else {
-                return {
-                  ...position,
-                  player: x.find((p: any) => p.player?._id === event.active.id)?.player || null,
-                };
-              }
+            // inside movement
+            else {
+              return {
+                ...position,
+                player: x.find((p: any) => p.player?._id === event.active.id)?.player || null,
+              };
             }
+          }
 
-            return position;
-          });
-          return NewDropped;
+          return position;
         });
-        return NewUnselecteds;
+        return NewDropped;
       });
     } else {
       setAsUnselected(event.active.id);

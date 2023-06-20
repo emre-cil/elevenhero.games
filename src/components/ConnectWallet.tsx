@@ -6,10 +6,12 @@ import walletConnectImg from '@/assets/Images/walletconnect.webp';
 // import { ethers } from 'ethers';
 // import { setWallet } from '@/features/user/userSlice';
 const DAPP = 'https://metamask.app.link/dapp/elevenhere.games';
+const chainId = import.meta.env.VITE_CHAIN_ID;
 interface ConnectWalletProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
 }
+// window?.ethereum?.chainId === import.meta.env.VITE_CHAIN_ID
 const ConnectWallet: FC<ConnectWalletProps> = ({ isOpen, setIsOpen }) => {
   // const dispatch = useAppDispatch();
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -26,22 +28,40 @@ const ConnectWallet: FC<ConnectWalletProps> = ({ isOpen, setIsOpen }) => {
     });
   }, []);
 
+  const changeChainHandler = async () => {
+    if (window.ethereum) {
+      const providerChainId = await window.ethereum.request({
+        method: 'eth_chainId',
+      });
+
+      if (providerChainId !== chainId) {
+        try {
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId }],
+          });
+        } catch (error) {
+          console.log('Error while switching network:', error);
+        }
+      }
+    } else {
+      console.log('MetaMask extension not detected');
+    }
+  };
+
   const metamaskHandler = () => {
     if (isMobile && !window?.ethereum) {
       window.open(DAPP, '_blank');
     }
 
     if (window?.ethereum) {
-      if (window?.ethereum?.chainId === '0x13881') {
+      console.log(window?.ethereum?.chainId);
+      if (window?.ethereum?.chainId === chainId) {
         window.ethereum.request({ method: 'eth_requestAccounts' }).then((accounts: any) => {
           changeAccountHandler(accounts[0]);
         });
       } else {
-        // changeChainHandler().then(() => {
-        //   window.ethereum.request({ method: 'eth_requestAccounts' }).then((accounts) => {
-        //     changeAccountHandler(accounts[0]);
-        //   });
-        // });
+        changeChainHandler();
       }
     } else {
       alert('Please install Metamask');

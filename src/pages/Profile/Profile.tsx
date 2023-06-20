@@ -12,7 +12,6 @@ function Profile() {
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
   const dispatch = useAppDispatch();
   const { data: details, isLoading } = useGetDetailsQuery(undefined);
-
   return (
     <Container maxWidth="md" sx={{ py: 3 }}>
       <Stack gap={2}>
@@ -41,6 +40,14 @@ function Profile() {
               borderRadius: '8px',
             }}
           >
+            {details?.walletId ? (
+              <TextBadgeCard title="Wallet" text={details?.walletId} />
+            ) : (
+              <Button variant="contained" sx={{ height: 56 }} onClick={() => setIsWalletModalOpen(true)}>
+                {window?.ethereum?.chainId === import.meta.env.VITE_CHAIN_ID ? 'Connect Wallet' : 'Change Network'}
+              </Button>
+            )}
+
             <Stack direction="row" gap={2}>
               <TextBadgeCard title="Username" text={details?.username} />
               <TextBadgeCard title="Money" text={details?.money} />
@@ -57,9 +64,6 @@ function Profile() {
             </Stack>
           </Stack>
         </Stack>
-        <Button variant="contained" onClick={() => setIsWalletModalOpen(true)}>
-          Connect Wallet
-        </Button>
         <Stack alignItems="center" justifyContent="center" sx={{ py: 2 }}>
           <Link onClick={() => dispatch(logout())}>Log out</Link>
         </Stack>

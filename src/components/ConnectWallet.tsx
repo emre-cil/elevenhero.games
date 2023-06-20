@@ -2,6 +2,8 @@ import { Box, Modal, Stack, Typography } from '@mui/material';
 import { FC, useEffect } from 'react';
 import metamaskImg from '@/assets/Images/metamask.webp';
 import walletConnectImg from '@/assets/Images/walletconnect.webp';
+import { useUpdateWalletMutation } from '@/features/user/userApiSlice';
+import { toast } from 'react-hot-toast';
 // import { useAppDispatch } from '@/app/store';
 // import { ethers } from 'ethers';
 // import { setWallet } from '@/features/user/userSlice';
@@ -14,12 +16,20 @@ interface ConnectWalletProps {
 // window?.ethereum?.chainId === import.meta.env.VITE_CHAIN_ID
 const ConnectWallet: FC<ConnectWalletProps> = ({ isOpen, setIsOpen }) => {
   // const dispatch = useAppDispatch();
+  const [updateWallet, { isLoading: walletUploadLoading }] = useUpdateWalletMutation();
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const changeAccountHandler = (address: string) => {
-    window?.ethereum?.request({ method: 'eth_getBalance', params: [address, 'latest'] }).then((balance: any) => {
-      console.log(balance);
-      setIsOpen(false);
-    });
+    updateWallet({
+      walletAddress: address,
+    })
+      .unwrap()
+      .then((res: any) => {
+        toast.success('Wallet Connected');
+        setIsOpen(false);
+      })
+      .catch((err: any) => {
+        toast.error(err?.data?.message || 'Something went wrong');
+      });
   };
 
   useEffect(() => {

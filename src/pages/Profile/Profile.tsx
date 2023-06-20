@@ -12,6 +12,7 @@ function Profile() {
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
   const dispatch = useAppDispatch();
   const { data: details, isLoading } = useGetDetailsQuery(undefined);
+  console.log(details);
   return (
     <Container maxWidth="md" sx={{ py: 3 }}>
       <Stack gap={2}>
@@ -40,8 +41,12 @@ function Profile() {
               borderRadius: '8px',
             }}
           >
-            {details?.walletId ? (
-              <TextBadgeCard title="Wallet" text={details?.walletId} />
+            {details?.walletAddress ? (
+              <TextBadgeCard
+                title="Wallet Address"
+                text={details?.walletAddress}
+                onClick={() => setIsWalletModalOpen(true)}
+              />
             ) : (
               <Button variant="contained" sx={{ height: 56 }} onClick={() => setIsWalletModalOpen(true)}>
                 {window?.ethereum?.chainId === import.meta.env.VITE_CHAIN_ID ? 'Connect Wallet' : 'Change Network'}

@@ -100,6 +100,14 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Profile'],
     }),
+    updateWallet: builder.mutation({
+      query: (body) => ({
+        url: '/users/updateWallet',
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: ['Profile'],
+    }),
   }),
 });
 
@@ -114,4 +122,5 @@ export const {
   useGetMoneyQuery,
   useGetDetailsQuery,
   useUpdateImageMutation,
+  useUpdateWalletMutation,
 } = userApiSlice;

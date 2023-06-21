@@ -8,8 +8,6 @@ import ELEVENHERO from '../../artifacts/contracts/MyNFT.sol/ELEVENHERO.json';
 import { useClaimNFTMutation } from '@/features/nftsApiSlice';
 const contractAddress = '0x277F52F9fa0d9F36Ce9Db829f697452F9651185a';
 const provider = window.ethereum && new ethers.providers.Web3Provider(window.ethereum);
-const signer = provider?.getSigner();
-const contract = new ethers.Contract(contractAddress, ELEVENHERO.abi, signer);
 
 interface NFTDetailModalProps {
   isOpen: any;
@@ -41,7 +39,11 @@ const NFTDetailModal: FC<NFTDetailModalProps> = ({ isOpen, setIsOpen }) => {
     }
   };
   console.log(isOpen);
-  const claimAsNft = () => {
+  const claimAsNft = async () => {
+    await provider.send('eth_requestAccounts', []);
+    const signer = provider?.getSigner();
+    const contract = new ethers.Contract(contractAddress, ELEVENHERO.abi, signer);
+
     const url = isOpen?.DNA || 'tst://test';
     const connection = contract.connect(signer);
     const addr = connection.address;

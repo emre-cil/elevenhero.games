@@ -65,7 +65,8 @@ const ConnectWallet: FC<ConnectWalletProps> = ({ isOpen, setIsOpen }) => {
     }
 
     if (window?.ethereum) {
-      console.log(window?.ethereum?.chainId);
+      window.ethereum.enable();
+
       if (window?.ethereum?.chainId === chainId) {
         window.ethereum.request({ method: 'eth_requestAccounts' }).then((accounts: any) => {
           changeAccountHandler(accounts[0]);

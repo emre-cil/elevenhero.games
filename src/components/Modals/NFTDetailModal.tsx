@@ -24,6 +24,7 @@ const NFTDetailModal: FC<NFTDetailModalProps> = ({ isOpen, setIsOpen }) => {
         .unwrap()
         .then(() => {
           toast.success('Username added successfully');
+          setIsOpen(null);
         })
         .catch((e) => {
           toast.error(e?.data?.message);

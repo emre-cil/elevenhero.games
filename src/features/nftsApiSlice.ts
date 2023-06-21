@@ -10,6 +10,7 @@ export const nftsApiSlice = apiSlice.injectEndpoints({
           name: body.username,
         },
       }),
+      invalidatesTags: ['Inventory'],
     }),
   }),
 });

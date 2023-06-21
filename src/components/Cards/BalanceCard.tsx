@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Stack, Typography, Box, CircularProgress, Modal, Tabs, Tab } from '@mui/material';
+import { Stack, Typography, Box, CircularProgress, Modal, Tabs, Tab, TextField, Button } from '@mui/material';
 import walletIcon from '@/assets/Icons/walletIcon.svg';
 import { useGetMoneyQuery } from '@/features/user/userApiSlice';
 
@@ -98,10 +98,10 @@ const BalanceCard: FC<BalanceCardProps> = ({ accessToken }) => {
         <Stack
           sx={{
             width: 300,
-            height: 300,
             backgroundColor: 'grey.200',
             borderRadius: '8px',
           }}
+          gap={2}
         >
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs
@@ -129,6 +129,10 @@ const BalanceCard: FC<BalanceCardProps> = ({ accessToken }) => {
               <Tab label="Withdraw" {...a11yProps(1)} />
             </Tabs>
           </Box>
+          <TextField label="amount" type="number" sx={{ width: '80%', mx: 'auto' }} />
+          <Button variant="contained" sx={{ width: '80%', mx: 'auto', mb: '40px' }}>
+            {isOpen === 0 ? 'Deposit' : 'Withdraw'}
+          </Button>
         </Stack>
       </Modal>
     </>

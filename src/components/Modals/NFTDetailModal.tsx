@@ -2,6 +2,15 @@ import { useAddUsernameMutation } from '@/features/nftsApiSlice';
 import { Button, Modal, Stack, TextField } from '@mui/material';
 import { FC, useRef } from 'react';
 import { toast } from 'react-hot-toast';
+import { ethers } from 'ethers';
+
+import ELEVENHERO from '../../artifacts/contracts/MyNFT.sol/ELEVENHERO.json';
+import { useClaimNFTMutation } from '@/features/nftsApiSlice';
+const contractAddress = '0x277F52F9fa0d9F36Ce9Db829f697452F9651185a';
+const provider = window.ethereum && new ethers.providers.Web3Provider(window.ethereum);
+const signer = provider?.getSigner();
+const contract = new ethers.Contract(contractAddress, ELEVENHERO.abi, signer);
+
 interface NFTDetailModalProps {
   isOpen: any;
   setIsOpen: any;
@@ -10,7 +19,7 @@ interface NFTDetailModalProps {
 const NFTDetailModal: FC<NFTDetailModalProps> = ({ isOpen, setIsOpen }) => {
   const usernameRef = useRef<any>(null);
   const [addUsername] = useAddUsernameMutation();
-
+  const [claimNFT, { isLoading: claimNFTLoading }] = useClaimNFTMutation();
   const usernameHandler = () => {
     const username = usernameRef.current?.value?.trim();
     if (!username) {
@@ -30,6 +39,34 @@ const NFTDetailModal: FC<NFTDetailModalProps> = ({ isOpen, setIsOpen }) => {
           toast.error(e?.data?.message);
         });
     }
+  };
+  console.log(isOpen);
+  const claimAsNft = () => {
+    const url = isOpen?.DNA || 'tst://test';
+    const connection = contract.connect(signer);
+    const addr = connection.address;
+    contract
+      .payToMint(addr, url, {
+        value: ethers.utils.parseEther('0.0051'),
+        gasLimit: 500000,
+      })
+      .then((result: any) => {
+        console.log(result);
+        if (result?.hash) {
+          claimNFT({ contractAddress: result?.to, hash: result?.hash, nftId: isOpen._id })
+            .unwrap()
+            .then(() => {
+              toast.success('NFT claimed successfully');
+              setIsOpen(null);
+            })
+            .catch((e) => {
+              toast.error(e?.data?.message || 'Something went wrong');
+            });
+        }
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
   };
   return (
     <Modal
@@ -58,6 +95,10 @@ const NFTDetailModal: FC<NFTDetailModalProps> = ({ isOpen, setIsOpen }) => {
           backgroundColor: 'rgba(0,0,0,0.7)',
           p: 2,
           borderRadius: 2,
+          a: {
+            color: 'white',
+            fontSize: 16,
+          },
         }}
       >
         <img src={`${import.meta.env.VITE_API_URL}/nfts/${isOpen.image}.webp`} alt={isOpen.name} />
@@ -69,9 +110,15 @@ const NFTDetailModal: FC<NFTDetailModalProps> = ({ isOpen, setIsOpen }) => {
             </Button>
           </Stack>
         )}
-        <Button fullWidth variant="contained">
-          claim as NFT
-        </Button>
+        {!isOpen?.hash ? (
+          <Button fullWidth variant="contained" onClick={claimAsNft}>
+            claim as NFT
+          </Button>
+        ) : (
+          <a href={`https://mumbai.polygonscan.com/tx/${isOpen?.hash}`} target="_blank" rel="noreferrer">
+            View on PolygonScan
+          </a>
+        )}
       </Stack>
     </Modal>
   );

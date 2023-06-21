@@ -208,8 +208,6 @@ function Lineup() {
           // if the position is the same as the one
           if (position.id === event.over.id) {
             if (isPlayerUnselected) {
-              // if the position is not empty swap players
-              console.log('positoinplayer', position.player);
               const player = unSelectedPlayers.find((p: any) => p._id === event.active.id) || null;
               setUnSelectedPlayers((u: any) => {
                 return position.player
@@ -391,7 +389,7 @@ function Lineup() {
               alignItems="center"
               justifyContent="space-between"
             >
-              <Stack
+              {/* <Stack
                 direction="row"
                 gap={1}
                 flexWrap="wrap"
@@ -404,7 +402,7 @@ function Lineup() {
                 {playerPositions.map((position) => (
                   <Box key={position}>{position}</Box>
                 ))}
-              </Stack>
+              </Stack> */}
               <Grid container spacing={1}>
                 {unSelectedPlayers?.slice((page - 1) * 6, page * 6)?.map((player: any) => (
                   <TestLineUpCard key={player.id} player={player} />

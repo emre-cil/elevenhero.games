@@ -12,7 +12,15 @@ export const nftsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Inventory'],
     }),
+    claimNFT: builder.mutation({
+      query: (body) => ({
+        url: '/nfts/claimNFT',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Inventory'],
+    }),
   }),
 });
 
-export const { useAddUsernameMutation } = nftsApiSlice;
+export const { useAddUsernameMutation, useClaimNFTMutation } = nftsApiSlice;

@@ -3,6 +3,9 @@
 </p>
 
 
+## 📝 Documentation
+This my CSE Akdeniz 2023 Senior Project Frontend and you can check  [Documentation](https://github.com/emre-cil/elevenhero.games/blob/master/Documentation.pdf) on GitHub.
+
 ## 🚀 Demo
 ![viterjs-template](https://github.com/emre-cil/elevenhero.games/blob/master/appImages/lineup.png) <br/>   <br/>
 ![viterjs-template](https://github.com/emre-cil/elevenhero.games/blob/master/appImages/inventory.png)<br/>   <br/>
